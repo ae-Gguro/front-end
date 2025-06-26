@@ -9,20 +9,26 @@ import SwiftUI
 
 struct ProfileCreateView: View {
     var body: some View {
-        ZStack {
+        ZStack(alignment: .topLeading) {
             BackgroundImage()
             
+            BackButton(color: "red")
+                .padding(.leading, 70)
+                .padding(.top, 60)
+            
             VStack(spacing: 30) {
+                Spacer().frame(height: 40)
+                
                 ProfileImageUploadButton()
                 
                 InputWithTitle(title: "이름", placeholder: "이름을 입력해 주세요.")
                 InputWithBirth()
                 
-                Spacer()
-                    .frame(height: 110)
+                Spacer().frame(height: 110)
                 
                 ProfileButton(color: "red", title: "프로필 추가")
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .toolbar(.hidden)
     }
