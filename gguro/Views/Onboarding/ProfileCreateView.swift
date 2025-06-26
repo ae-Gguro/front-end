@@ -21,7 +21,7 @@ struct ProfileCreateView: View {
                 
                 ProfileImageUploadButton()
                 
-                InputWithTitle(title: "이름", placeholder: "이름을 입력해 주세요.")
+                InputWithName()
                 InputWithBirth()
                 
                 Spacer().frame(height: 110)

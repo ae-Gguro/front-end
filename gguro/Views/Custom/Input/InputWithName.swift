@@ -1,44 +1,41 @@
 //
-//  InputWithBirth.swift
+//  InputWithName.swift
 //  gguro
 //
-//  Created by 김미주 on 6/26/25.
+//  Created by 김미주 on 6/27/25.
 //
 
 import SwiftUI
 
-struct InputWithBirth: View {
-    @State var year: String = ""
-    @State var month: String = ""
-    @State var day: String = ""
+struct InputWithName: View {
+    @State var lastName: String = ""
+    @State var firstName: String = ""
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("생년월일")
+            Text("이름")
                 .font(.NanumExtraBold28)
                 .foregroundStyle(.black2)
                 .padding(.leading, 15)
             
             HStack(spacing: 20) {
-                BirthTextField(placeholder: "연도", width: 280, text: $year)
-                BirthTextField(placeholder: "월", width: 140, text: $month)
-                BirthTextField(placeholder: "일", width: 140, text: $day)
+                NameTextField(placeholder: "성", text: $lastName)
+                NameTextField(placeholder: "이름", text: $firstName)
             }
         }
         .frame(width: 600)
     }
 }
 
-struct BirthTextField: View {
+struct NameTextField: View {
     var placeholder: String
-    var width: CGFloat
     
     @Binding var text: String
     
     var body: some View {
         ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: 20)
-                .frame(width: width, height: 60)
+                .frame(width: 290, height: 60)
                 .foregroundColor(.white)
                 .insetShadow(cornerRadius: 20)
             
@@ -51,5 +48,5 @@ struct BirthTextField: View {
 }
 
 #Preview {
-    InputWithBirth()
+    InputWithName()
 }
