@@ -27,6 +27,25 @@ struct InsetShadowModifier: ViewModifier {
     }
 }
 
+// Circle 안쪽 그림자
+struct InsetShadowCircleModifier: ViewModifier {
+    var color: Color = .shadowWhite
+    var radius: CGFloat = 5
+
+    func body(content: Content) -> some View {
+        content
+            .overlay(
+                Circle()
+                    .stroke(color, lineWidth: 3)
+                    .blur(radius: radius)
+                    .mask(
+                        Circle()
+                            .fill(Color.black)
+                    )
+            )
+    }
+}
+
 extension View {
     func insetShadow(
         color: Color = .shadowWhite,
@@ -34,5 +53,12 @@ extension View {
         cornerRadius: CGFloat = 50
     ) -> some View {
         self.modifier(InsetShadowModifier(color: color, radius: radius, cornerRadius: cornerRadius))
+    }
+    
+    func insetCircleShadow(
+        color: Color = .shadowWhite,
+        radius: CGFloat = 5
+    ) -> some View {
+        self.modifier(InsetShadowCircleModifier(color: color, radius: radius))
     }
 }
