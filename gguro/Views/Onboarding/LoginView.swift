@@ -13,10 +13,7 @@ struct LoginView: View {
             BackgroundImage()
             
             VStack {
-                Text("Pretendard 프리텐다드")
-                    .font(.PretendardSemiBold32)
-                Text("NanumSquareRound 나눔스퀘어라운드")
-                    .font(.NanumExtraBold32)
+                KakaoLoginButton()
             }
         }
     }
