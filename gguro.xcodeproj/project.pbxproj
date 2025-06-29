@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		238564302E110EC2008F25B1 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2385642F2E110EC2008F25B1 /* KakaoSDKAuth */; };
+		238564322E110EC2008F25B1 /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 238564312E110EC2008F25B1 /* KakaoSDKCommon */; };
+		238564342E110EC2008F25B1 /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 238564332E110EC2008F25B1 /* KakaoSDKUser */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		23855B182DDE163F008F25B1 /* gguro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gguro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -38,6 +44,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				238564322E110EC2008F25B1 /* KakaoSDKCommon in Frameworks */,
+				238564302E110EC2008F25B1 /* KakaoSDKAuth in Frameworks */,
+				238564342E110EC2008F25B1 /* KakaoSDKUser in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +89,9 @@
 			);
 			name = gguro;
 			packageProductDependencies = (
+				2385642F2E110EC2008F25B1 /* KakaoSDKAuth */,
+				238564312E110EC2008F25B1 /* KakaoSDKCommon */,
+				238564332E110EC2008F25B1 /* KakaoSDKUser */,
 			);
 			productName = gguro;
 			productReference = 23855B182DDE163F008F25B1 /* gguro.app */;
@@ -109,6 +121,9 @@
 			);
 			mainGroup = 23855B0F2DDE163F008F25B1;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				2385642E2E110EC2008F25B1 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 23855B192DDE163F008F25B1 /* Products */;
 			projectDirPath = "";
@@ -281,7 +296,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = umc.gguro;
+				PRODUCT_BUNDLE_IDENTIFIER = ae.gguro.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -311,7 +326,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = umc.gguro;
+				PRODUCT_BUNDLE_IDENTIFIER = ae.gguro.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -341,6 +356,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2385642E2E110EC2008F25B1 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.24.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2385642F2E110EC2008F25B1 /* KakaoSDKAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2385642E2E110EC2008F25B1 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKAuth;
+		};
+		238564312E110EC2008F25B1 /* KakaoSDKCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2385642E2E110EC2008F25B1 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKCommon;
+		};
+		238564332E110EC2008F25B1 /* KakaoSDKUser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2385642E2E110EC2008F25B1 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKUser;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 23855B102DDE163F008F25B1 /* Project object */;
 }

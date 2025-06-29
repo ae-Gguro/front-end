@@ -6,12 +6,23 @@
 //
 
 import SwiftUI
+import KakaoSDKCommon
+import KakaoSDKAuth
 
 @main
 struct gguroApp: App {
+    init() {
+        KakaoSDK.initSDK(appKey: "eebb1242e2da80fe103994d0366c0671")
+    }
+    
     var body: some Scene {
         WindowGroup {
             LoginView()
+                .onOpenURL { url in
+                    if (AuthApi.isKakaoTalkLoginUrl(url)) {
+                        _ = AuthController.handleOpenUrl(url: url)
+                    }
+                }
         }
     }
 }
