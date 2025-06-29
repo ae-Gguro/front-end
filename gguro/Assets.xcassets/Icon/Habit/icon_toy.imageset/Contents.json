@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "icon_toy.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
