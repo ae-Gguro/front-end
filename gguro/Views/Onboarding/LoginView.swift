@@ -12,8 +12,9 @@ struct LoginView: View {
         ZStack {
             BackgroundImage()
             
-            VStack {
+            HStack {
                 KakaoLoginButton()
+                AppleLoginButton()
             }
         }
     }
