@@ -21,8 +21,7 @@ struct ProfileImageUploadButton: View {
             VStack(spacing: 15) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 30)
-                        .fill(.gray3)
-                        .insetShadow(cornerRadius: 30)
+                        .fill(.gray3.shadow(.inner(color: .shadowWhite, radius: 7)))
                         .frame(width: 160, height: 160)
                     if let selectedImage {
                         Image(uiImage: selectedImage)

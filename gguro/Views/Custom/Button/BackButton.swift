@@ -24,9 +24,8 @@ struct BackButton: View {
         Button(action: { dismiss() }) {
             ZStack {
                 Circle()
-                    .fill(.white)
+                    .fill(.white.shadow(.inner(color: .shadowWhite, radius: 7)))
                     .frame(width: 90, height: 90)
-                    .insetCircleShadow()
                 
                 HStack {
                     Image(.iconBack)

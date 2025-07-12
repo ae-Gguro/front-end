@@ -23,9 +23,8 @@ struct InputWithTitle: View {
             
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: 20)
+                    .fill(.white.shadow(.inner(color: .shadowWhite, radius: 7)))
                     .frame(width: 600, height: 60)
-                    .foregroundColor(.white)
-                    .insetShadow(cornerRadius: 20)
                 
                 if !isPassword {
                     TextField(placeholder, text: $text)
