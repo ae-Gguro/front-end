@@ -11,6 +11,14 @@ struct ParentsMainView: View {
     var body: some View {
         ZStack {
             BackgroundImage()
+            
+            VStack {
+                
+                HStack(spacing: 116) {
+                    ParentsMenu(type: .conversation(name: "은서"))
+                    ParentsMenu(type: .emotion(name: "은서"))
+                }
+            }
         }
     }
 }
