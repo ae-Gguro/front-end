@@ -19,7 +19,6 @@ struct HeaderChildProfile: View {
                 .compositingGroup() // 하나의 뷰로 만듦 (투명도 조절에 필요)
                 .opacity(isEnabled ? 1.0 : 0.5)
         }
-        .disabled(!isEnabled)
         .buttonStyle(.plain)
     }
     

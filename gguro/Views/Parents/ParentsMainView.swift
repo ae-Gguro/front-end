@@ -13,11 +13,18 @@ struct ParentsMainView: View {
             BackgroundImage()
             
             VStack {
+                Spacer().frame(height: 30)
+                
+                ParentsHeaderView()
+                
+                Spacer().frame(height: 125)
                 
                 HStack(spacing: 116) {
                     ParentsMenu(type: .conversation(name: "은서"))
                     ParentsMenu(type: .emotion(name: "은서"))
                 }
+                
+                Spacer()
             }
         }
     }
