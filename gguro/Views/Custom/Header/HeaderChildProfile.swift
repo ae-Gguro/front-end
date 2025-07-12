@@ -11,8 +11,19 @@ struct HeaderChildProfile: View {
     var color: ProfileColor
 //    var image: UIImage
     var name: String
+    var isEnabled: Bool = false // 비활성과가 디폴트
     
     var body: some View {
+        Button(action: {}) { // TODO: action
+            profileGroup
+                .compositingGroup() // 하나의 뷰로 만듦 (투명도 조절에 필요)
+                .opacity(isEnabled ? 1.0 : 0.5)
+        }
+        .disabled(!isEnabled)
+        .buttonStyle(.plain)
+    }
+    
+    private var profileGroup: some View {
         VStack(spacing: -16) {
             ZStack {
                 Circle()
