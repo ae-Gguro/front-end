@@ -13,8 +13,7 @@ struct MessageBox: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 50)
-                .fill(.white)
-                .insetShadow()
+                .fill(.white.shadow(.inner(color: .shadowWhite, radius: 7)))
                 .frame(width: 700, height: 100)
             content
                 .foregroundStyle(.black1)

@@ -30,9 +30,8 @@ struct ProfileButton: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 40)
+                .fill(.red1.shadow(.inner(color: .shadowRed,radius: 7)))
                 .frame(width: 400, height: 70)
-                .foregroundStyle(foreground)
-                .insetShadow(color: shadow, cornerRadius: 40)
             Text(title)
                 .font(.NanumExtraBold32)
                 .foregroundStyle(.white)

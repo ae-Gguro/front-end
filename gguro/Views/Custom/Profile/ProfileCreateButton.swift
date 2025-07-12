@@ -13,8 +13,7 @@ struct ProfileCreateButton: View {
             VStack(spacing: 15) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 30)
-                        .fill(.gray3)
-                        .insetShadow(cornerRadius: 30)
+                        .fill(.gray3.shadow(.inner(color: .shadowWhite, radius: 7)))
                         .frame(width: 260, height: 260)
                     Image(.iconPlus)
                         .resizable()

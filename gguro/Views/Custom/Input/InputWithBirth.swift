@@ -38,9 +38,8 @@ struct BirthTextField: View {
     var body: some View {
         ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: 20)
+                .fill(.white.shadow(.inner(color: .shadowWhite, radius: 7)))
                 .frame(width: width, height: 60)
-                .foregroundColor(.white)
-                .insetShadow(cornerRadius: 20)
             
             TextField(placeholder, text: $text)
                 .font(.NanumExtraBold24)
