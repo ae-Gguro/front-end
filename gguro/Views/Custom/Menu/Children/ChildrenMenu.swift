@@ -17,7 +17,7 @@ struct ChildrenMenu: View {
             VStack(spacing: 40) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 25)
-                        .fill(.white.shadow(.inner(color: .shadowWhite, radius: 8)))
+                        .fill(.white.shadow(.inner(color: .shadowWhite, radius: 7)))
                         .frame(width: 350, height: 500)
                     
                     Image(.imageMenuBackground)
@@ -36,7 +36,7 @@ struct ChildrenMenu: View {
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 25)
-                        .fill(.red1.shadow(.inner(color: .shadowRed, radius: 8)))
+                        .fill(.red1.shadow(.inner(color: .shadowRed, radius: 7)))
                         .frame(width: 350, height: 100)
                     HStack(spacing: 20) {
                         Text(type.buttonTitle)
