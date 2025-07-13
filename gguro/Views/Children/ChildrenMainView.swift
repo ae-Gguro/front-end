@@ -11,6 +11,26 @@ struct ChildrenMainView: View {
     var body: some View {
         ZStack {
             BackgroundImage()
+            
+            VStack {
+                Spacer().frame(height: 30)
+                
+                ChildrenHeaderView()
+                
+                Spacer().frame(height: 126)
+                
+                ChildrenMenuButtonGroup
+                
+                Spacer()
+            }
+        }
+    }
+    
+    private var ChildrenMenuButtonGroup: some View {
+        HStack(spacing: 75) {
+            ChildrenMenu(type: .conversation)
+            ChildrenMenu(type: .playing)
+            ChildrenMenu(type: .studying)
         }
     }
 }
