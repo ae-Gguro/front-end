@@ -74,7 +74,7 @@ extension Font {
     
     // Bold
     
-    static var NunumBold64: Font {
+    static var NanumBold64: Font {
         return .nanum(type: .bold, size: 64)
     }
     
