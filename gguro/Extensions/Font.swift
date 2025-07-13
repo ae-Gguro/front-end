@@ -140,6 +140,10 @@ extension Font {
         return .pretend(type: .semiBold, size: 128)
     }
     
+    static var PretendardSemiBold24: Font {
+        return .pretend(type: .semiBold, size: 24)
+    }
+    
     static var PretendardSemiBold32: Font {
         return .pretend(type: .semiBold, size: 32)
     }
