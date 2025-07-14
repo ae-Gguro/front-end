@@ -32,10 +32,12 @@ struct ChatBoxBlue: View {
                     RoundedRectangle(cornerRadius: 15)
                         .fill(.blue1)
                     
-                    Image(.imgTailBlue)
+                    Image(.imageTail)
+                        .foregroundStyle(.blue1)
+                        .scaleEffect(x: -1, y:1)
                 }
             }
-            .frame(maxWidth: 700, alignment: .trailing)
+            .fixedSize(horizontal: false, vertical: true)
     }
 }
 
