@@ -33,7 +33,8 @@ struct ChatBoxGray: View {
             .padding(.vertical, 15)
             .background {
                 HStack(alignment: .bottom, spacing: -15) {
-                    Image(.imgTailGray)
+                    Image(.imageTail)
+                        .foregroundStyle(.gray3)
                     
                     RoundedRectangle(cornerRadius: 15)
                         .fill(.gray3)
