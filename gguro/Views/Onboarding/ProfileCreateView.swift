@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct ProfileCreateView: View {
+    var type: ProfileCreateType
+    
     var body: some View {
         ZStack(alignment: .topLeading) {
             BackgroundImage()
             
-            BackButton(color: "red")
+            BackButton(color: type.color)
                 .padding(.leading, 70)
                 .padding(.top, 60)
             
@@ -26,7 +28,7 @@ struct ProfileCreateView: View {
                 
                 Spacer().frame(height: 110)
                 
-                ProfileButton(color: "red", title: "프로필 추가")
+                ProfileButton(color: type.color, title: "프로필 추가")
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
@@ -35,5 +37,5 @@ struct ProfileCreateView: View {
 }
 
 #Preview {
-    ProfileCreateView()
+    ProfileCreateView(type: .onboarding)
 }
