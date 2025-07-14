@@ -174,4 +174,8 @@ extension Font {
     static var PretendardRegular32: Font {
         return .pretend(type: .regular, size: 32)
     }
+    
+    static var PretendardRegular24: Font {
+        return .pretend(type: .regular, size: 24)
+    }
 }
