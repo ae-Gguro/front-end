@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct ProfileCreateButton: View {
+    var type: ProfileCreateType
+    
     var body: some View {
-        NavigationLink(destination: ProfileCreateView(type: .onboarding)) {
+        NavigationLink(destination: ProfileCreateView(type: type)) {
             VStack(spacing: 15) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 30)
@@ -30,5 +32,5 @@ struct ProfileCreateButton: View {
 }
 
 #Preview {
-    ProfileCreateButton()
+    ProfileCreateButton(type: .onboarding)
 }
