@@ -19,7 +19,7 @@ struct ProfileSelectView: View {
                                Text("프로필").foregroundStyle(.red1) +
                                Text("을 선택해 주세요!")
                     )
-                    ProfileCreateButton()
+                    ProfileCreateButton(type: .onboarding)
                 }
             }
             .toolbar(.hidden)

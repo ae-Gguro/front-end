@@ -30,7 +30,7 @@ struct ProfileButton: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 40)
-                .fill(.red1.shadow(.inner(color: .shadowRed,radius: 7)))
+                .fill(foreground.shadow(.inner(color: shadow, radius: 7)))
                 .frame(width: 400, height: 70)
             Text(title)
                 .font(.NanumExtraBold32)
@@ -40,5 +40,5 @@ struct ProfileButton: View {
 }
 
 #Preview {
-    ProfileButton(color: "red", title: "테스트")
+    ProfileButton(color: "blue", title: "테스트")
 }
