@@ -16,6 +16,7 @@ struct ParentsHeaderView: View {
             
             MenuGroup
         }
+        .padding(.top, 30)
         .padding(.leading, 40)
         .padding(.trailing, 30)
     }
