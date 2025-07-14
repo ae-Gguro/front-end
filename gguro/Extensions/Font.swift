@@ -60,8 +60,16 @@ extension Font {
         return .nanum(type: .extraBold, size: 32)
     }
     
+    static var NanumExtraBold30: Font {
+        return .nanum(type: .extraBold, size: 30)
+    }
+    
     static var NanumExtraBold28: Font {
         return .nanum(type: .extraBold, size: 28)
+    }
+    
+    static var NanumExtraBold26: Font {
+        return .nanum(type: .extraBold, size: 26)
     }
     
     static var NanumExtraBold24: Font {
@@ -84,6 +92,10 @@ extension Font {
     
     static var NanumBold36: Font {
         return .nanum(type: .bold, size: 36)
+    }
+    
+    static var NanumBold30: Font {
+        return .nanum(type: .bold, size: 30)
     }
     
     static var NanumBold20: Font {
@@ -150,6 +162,11 @@ extension Font {
     
     static var PretendardSemiBold32: Font {
         return .pretend(type: .semiBold, size: 32)
+    }
+    
+    // Medium
+    static var PretendardMedium10: Font {
+        return .pretend(type: .medium, size: 10)
     }
     
     // Regular

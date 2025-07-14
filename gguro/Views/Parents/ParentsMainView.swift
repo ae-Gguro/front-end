@@ -13,8 +13,6 @@ struct ParentsMainView: View {
             BackgroundImage()
             
             VStack {
-                Spacer().frame(height: 30)
-                
                 ParentsHeaderView()
                 
                 Spacer().frame(height: 125)
