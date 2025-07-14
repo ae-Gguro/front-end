@@ -48,3 +48,12 @@ enum WordQuizState {
     case revealAnswer
     case ended
 }
+
+enum RoleplayState {
+    case intro(name: String)
+    case listening
+    case thinking
+    case confirm(name: String)
+    case started
+    case ended
+}
