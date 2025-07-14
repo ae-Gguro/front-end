@@ -1,20 +1,18 @@
 //
-//  ProfileCreateView.swift
+//  ProfileEditView.swift
 //  gguro
 //
-//  Created by 김미주 on 5/21/25.
+//  Created by 김미주 on 7/15/25.
 //
 
 import SwiftUI
 
-struct ProfileCreateView: View {
-    var type: ProfileCreateType
-    
+struct ProfileEditView: View {
     var body: some View {
         ZStack(alignment: .topLeading) {
             BackgroundImage()
             
-            BackButton(color: type.color)
+            BackButton(color: "blue")
                 .padding(.leading, 70)
                 .padding(.top, 60)
             
@@ -28,14 +26,13 @@ struct ProfileCreateView: View {
                 
                 Spacer().frame(height: 110)
                 
-                ProfileButton(color: type.color, title: "프로필 추가")
+                ProfileButton(color: "blue", title: "프로필 수정")
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .toolbar(.hidden)
     }
 }
 
 #Preview {
-    ProfileCreateView(type: .onboarding)
+    ProfileEditView()
 }

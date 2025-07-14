@@ -40,6 +40,10 @@ extension Font {
         return .nanum(type: .extraBold, size: 64)
     }
     
+    static var NanumExtraBold55: Font {
+        return .nanum(type: .extraBold, size: 55)
+    }
+    
     static var NanumExtraBold48: Font {
         return .nanum(type: .extraBold, size: 48)
     }
@@ -173,5 +177,9 @@ extension Font {
     
     static var PretendardRegular32: Font {
         return .pretend(type: .regular, size: 32)
+    }
+    
+    static var PretendardRegular24: Font {
+        return .pretend(type: .regular, size: 24)
     }
 }
