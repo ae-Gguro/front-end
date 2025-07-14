@@ -18,9 +18,9 @@ struct QuizRevealAnswerView: View {
             VStack {
                 
                 
-                    Text(quiz.fullQuestion)
-                        .font(.NanumBold64)
-                        .foregroundStyle(.white)
+                Text(quiz.fullQuestion)
+                    .font(.NanumBold64)
+                    .foregroundStyle(.white)
                 
                 
                 
@@ -35,27 +35,27 @@ struct QuizRevealAnswerView: View {
                                     .strokeBorder(.red1, lineWidth: 10)
                                     .frame(width: 200, height: 200)
                                     .background(RoundedRectangle(cornerRadius: 30).fill(.white))
-
+                                
                                 Text(String(char))
                                     .font(.PretendardSemiBold128)
                                     .foregroundStyle(.red1)
                             }
                         }
                     }
-
+                    
                 }
                 
                 Spacer().frame(height: 46)
                 
                 
-            
-                    (Text("정답은") + Text(viewModel.wordQuizSample[0].correctAnswer)
-                        .foregroundStyle(.yellow1)
-                     + Text("였어!\n 화면을 클릭해서 다음 퀴즈를 풀어보자"))
-                    .multilineTextAlignment(.center)
-                    .font(.NanumExtraBold28)
-                    .foregroundStyle(.white)
-            
+                
+                (Text("정답은") + Text(viewModel.wordQuizSample[0].correctAnswer)
+                    .foregroundStyle(.yellow1)
+                 + Text("였어!\n 화면을 클릭해서 다음 퀴즈를 풀어보자"))
+                .multilineTextAlignment(.center)
+                .font(.NanumExtraBold28)
+                .foregroundStyle(.white)
+                
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             
