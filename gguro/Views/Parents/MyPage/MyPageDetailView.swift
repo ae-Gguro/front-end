@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct MyPageDetailView: View {
+    @State var showDeleteModal: Bool = false
+    @State var showWithdrawModal: Bool = false
+    
     var body: some View {
         ZStack {
             BackgroundImage()
@@ -35,6 +38,32 @@ struct MyPageDetailView: View {
                 .padding(.top, 26)
                 .padding(.bottom, 80)
             }
+            
+            // 삭제 모달
+            if showDeleteModal {
+                ModalView(
+                    type: .delete,
+                    onLeftButtonTap: {
+                        // TODO: delete action
+                    },
+                    onRightButtonTap: {
+                        showDeleteModal = false
+                    }
+                )
+            }
+            
+            // 탈퇴 모달
+            if showWithdrawModal {
+                ModalView(
+                    type: .withdraw,
+                    onLeftButtonTap: {
+                        // TODO: withdraw action
+                    },
+                    onRightButtonTap: {
+                        showWithdrawModal = false
+                    }
+                )
+            }
         }
     }
     
@@ -55,7 +84,9 @@ struct MyPageDetailView: View {
                     .padding(.bottom, 180)
                 
                 // 삭제 버튼
-                Button(action: {}) { // TODO: action
+                Button(action: {
+                    showDeleteModal.toggle()
+                }) {
                     Text("짱구 프로필 삭제하기")
                         .font(.PretendardRegular24)
                         .foregroundStyle(.black1)
@@ -149,7 +180,9 @@ struct MyPageDetailView: View {
                         .foregroundStyle(.black1)
                     
                     VStack(spacing: 30) {
-                        Button(action: {}) { // TODO: action
+                        Button(action: {
+                            showWithdrawModal.toggle()
+                        }) {
                             Text("계정 탈퇴하기")
                                 .font(.PretendardRegular24)
                                 .foregroundStyle(.black1)
