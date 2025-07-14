@@ -12,7 +12,6 @@ enum ChildrenAIType {
     case aiChat(name: String)
     case rolePlay(name: String)
     case wordQuiz(name: String)
-    case studyMenu(name: String)
     case lifeStudy(name: String)
     case animalStudy(name: String)
     
@@ -24,8 +23,6 @@ enum ChildrenAIType {
             return MessageBox(content: Text("\(name)(아)야! 우리 역할 놀이 하자! 😎"))
         case .wordQuiz(let name):
             return MessageBox(content: Text("\(name)(아)야! 같이 단어를 맞혀 보자! 🧐"))
-        case .studyMenu(let name):
-            return MessageBox(content: Text("\(name)(아)야! 어떤 주제를 공부해볼까? ✏️"))
         case .lifeStudy(let name):
             return MessageBox(content: Text("\(name)(아)야! 어떤 바른 생활을 살아볼까? 🎒 "))
         case .animalStudy(let name):
@@ -46,5 +43,8 @@ enum WordQuizState {
     case intro
     case listening
     case thinking
+    case correctAnswer
+    case wrongAnswer
+    case revealAnswer
     case ended
 }
