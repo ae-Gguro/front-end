@@ -16,7 +16,7 @@ enum Config {
     }()
     
     static let baseURL: String = {
-        guard let baseURL = Config.infoDictionary["API_URL"] as? String else {
+        guard let baseURL = Config.infoDictionary["BASE_URL"] as? String else {
             fatalError()
         }
         return baseURL
