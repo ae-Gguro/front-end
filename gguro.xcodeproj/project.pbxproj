@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2325625B2E2F848C000B6347 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 2325625A2E2F848C000B6347 /* Moya */; };
 		238564302E110EC2008F25B1 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2385642F2E110EC2008F25B1 /* KakaoSDKAuth */; };
 		238564322E110EC2008F25B1 /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 238564312E110EC2008F25B1 /* KakaoSDKCommon */; };
 		238564342E110EC2008F25B1 /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 238564332E110EC2008F25B1 /* KakaoSDKUser */; };
@@ -44,6 +45,7 @@
 			files = (
 				238564322E110EC2008F25B1 /* KakaoSDKCommon in Frameworks */,
 				238564302E110EC2008F25B1 /* KakaoSDKAuth in Frameworks */,
+				2325625B2E2F848C000B6347 /* Moya in Frameworks */,
 				238564342E110EC2008F25B1 /* KakaoSDKUser in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,6 +92,7 @@
 				2385642F2E110EC2008F25B1 /* KakaoSDKAuth */,
 				238564312E110EC2008F25B1 /* KakaoSDKCommon */,
 				238564332E110EC2008F25B1 /* KakaoSDKUser */,
+				2325625A2E2F848C000B6347 /* Moya */,
 			);
 			productName = gguro;
 			productReference = 23855B182DDE163F008F25B1 /* gguro.app */;
@@ -121,6 +124,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				2385642E2E110EC2008F25B1 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+				232562592E2F848C000B6347 /* XCRemoteSwiftPackageReference "Moya" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 23855B192DDE163F008F25B1 /* Products */;
@@ -155,6 +159,8 @@
 /* Begin XCBuildConfiguration section */
 		23855B212DDE1641008F25B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 23855B1A2DDE163F008F25B1 /* gguro */;
+			baseConfigurationReferenceRelativePath = Secret.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -218,6 +224,8 @@
 		};
 		23855B222DDE1641008F25B1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 23855B1A2DDE163F008F25B1 /* gguro */;
+			baseConfigurationReferenceRelativePath = Secret.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -358,6 +366,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		232562592E2F848C000B6347 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
 		2385642E2E110EC2008F25B1 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
@@ -369,6 +385,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2325625A2E2F848C000B6347 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 232562592E2F848C000B6347 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
 		2385642F2E110EC2008F25B1 /* KakaoSDKAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2385642E2E110EC2008F25B1 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
