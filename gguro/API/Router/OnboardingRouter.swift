@@ -46,7 +46,7 @@ extension OnboardingRouter: APITargetType {
         case .postLogin(let loginData):
             return .requestJSONEncodable(loginData)
         case .postNaver(let accessToken), .postKakao(let accessToken):
-            return .requestJSONEncodable(["accessToken": accessToken])
+            return .requestParameters(parameters: ["accessToken": accessToken], encoding: JSONEncoding.default)
         }
     }
 }

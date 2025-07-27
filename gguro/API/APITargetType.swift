@@ -1,13 +1,14 @@
 //
 //  APITargetType.swift
-//  gguro
+//  CoreDisc
 //
-//  Created by 김미주 on 7/22/25.
+//  Created by 김미주 on 7/23/25.
 //
 
 import Foundation
 import Moya
 
+// baseURL 공통 처리
 protocol APITargetType: TargetType {}
 
 extension APITargetType {
@@ -15,7 +16,7 @@ extension APITargetType {
         return URL(string: Config.baseURL)!
     }
     
-    var headers: [String : String]? {
+    var headers: [String: String]? {
         switch task {
         case .requestJSONEncodable, .requestParameters:
             return ["Content-Type": "application/json"]
@@ -25,4 +26,6 @@ extension APITargetType {
             return nil
         }
     }
+    
+    var validationType: ValidationType { .successCodes }
 }
