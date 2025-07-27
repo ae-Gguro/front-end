@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     @State private var path = NavigationPath()
+    @State private var isLoginSuccess = false
     
     var body: some View {
         NavigationStack(path: $path) {
@@ -53,13 +54,16 @@ struct LoginView: View {
                     Spacer().frame(height: 35)
                     
                     HStack(spacing: 50){
-                        KakaoLoginButton()
+                        KakaoLoginButton(isLoginSuccess: $isLoginSuccess)
                         AppleLoginButton()
                     }
                 }
             }
             .navigationDestination(for: String.self) {value in
                     SignupView()
+            }
+            .navigationDestination(isPresented: $isLoginSuccess) {
+                ProfileSelectView()
             }
             .navigationBarBackButtonHidden(true)
             

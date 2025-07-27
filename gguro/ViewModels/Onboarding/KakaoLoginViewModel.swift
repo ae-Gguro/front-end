@@ -10,21 +10,37 @@ import Moya
 
 @Observable
 class KakakoLoginViewModel {
-    let provider: MoyaProvider<OnboardingRouter>
-    
-    init() {
-        let logger = NetworkLoggerPlugin(configuration: .init(logOptions: [.verbose]))
-        self.provider = MoyaProvider<OnboardingRouter>(plugins: [logger])
-    }
+    let provider = APIManager.shared.createProvider(for: OnboardingRouter.self)
     
     // 카카오 로그인
-    func postKakaoLogin(_ accessToken: String) {
+    func postKakaoLogin(accessToken: String, completion: @escaping (Bool) -> Void) {
         provider.request(.postKakao(accessToken: accessToken)) { result in
             switch result {
             case .success(let response):
-                print("Kakao Login 성공: \(response.statusCode)")
+                do {
+                    let decodedData = try JSONDecoder().decode(KakaoResponse.self, from: response.data)
+                    
+                    let userInfo = UserInfo(
+                        accessToken: decodedData.result.accessToken,
+                        refreshToken: decodedData.result.refreshToken
+                    )
+                    
+                    // 토큰 KeyChain에 저장
+                    let saved = KeychainManager.standard.saveSession(userInfo, for: "appNameUser")
+                    if saved {
+                        print("Token 저장 성공: \(String(describing: userInfo.accessToken))")
+                        completion(true)
+                    } else {
+                        print("Token 저장 실패")
+                        completion(false)
+                    }
+                } catch {
+                    print("KakaoResponse 디코더 오류: \(error)")
+                    completion(false)
+                }
             case .failure(let error):
-                print("Kakao Login 실패: \(error)")
+                print("Kakao Login Error: \(error)")
+                completion(false)
             }
         }
     }
