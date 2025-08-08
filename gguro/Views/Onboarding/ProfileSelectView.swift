@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ProfileSelectView: View {
+    @StateObject var viewModel = ProfileSelectViewModel()
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -19,8 +21,20 @@ struct ProfileSelectView: View {
                                Text("프로필").foregroundStyle(.red1) +
                                Text("을 선택해 주세요!")
                     )
-                    ProfileCreateButton(type: .onboarding)
+                    
+                    HStack(spacing: 130) {
+                        ForEach(viewModel.profileList, id: \.profileId) { item in
+                            ProfileSelectButton(profileImg: item.profileImageUrl, name: item.profileName)
+                            
+                            if viewModel.profileList.count < 3 {
+                                ProfileCreateButton(type: .onboarding)
+                            }
+                        }
+                    }
                 }
+            }
+            .onAppear {
+                viewModel.fetchProfileList()
             }
             .toolbar(.hidden)
         }
