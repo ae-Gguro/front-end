@@ -14,6 +14,7 @@ struct ProfileCreateData: Codable {
     let year: Int
     let month: Int
     let day: Int
+    let image: String?
 }
 
 // MARK: - 아이 프로필 삭제

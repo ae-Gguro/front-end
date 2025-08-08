@@ -8,7 +8,15 @@
 import SwiftUI
 
 struct ProfileCreateView: View {
+    @StateObject var viewModel = ProfileCreateViewModel()
     var type: ProfileCreateType
+    
+    @State private var lastName: String = ""
+    @State private var firstName: String = ""
+    @State private var year: String = ""
+    @State private var month: String = ""
+    @State private var day: String = ""
+    @State private var profileImg: UIImage? = nil
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -21,14 +29,25 @@ struct ProfileCreateView: View {
             VStack(spacing: 30) {
                 Spacer().frame(height: 40)
                 
-                ProfileImageUploadButton()
+                ProfileImageUploadButton(selectedImage: $profileImg)
                 
-                InputWithName()
-                InputWithBirth()
+                InputWithName(lastName: $lastName, firstName: $firstName)
+                InputWithBirth(year: $year, month: $month, day: $day)
                 
                 Spacer().frame(height: 110)
                 
-                ProfileButton(color: type.color, title: "프로필 추가")
+                ProfileButton(color: type.color, title: "프로필 추가", action: {
+                    let stringImage = viewModel.convertImageToBase64(profileImg)
+
+                    viewModel.fetchCreateProfile(
+                        firstName: firstName,
+                        lastName: lastName,
+                        year: Int(year) ?? 0,
+                        month: Int(month) ?? 0,
+                        day: Int(day) ?? 0,
+                        image: stringImage
+                    )
+                })
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }

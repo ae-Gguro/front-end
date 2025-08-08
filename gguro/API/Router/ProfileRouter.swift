@@ -51,7 +51,25 @@ extension ProfileRouter: APITargetType {
     var task: Task {
         switch self {
         case .postProfileCreate(let profileData):
-            return .requestJSONEncodable(profileData)
+            var multipartData = [MultipartFormData]()
+
+            // 1. JSON 인코딩된 데이터 생성
+            if let jsonData = try? JSONEncoder().encode(profileData) {
+                multipartData.append(MultipartFormData(provider: .data(jsonData),
+                                                       name: "request",
+                                                       mimeType: "application/json"))
+            }
+
+            // 2. 이미지 추가
+            if let imageBase64 = profileData.image,
+               let imageData = Data(base64Encoded: imageBase64) {
+                multipartData.append(MultipartFormData(provider: .data(imageData),
+                                                       name: "image",
+                                                       fileName: "profile.jpg",
+                                                       mimeType: "image/jpeg"))
+            }
+
+            return .uploadMultipart(multipartData)
         case .getProfileDetail:
             return .requestPlain
         case .deleteProfile:

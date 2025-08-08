@@ -19,10 +19,10 @@ struct ProfileEditView: View {
             VStack(spacing: 30) {
                 Spacer().frame(height: 40)
                 
-                ProfileImageUploadButton()
+//                ProfileImageUploadButton()
                 
-                InputWithName()
-                InputWithBirth()
+//                InputWithName()
+//                InputWithBirth()
                 
                 Spacer().frame(height: 110)
                 
