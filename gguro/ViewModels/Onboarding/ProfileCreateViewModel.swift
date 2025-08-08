@@ -22,7 +22,8 @@ class ProfileCreateViewModel: ObservableObject {
         year: Int,
         month: Int,
         day: Int,
-        image: String?
+        image: String?,
+        completion: (() -> Void)? = nil
     ) {
         let profileData = ProfileCreateData(firstName: firstName, lastName: lastName, year: year, month: month, day: day, image: image)
         
@@ -31,6 +32,7 @@ class ProfileCreateViewModel: ObservableObject {
             case .success(let response):
                 do {
                     _ = try JSONDecoder().decode(ProfileCreateResponse.self, from: response.data)
+                    completion?()
                 } catch {
                     print("PostProfileCreate 디코더 오류: \(error)")
                 }

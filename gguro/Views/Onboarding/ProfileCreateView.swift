@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ProfileCreateView: View {
+    @Environment(\.dismiss) var dismiss
+    
     @StateObject var viewModel = ProfileCreateViewModel()
     var type: ProfileCreateType
     
@@ -46,7 +48,9 @@ struct ProfileCreateView: View {
                         month: Int(month) ?? 0,
                         day: Int(day) ?? 0,
                         image: stringImage
-                    )
+                    ) {
+                        dismiss()
+                    }
                 })
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
