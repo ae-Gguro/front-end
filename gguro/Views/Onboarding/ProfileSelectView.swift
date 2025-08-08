@@ -25,10 +25,9 @@ struct ProfileSelectView: View {
                     HStack(spacing: 130) {
                         ForEach(viewModel.profileList, id: \.profileId) { item in
                             ProfileSelectButton(profileImg: item.profileImageUrl, name: item.profileName)
-                            
-                            if viewModel.profileList.count < 3 {
-                                ProfileCreateButton(type: .onboarding)
-                            }
+                        }
+                        if viewModel.profileList.count < 3 {
+                            ProfileCreateButton(type: .onboarding)
                         }
                     }
                 }
