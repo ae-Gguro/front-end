@@ -34,6 +34,6 @@ struct ProfileCreateUser: Decodable {
     let isSocialLogin: Bool
     let email: String?
     let oauthId: String?
-    let oathType: String?
+    let oauthType: String?
     let profileList: [String]?
 }
