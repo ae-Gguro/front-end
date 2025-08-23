@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ConversationDataView: View {
+    @Environment(NavigationRouter<ParentsRoute>.self) private var router
     @State private var viewModel = ConversationDataViewModel()
     
     var body: some View {
@@ -83,6 +84,7 @@ struct ConversationDataView: View {
                 .padding(.bottom, 60)
             }
         }
+        .navigationBarBackButtonHidden()
     }
     
     // 날짜 포맷
@@ -102,25 +104,31 @@ struct ConversationDataView: View {
 }
 
 struct ConversationListItem: View {
+    @Environment(NavigationRouter<ParentsRoute>.self) private var router
+    
     var date: String
     var title: String
     
     var body: some View {
-        HStack {
-            Text(date)
-                .font(.PretendardSemiBold32)
-                .foregroundStyle(.blue1)
-            
-            Spacer().frame(width: 54)
-            
-            Text(title)
-                .font(.PretendardRegular32)
-                .foregroundStyle(.black1)
-                .lineLimit(1)
-            
-            Spacer()
+        Button(action: {
+            router.push(.conversationDetail)
+        }) {
+            HStack {
+                Text(date)
+                    .font(.PretendardSemiBold32)
+                    .foregroundStyle(.blue1)
+                
+                Spacer().frame(width: 54)
+                
+                Text(title)
+                    .font(.PretendardRegular32)
+                    .foregroundStyle(.black1)
+                    .lineLimit(1)
+                
+                Spacer()
+            }
+            .padding(.horizontal, 94)
         }
-        .padding(.horizontal, 94)
     }
 }
 

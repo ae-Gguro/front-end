@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct EmotionVariationView: View {
+    @Environment(NavigationRouter<ParentsRoute>.self) private var router
     @State private var viewModel = EmotionVariationViewModel()
 
     var body: some View {
@@ -62,6 +63,7 @@ struct EmotionVariationView: View {
                 .padding(.bottom, 60)
             }
         }
+        .navigationBarBackButtonHidden()
     }
     
     // 날짜 포맷
