@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct InputWithBirth: View {
-    @State var year: String = ""
-    @State var month: String = ""
-    @State var day: String = ""
+    @Binding var year: String
+    @Binding var month: String
+    @Binding var day: String
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -47,8 +47,4 @@ struct BirthTextField: View {
                 .padding(.horizontal, 30)
         }
     }
-}
-
-#Preview {
-    InputWithBirth()
 }

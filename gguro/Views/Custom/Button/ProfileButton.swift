@@ -10,6 +10,7 @@ import SwiftUI
 struct ProfileButton: View {
     var color: String
     var title: String
+    var action: () -> Void = {}
     
     var foreground: Color {
         if color == "red" {
@@ -28,13 +29,15 @@ struct ProfileButton: View {
     }
     
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 40)
-                .fill(foreground.shadow(.inner(color: shadow, radius: 7)))
-                .frame(width: 400, height: 70)
-            Text(title)
-                .font(.NanumExtraBold32)
-                .foregroundStyle(.white)
+        Button(action: action) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 40)
+                    .fill(foreground.shadow(.inner(color: shadow, radius: 7)))
+                    .frame(width: 400, height: 70)
+                Text(title)
+                    .font(.NanumExtraBold32)
+                    .foregroundStyle(.white)
+            }
         }
     }
 }
