@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct ProfileSelectView: View {
-    @Environment(NavigationRouter<ProfileRoute>.self) private var router
     @StateObject var viewModel = ProfileSelectViewModel()
+    
+    let type: ProfileCreateType
     
     var body: some View {
         ZStack {
@@ -27,7 +28,7 @@ struct ProfileSelectView: View {
                         ProfileSelectButton(viewModel: viewModel, profileImg: item.profileImageUrl, name: item.profileName)
                     }
                     if viewModel.profileList.count < 3 {
-                        ProfileCreateButton(type: .onboarding)
+                        ProfileCreateButton(type: type)
                     }
                 }
             }
@@ -36,12 +37,17 @@ struct ProfileSelectView: View {
             viewModel.fetchProfileList()
         }
         .fullScreenCover(isPresented: $viewModel.isSelected) {
-            ChildrenMainView()
+            switch type {
+            case .onboarding:
+                ChildrenMainView()
+            case .parents:
+                MypageContainer()
+            }
         }
         .navigationBarBackButtonHidden()
     }
 }
 
 #Preview {
-    ProfileSelectView()
+    ProfileSelectView(type: .onboarding)
 }

@@ -14,8 +14,7 @@ struct ProfileCreateButton: View {
     
     var body: some View {
         Button(action: {
-            router.push(.profileCreate)
-            print("path after push:", router.path)
+            router.push(.profileCreate(type: type))
         }) {
             VStack(spacing: 15) {
                 ZStack {

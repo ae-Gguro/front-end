@@ -12,11 +12,11 @@ struct ProfileContainer: View {
     
     var body: some View {
         NavigationStack(path: $router.path) {
-            ProfileSelectView()
+            ProfileSelectView(type: .onboarding)
                 .navigationDestination(for: ProfileRoute.self) { route in
                     switch route {
                     case .profileSelect:
-                        ProfileSelectView()
+                        ProfileSelectView(type: .onboarding)
                     case .profileCreate:
                         ProfileCreateView(type: .onboarding)
                     }

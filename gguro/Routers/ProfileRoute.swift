@@ -9,5 +9,5 @@ import Foundation
 
 enum ProfileRoute: Hashable {
     case profileSelect
-    case profileCreate
+    case profileCreate(type: ProfileCreateType)
 }

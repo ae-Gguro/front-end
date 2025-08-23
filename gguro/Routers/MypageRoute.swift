@@ -8,9 +8,12 @@
 import Foundation
 
 enum MypageRoute: Hashable {
-    case main
+    case mypage
     
-    case conversationData
-    case conversationDetail
-    case emotionVariation
+    case emotionToday
+    case emotionWeek
+    
+    case conversation
+    
+    case setting
 }
