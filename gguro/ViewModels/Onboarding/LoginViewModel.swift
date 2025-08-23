@@ -43,6 +43,38 @@ class LoginViewModel: NSObject, ObservableObject {
         }
     }
     
+    func fetchLogin(username: String, password: String) {
+        provider.request(.postLogin(loginData: LoginData(username: username, password: password))) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let decodedData = try JSONDecoder().decode(LoginResponse.self, from: response.data)
+                    let result = decodedData.result
+                    
+                    let userInfo = UserInfo(
+                        accessToken: result.accessToken,
+                        refreshToken: result.refreshToken
+                    )
+                    let saved = KeychainManager.standard.saveSession(userInfo, for: "appNameUser")
+                    
+                    if saved {
+                        print("로그인 성공")
+                        DispatchQueue.main.async {
+                            // 로그인 상태 변경
+                            self.isLogin = true
+                        }
+                    } else{
+                        print("로그인 실패: \(decodedData.message)")
+                    }
+                } catch {
+                    print("PostLogin 디코더 오류: \(error)")
+                }
+            case .failure(let error):
+                print("PostLogin API 오류: \(error)")
+            }
+        }
+    }
+    
     // 카카오 로그인
     func kakaoLogin() {
         func kakaoLogin(accessToken: String) {

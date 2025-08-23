@@ -11,6 +11,9 @@ struct LoginView: View {
     @Environment(NavigationRouter<OnboardingRoute>.self) private var router
     @StateObject private var viewModel = LoginViewModel()
     
+    @State var username: String = ""
+    @State var password: String = ""
+    
     var body: some View {
         ZStack {
             BackgroundImage()
@@ -27,17 +30,20 @@ struct LoginView: View {
                 }
                 Spacer().frame(height: 70)
                 
-                InputLogin(placeholder: "아이디를 입력해 주세요.", isPassword: false)
+                InputLogin(placeholder: "아이디를 입력해 주세요.", isPassword: false, text: $username)
                     .frame(alignment: .center)
                 
                 Spacer().frame(height: 25)
                 
-                InputLogin(placeholder: "비밀번호를 입력해 주세요.", isPassword: true)
+                InputLogin(placeholder: "비밀번호를 입력해 주세요.", isPassword: true, text: $password)
                     .frame(alignment: .center)
                 
                 Spacer().frame(height: 50)
                 
-                ProfileButton(color: "red", title: "로그인")
+                ProfileButton(color: "red", title: "로그인", action: {
+                    print("===========\(username),\(password)===============")
+                    viewModel.fetchLogin(username: username, password: password)
+                })
                 
                 Spacer().frame(height: 80)
                 
