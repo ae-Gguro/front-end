@@ -80,6 +80,10 @@ extension Font {
         return .nanum(type: .extraBold, size: 24)
     }
     
+    static var NanumExtraBold20: Font {
+        return .nanum(type: .extraBold, size: 20)
+    }
+    
     static var NanumExtraBold19: Font {
         return .nanum(type: .extraBold, size: 19)
     }

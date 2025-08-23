@@ -88,7 +88,7 @@ struct MyPageView: View {
                 RoundedRectangle(cornerRadius: 25)
                     .fill(.white.shadow(.inner(color: .shadowWhite, radius: 7)))
                 
-                // TODO: 캘린더
+                ReportCalendarView()
             }
         }
     }
