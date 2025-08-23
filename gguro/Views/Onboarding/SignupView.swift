@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SignupView: View {
+    @Environment(NavigationRouter<OnboardingRoute>.self) private var router
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -34,13 +35,16 @@ struct SignupView: View {
                     
                     Spacer().frame(height: 66)
                     
-                    ProfileButton(color: "red", title: "회원가입")
+                    ProfileButton(color: "red", title: "회원가입", action: {
+                        // TODO: 회원가입 API 연결
+                        router.pop()
+                    })
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             
 
         }
-        .navigationBarBackButtonHidden(true)
+        .navigationBarBackButtonHidden()
     }
 }
 

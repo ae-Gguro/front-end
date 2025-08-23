@@ -8,10 +8,15 @@
 import SwiftUI
 
 struct ProfileCreateButton: View {
+    @Environment(NavigationRouter<ProfileRoute>.self) private var router
+    
     var type: ProfileCreateType
     
     var body: some View {
-        NavigationLink(destination: ProfileCreateView(type: type)) {
+        Button(action: {
+            router.push(.profileCreate)
+            print("path after push:", router.path)
+        }) {
             VStack(spacing: 15) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 30)

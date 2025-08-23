@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileCreateView: View {
-    @Environment(\.dismiss) var dismiss
+    @Environment(NavigationRouter<ProfileRoute>.self) private var router
     
     @StateObject var viewModel = ProfileCreateViewModel()
     var type: ProfileCreateType
@@ -49,13 +49,13 @@ struct ProfileCreateView: View {
                         day: Int(day) ?? 0,
                         image: stringImage
                     ) {
-                        dismiss()
+                        router.pop()
                     }
                 })
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .toolbar(.hidden)
+        .navigationBarBackButtonHidden()
     }
 }
 
