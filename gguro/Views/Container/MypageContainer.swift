@@ -30,6 +30,8 @@ struct MypageContainer: View {
                         
                     case .setting:
                         SettingView()
+                    case .edit:
+                        ProfileEditView()
                     }
                 }
         }

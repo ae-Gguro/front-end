@@ -118,6 +118,10 @@ extension Font {
         return .nanum(type: .bold, size: 15)
     }
     
+    static var NanumBold12: Font {
+        return .nanum(type: .bold, size: 12)
+    }
+    
     // MARK: - Pretendard
     enum Pretend {
         case black
