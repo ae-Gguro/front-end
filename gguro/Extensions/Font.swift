@@ -166,6 +166,11 @@ extension Font {
         return .custom(type.value, size: size)
     }
     
+    // bold
+    static var PretenardBold36: Font {
+        return .pretend(type: .bold, size: 36)
+    }
+    
     // SemiBold
     
     static var PretendardSemiBold128: Font {
