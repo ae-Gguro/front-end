@@ -8,10 +8,19 @@
 import SwiftUI
 
 struct ParentsMenu: View {
+    @Environment(NavigationRouter<ParentsRoute>.self) private var router
+    
     let type: ParentsMenuType
     
     var body: some View {
-        Button(action: {}) {
+        Button(action: {
+            switch type {
+            case .conversation:
+                router.push(.conversationData)
+            case .emotion:
+                router.push(.emotionVariation)
+            }
+        }) {
             VStack(spacing: 40) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 25)

@@ -53,6 +53,7 @@ struct ConversationDetailView: View {
                 .padding(.bottom, 60)
             }
         }
+        .navigationBarBackButtonHidden()
     }
 }
 

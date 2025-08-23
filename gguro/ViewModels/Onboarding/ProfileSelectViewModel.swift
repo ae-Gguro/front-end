@@ -10,6 +10,9 @@ import Foundation
 class ProfileSelectViewModel: ObservableObject {
     @Published var profileList: [ProfileListProfile] = []
     
+    // 프로필 선택 여부
+    @Published var isSelected: Bool = false
+    
     let provider = APIManager.shared.createProvider(for: ProfileRouter.self)
 
     func fetchProfileList() {
