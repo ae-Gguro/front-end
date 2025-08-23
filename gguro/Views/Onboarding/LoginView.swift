@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     @Environment(NavigationRouter<OnboardingRoute>.self) private var router
-    @State private var isLoginSuccess = false
+    @StateObject private var viewModel = LoginViewModel()
     
     var body: some View {
         ZStack {
@@ -53,12 +53,32 @@ struct LoginView: View {
                 Spacer().frame(height: 35)
                 
                 HStack(spacing: 50){
-                    KakaoLoginButton(isLoginSuccess: $isLoginSuccess)
-                    AppleLoginButton()
+                    // 카카오 로그인
+                    Button(action: {
+                        viewModel.kakaoLogin()
+                    }) {
+                        Image(.iconLoginKakao)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 90, height: 90)
+                    }
+                    
+                    // 애플 로그인
+                    Button(action: {
+                        viewModel.appleLogin()
+                    }) {
+                        Image(.iconLoginApple)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 90, height: 90)
+                    }
                 }
             }
         }
-        .fullScreenCover(isPresented: $isLoginSuccess) {
+        .onChange(of: viewModel.isLogin, {
+            viewModel.fetchFcmToken()
+        })
+        .fullScreenCover(isPresented: $viewModel.isLogin) {
             ProfileContainer()
         }
         .navigationBarBackButtonHidden(true)

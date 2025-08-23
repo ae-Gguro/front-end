@@ -8,16 +8,19 @@
 import SwiftUI
 import KakaoSDKCommon
 import KakaoSDKAuth
+import FirebaseCore
 
 @main
 struct gguroApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
     init() {
         KakaoSDK.initSDK(appKey: "eebb1242e2da80fe103994d0366c0671")
     }
     
     var body: some Scene {
         WindowGroup {
-            MypageContainer()
+            OnboardingContainer()
                 .onOpenURL { url in
                     if (AuthApi.isKakaoTalkLoginUrl(url)) {
                         _ = AuthController.handleOpenUrl(url: url)
