@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MypageContainer: View {
     @State private var router = NavigationRouter<MypageRoute>()
+    @State private var pRouter = NavigationRouter<ParentsRoute>()
     
     var body: some View {
         NavigationStack(path: $router.path) {
@@ -25,6 +26,7 @@ struct MypageContainer: View {
                         
                     case .conversation:
                         ConversationDataView()
+                            .environment(pRouter)
                         
                     case .setting:
                         SettingView()

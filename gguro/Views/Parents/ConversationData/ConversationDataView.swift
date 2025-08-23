@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ConversationDataView: View {
-    @Environment(NavigationRouter<ParentsRoute>.self) private var router
     @State private var viewModel = ConversationDataViewModel()
     
     var body: some View {
