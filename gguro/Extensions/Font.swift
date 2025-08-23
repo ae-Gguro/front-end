@@ -88,6 +88,10 @@ extension Font {
         return .nanum(type: .extraBold, size: 19)
     }
     
+    static var NanumExtraBold16: Font {
+        return .nanum(type: .extraBold, size: 16)
+    }
+    
     // Bold
     
     static var NanumBold64: Font {
