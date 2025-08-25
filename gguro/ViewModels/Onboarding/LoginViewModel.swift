@@ -88,7 +88,7 @@ class LoginViewModel: NSObject, ObservableObject {
                     switch r {
                     case .success(let response):
                         do {
-                            let decodedData = try JSONDecoder().decode(SocialLoginResponse.self, from: response.data)
+                            let decodedData = try JSONDecoder().decode(LoginResponse.self, from: response.data)
                             
                             let userInfo = UserInfo(
                                 accessToken: decodedData.result.accessToken,
@@ -123,7 +123,7 @@ class LoginViewModel: NSObject, ObservableObject {
                 switch result {
                 case .success(let response):
                     do {
-                        let decodedData = try JSONDecoder().decode(SocialLoginResponse.self, from: response.data)
+                        let decodedData = try JSONDecoder().decode(LoginResponse.self, from: response.data)
                         
                         let userInfo = UserInfo(
                             accessToken: decodedData.result.accessToken,

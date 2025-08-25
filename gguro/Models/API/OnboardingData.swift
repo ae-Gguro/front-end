@@ -11,6 +11,8 @@ import Foundation
 struct SignupData: Codable {
     let username: String
     let password: String
+    let nickname: String
+    let checkPassword: String
 }
 
 // MARK: - login
