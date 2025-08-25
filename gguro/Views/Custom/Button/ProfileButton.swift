@@ -10,21 +10,30 @@ import SwiftUI
 struct ProfileButton: View {
     var color: String
     var title: String
+    var isEnabled: Bool = true
     var action: () -> Void = {}
     
     var foreground: Color {
-        if color == "red" {
-            return .red1
+        if isEnabled {
+            if color == "red" {
+                return .red1
+            } else {
+                return .blue1
+            }
         } else {
-            return .blue1
+            return .gray1
         }
     }
     
     var shadow: Color {
-        if color == "red" {
-            return .shadowRed
+        if isEnabled {
+            if color == "red" {
+                return .shadowRed
+            } else {
+                return .shadowBlue
+            }
         } else {
-            return .shadowBlue
+            return .black1.opacity(0.3)
         }
     }
     

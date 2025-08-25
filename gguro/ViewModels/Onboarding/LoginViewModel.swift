@@ -12,6 +12,7 @@ import AuthenticationServices
 import KakaoSDKCommon
 import KakaoSDKAuth
 import KakaoSDKUser
+import NidThirdPartyLogin
 
 class LoginViewModel: NSObject, ObservableObject {
     private let fcmProvider = APIManager.shared.createProvider(for: NotificationRouter.self)
@@ -75,6 +76,46 @@ class LoginViewModel: NSObject, ObservableObject {
         }
     }
     
+    // 네이버 로그인
+    func naverLogin() {
+        NidOAuth.shared.requestLogin { result in
+            switch result {
+            case .success(let response):
+                let accessToken = response.accessToken.tokenString
+                print("Access Token: ", accessToken)
+                
+                self.provider.request(.postNaver(accessToken: accessToken)) { r in
+                    switch r {
+                    case .success(let response):
+                        do {
+                            let decodedData = try JSONDecoder().decode(LoginResponse.self, from: response.data)
+                            
+                            let userInfo = UserInfo(
+                                accessToken: decodedData.result.accessToken,
+                                refreshToken: decodedData.result.refreshToken
+                            )
+                            
+                            // 토큰 KeyChain에 저장
+                            let saved = KeychainManager.standard.saveSession(userInfo, for: "appNameUser")
+                            if saved {
+                                print("Token 저장 성공: \(String(describing: userInfo.accessToken))")
+                                self.isLogin = true // 화면 전환
+                            } else {
+                                print("Token 저장 실패")
+                            }
+                        } catch {
+                            print("Naver Login 디코더 오류: \(error)")
+                        }
+                    case .failure(let error):
+                        print("Naver Login API 오류: \(error)")
+                    }
+                }
+            case .failure(let error):
+                print("Error: ", error.localizedDescription)
+            }
+        }
+    }
+    
     // 카카오 로그인
     func kakaoLogin() {
         func kakaoLogin(accessToken: String) {
@@ -82,7 +123,7 @@ class LoginViewModel: NSObject, ObservableObject {
                 switch result {
                 case .success(let response):
                     do {
-                        let decodedData = try JSONDecoder().decode(KakaoResponse.self, from: response.data)
+                        let decodedData = try JSONDecoder().decode(LoginResponse.self, from: response.data)
                         
                         let userInfo = UserInfo(
                             accessToken: decodedData.result.accessToken,

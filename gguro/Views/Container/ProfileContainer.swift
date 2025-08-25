@@ -10,6 +10,8 @@ import SwiftUI
 struct ProfileContainer: View {
     @State private var router = NavigationRouter<ProfileRoute>()
     
+    @StateObject private var profileViewModel = ProfileSelectViewModel()
+    
     var body: some View {
         NavigationStack(path: $router.path) {
             ProfileSelectView(type: .onboarding)
@@ -23,6 +25,7 @@ struct ProfileContainer: View {
                 }
         }
         .environment(router)
+        .environmentObject(profileViewModel)
     }
 }
 
