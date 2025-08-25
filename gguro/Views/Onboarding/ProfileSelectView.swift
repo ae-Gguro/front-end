@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileSelectView: View {
-    @StateObject var viewModel = ProfileSelectViewModel()
+    @EnvironmentObject var viewModel: ProfileSelectViewModel
     
     let type: ProfileCreateType
     
@@ -26,6 +26,9 @@ struct ProfileSelectView: View {
                 HStack(spacing: 130) {
                     ForEach(viewModel.profileList, id: \.profileId) { item in
                         ProfileSelectButton(viewModel: viewModel, profileImg: item.profileImageUrl, name: item.profileName)
+                            .onTapGesture {
+                                viewModel.selectProfile(item)
+                            }
                     }
                     if viewModel.profileList.count < 3 {
                         ProfileCreateButton(type: type)

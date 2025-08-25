@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ChildrenHeaderView: View {
+    @EnvironmentObject var viewModel: ProfileSelectViewModel
+    
+    @State private var showParentsView: Bool = false
+    
     var body: some View {
         
         HStack(spacing: 20) {
@@ -19,22 +23,50 @@ struct ChildrenHeaderView: View {
         }
         .padding(.horizontal, 35)
         .padding(.top, 0)
-        
+        .task {
+            viewModel.fetchProfileList()
+        }
+        .fullScreenCover(isPresented: $showParentsView) {
+            ParentsContainer()
+        }
     }
     
     private var ProfileGroup: some View {
         HStack(spacing: 25) {
-            HeaderChildProfile(color: .red, name: "은서", isEnabled: true)
-            HeaderChildProfile(color: .blue, name: "채은", isEnabled: false)
-            HeaderChildProfile(color: .green, name: "민지", isEnabled: false)
-            HeaderChildProfile(color: .purple, name: "미주", isEnabled: false)
+            ForEach(Array(viewModel.profileList.enumerated()), id: \.element.profileId) { index, item in
+                HeaderChildProfile(
+                    color: setProfileColor(index),
+                    profile: item,
+                    isEnabled: viewModel.selectedProfileId == item.profileId
+                )
+            }
         }
     }
     
     private var ButtonGroup: some View {
         HStack(spacing: 20){
             HeaderMenu(type: .parents)
+                .onTapGesture {
+                    showParentsView = true
+                }
             HeaderMenu(type: .home)
+                .onTapGesture {
+                    // TODO: ChildRoute reset
+                }
+        }
+    }
+    
+    // MARK: - Fucntions
+    private func setProfileColor(_ index: Int) -> ProfileColor {
+        switch index {
+        case 0:
+            return .red
+        case 1:
+            return .blue
+        case 2:
+            return .green
+        default:
+            return .yellow
         }
     }
 }

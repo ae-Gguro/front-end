@@ -23,8 +23,8 @@ struct ParentsHeaderView: View {
     
     private var ProfileGroup: some View {
         HStack(spacing: 25) {
-            HeaderChildProfile(color: .red, name: "은서", isEnabled: true)
-            HeaderChildProfile(color: .purple, name: "미주")
+//            HeaderChildProfile(color: .red, name: "은서", isEnabled: true)
+//            HeaderChildProfile(color: .purple, name: "미주")
         }
     }
     

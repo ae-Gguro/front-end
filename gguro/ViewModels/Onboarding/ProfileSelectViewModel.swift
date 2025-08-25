@@ -13,6 +13,9 @@ class ProfileSelectViewModel: ObservableObject {
     // 프로필 선택 여부
     @Published var isSelected: Bool = false
     
+    // 선택된 프로필 id
+    @Published var selectedProfileId: Int?
+    
     let provider = APIManager.shared.createProvider(for: ProfileRouter.self)
 
     func fetchProfileList() {
@@ -31,5 +34,10 @@ class ProfileSelectViewModel: ObservableObject {
                 print("GetProfiles API 오류: \(error)")
             }
         }
+    }
+    
+    func selectProfile(_ profile: ProfileListProfile) {
+        selectedProfileId = profile.profileId
+        isSelected = true
     }
 }
