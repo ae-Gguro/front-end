@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct KakaoResponse: Decodable {
+struct SocialLoginResponse: Decodable {
     let isSuccess: Bool
     let code: String
     let message: String
-    let result: KakaoResult
+    let result: SocialLoginResult
 }
 
-struct KakaoResult: Codable {
+struct SocialLoginResult: Codable {
     let accessToken: String
     let refreshToken: String
     let grantType: String

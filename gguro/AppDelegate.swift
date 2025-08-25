@@ -10,6 +10,7 @@ import UserNotifications
 import FirebaseCore
 import FirebaseMessaging
 import Moya
+import NidThirdPartyLogin
 
 // AppDelegate: SwiftUI 앱에서 UIApplicationDelegate를 활용하기 위한 클래스
 class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -33,7 +34,19 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         // Firebase Messaging 델리게이트 설정
         Messaging.messaging().delegate = self
         
+        // 네이버 로그인
+        NidOAuth.shared.initialize()
+        NidOAuth.shared.setLoginBehavior(.appPreferredWithInAppBrowserFallback)
+        
         return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        if (NidOAuth.shared.handleURL(url) == true) { // 네이버 앱에서 전달된 url인 경우
+            return true
+        }
+        
+        return false
     }
     
     // 알림 권한 요청 함수

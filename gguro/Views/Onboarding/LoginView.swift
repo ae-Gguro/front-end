@@ -59,6 +59,16 @@ struct LoginView: View {
                 Spacer().frame(height: 35)
                 
                 HStack(spacing: 50){
+                    // 네이버 로그인
+                    Button(action: {
+                        viewModel.naverLogin()
+                    }) {
+                        Image(.iconLoginNaver)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 90, height: 90)
+                    }
+                    
                     // 카카오 로그인
                     Button(action: {
                         viewModel.kakaoLogin()
