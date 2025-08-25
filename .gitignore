@@ -139,3 +139,4 @@ xcuserdata
 # End of https://www.toptal.com/developers/gitignore/api/swift,swiftpackagemanager,swiftpm,xcode,macos
 
 *.xcconfig
+GoogleService-Info.plist
