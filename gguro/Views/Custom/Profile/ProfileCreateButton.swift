@@ -8,13 +8,18 @@
 import SwiftUI
 
 struct ProfileCreateButton: View {
+    @Environment(NavigationRouter<ProfileRoute>.self) private var router
+    
+    var type: ProfileCreateType
+    
     var body: some View {
-        NavigationLink(destination: ProfileCreateView()) {
+        Button(action: {
+            router.push(.profileCreate(type: type))
+        }) {
             VStack(spacing: 15) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 30)
-                        .fill(.gray3)
-                        .insetShadow(cornerRadius: 30)
+                        .fill(.gray3.shadow(.inner(color: .shadowWhite, radius: 7)))
                         .frame(width: 260, height: 260)
                     Image(.iconPlus)
                         .resizable()
@@ -31,5 +36,5 @@ struct ProfileCreateButton: View {
 }
 
 #Preview {
-    ProfileCreateButton()
+    ProfileCreateButton(type: .onboarding)
 }

@@ -11,6 +11,9 @@ import KakaoSDKAuth
 import KakaoSDKUser
 
 struct KakaoLoginButton: View {
+    @Binding var isLoginSuccess: Bool
+    let viewModel: KakakoLoginViewModel = .init()
+    
     var body: some View {
         Button(action: {
             if (UserApi.isKakaoTalkLoginAvailable()) {
@@ -20,7 +23,11 @@ struct KakaoLoginButton: View {
                     }
                     if let oauthToken = oauthToken {
                         print("카카오 로그인 성공: \(oauthToken)")
-                        // 카카오 로그인
+                        viewModel.postKakaoLogin(accessToken: oauthToken.accessToken) { success in
+                            if success {
+                                isLoginSuccess = true
+                            }
+                        }
                     }
                 }
             } else {
@@ -30,7 +37,11 @@ struct KakaoLoginButton: View {
                     }
                     if let oauthToken = oauthToken {
                         print("카카오 로그인 성공: \(oauthToken)")
-                        // 카카오 로그인
+                        viewModel.postKakaoLogin(accessToken: oauthToken.accessToken) { success in
+                            if success {
+                                isLoginSuccess = true
+                            }
+                        }
                     }
                 }
             }
@@ -41,8 +52,4 @@ struct KakaoLoginButton: View {
                 .frame(width: 90, height: 90)
         }
     }
-}
-
-#Preview {
-    KakaoLoginButton()
 }

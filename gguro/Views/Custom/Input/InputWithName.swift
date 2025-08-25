@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct InputWithName: View {
-    @State var lastName: String = ""
-    @State var firstName: String = ""
+    @Binding var lastName: String
+    @Binding var firstName: String
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -35,9 +35,8 @@ struct NameTextField: View {
     var body: some View {
         ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: 20)
+                .fill(.white.shadow(.inner(color: .shadowWhite, radius: 7)))
                 .frame(width: 290, height: 60)
-                .foregroundColor(.white)
-                .insetShadow(cornerRadius: 20)
             
             TextField(placeholder, text: $text)
                 .font(.NanumExtraBold24)
@@ -45,8 +44,4 @@ struct NameTextField: View {
                 .padding(.horizontal, 30)
         }
     }
-}
-
-#Preview {
-    InputWithName()
 }
