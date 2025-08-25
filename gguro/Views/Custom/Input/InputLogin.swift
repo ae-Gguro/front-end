@@ -11,7 +11,7 @@ struct InputLogin: View {
     var placeholder: String = ""
     var isPassword: Bool = false
     
-    @State private var text: String = ""
+    @Binding var text: String
     
     var body: some View {
         VStack {
@@ -57,5 +57,5 @@ struct InputLogin: View {
 }
 
 #Preview {
-    InputLogin(placeholder: "테스트예용", isPassword: true)
+    InputLogin(placeholder: "테스트예용", isPassword: true, text: .constant(""))
 }

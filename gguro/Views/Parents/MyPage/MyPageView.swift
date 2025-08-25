@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MyPageView: View {
+    @Environment(NavigationRouter<MypageRoute>.self) private var router
+    
     @State var showDeleteModal: Bool = false
     @State var showWithdrawModal: Bool = false
     
@@ -69,50 +71,38 @@ struct MyPageView: View {
     
     // 왼쪽 페이지
     private var LeftGroup: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 25)
-                .fill(.white.shadow(.inner(color: .shadowWhite, radius: 7)))
-            
-            VStack {
-                Text("OO의 프로필")
-                    .font(.NanumExtraBold32)
-                    .foregroundStyle(.black1)
-                
-                // 프로필
+        VStack {
+            HStack {
                 ProfileGroup
-                    .padding(.top, 50)
-                    .padding(.bottom, 180)
                 
-                // 삭제 버튼
-                Button(action: {
-                    showDeleteModal.toggle()
-                }) {
-                    Text("짱구 프로필 삭제하기")
-                        .font(.PretendardRegular24)
-                        .foregroundStyle(.black1)
-                        .underline()
-                }
-                .buttonStyle(.plain)
+                Spacer()
+            }
+            .padding(.horizontal, 35)
+            .padding(.vertical, 25)
+            .background(
+                RoundedRectangle(cornerRadius: 25)
+                    .fill(.white.shadow(.inner(color: .shadowWhite, radius: 7)))
+            )
+            
+            ZStack {
+                RoundedRectangle(cornerRadius: 25)
+                    .fill(.white.shadow(.inner(color: .shadowWhite, radius: 7)))
+                
+                ReportCalendarView()
             }
         }
     }
     
     // 아이 프로필
     private var ProfileGroup: some View {
-        HStack(spacing: 20) {
+        HStack(spacing: 35) {
             Circle() // TODO: 아이 이미지
-                .frame(width: 180, height: 180)
+                .frame(width: 120, height: 120)
             
             VStack(alignment: .leading, spacing: 15) {
-                HStack(spacing: 10) {
-                    Text("OO")
-                        .font(.NanumExtraBold28)
-                        .foregroundStyle(.black1)
-                    
-                    Button(action: {}) { // TODO: action
-                        Image(.iconEdit)
-                    }
-                }
+                Text("OO")
+                    .font(.NanumExtraBold28)
+                    .foregroundStyle(.black1)
                 
                 Text("0000.00.00")
                     .font(.NanumExtraBold19)
@@ -124,81 +114,74 @@ struct MyPageView: View {
     
     // 오른쪽 페이지
     private var RightGroup: some View {
-        ZStack(alignment: .leading) {
+        ZStack {
             RoundedRectangle(cornerRadius: 25)
                 .fill(.white.shadow(.inner(color: .shadowWhite, radius: 7)))
             
-            VStack(alignment: .leading, spacing: 70) {
+            VStack(spacing: 40) {
                 // 감정 분석
-                VStack(alignment: .leading, spacing: 35) {
+                VStack(spacing: 15) {
                     Text("📊 OO의 감정 분석")
-                        .font(.NanumExtraBold32)
+                        .font(.NanumExtraBold28)
                         .foregroundStyle(.black1)
                     
-                    VStack(spacing: 30) {
-                        Button(action: {}) { // TODO: action
-                            Text("감정 분석 기록 보러 가기")
-                                .font(.PretendardRegular24)
-                                .foregroundStyle(.black1)
-                                .underline()
-                        }
-                        .buttonStyle(.plain)
+                    VStack(spacing: 10) {
+                        makeMypageButton(type: .reportToday)
                         
-                        Button(action: {}) { // TODO: action
-                            Text("관계 개선 조언 보러 가기")
-                                .font(.PretendardRegular24)
-                                .foregroundStyle(.black1)
-                                .underline()
-                        }
-                        .buttonStyle(.plain)
+                        makeMypageButton(type: .reportWeek)
                     }
-                    .padding(.leading, 40)
                 }
                 
                 // 대화 기록
-                VStack(alignment: .leading, spacing: 35) {
+                VStack(spacing: 15) {
                     Text("📚 OO의 대화 기록")
-                        .font(.NanumExtraBold32)
+                        .font(.NanumExtraBold28)
                         .foregroundStyle(.black1)
                     
-                    VStack(spacing: 30) {
-                        Button(action: {}) { // TODO: action
-                            Text("대화 기록 보러 가기")
-                                .font(.PretendardRegular24)
-                                .foregroundStyle(.black1)
-                                .underline()
-                        }
-                        .buttonStyle(.plain)
-                    }
-                    .padding(.leading, 40)
+                    makeMypageButton(type: .conversation)
                 }
                 
                 // 설정
-                VStack(alignment: .leading, spacing: 35) {
+                VStack(spacing: 15) {
                     Text("⚙️ 설정")
-                        .font(.NanumExtraBold32)
+                        .font(.NanumExtraBold28)
                         .foregroundStyle(.black1)
                     
-                    VStack(spacing: 30) {
-                        Button(action: {
-                            showWithdrawModal.toggle()
-                        }) {
-                            Text("계정 탈퇴하기")
-                                .font(.PretendardRegular24)
-                                .foregroundStyle(.black1)
-                                .underline()
-                        }
-                        .buttonStyle(.plain)
-                    }
-                    .padding(.leading, 40)
+                    makeMypageButton(type: .setting)
                 }
             }
-            .padding(.leading, 70)
-            
         }
+    }
+    
+    private func makeMypageButton(type: MypageButtonType) -> some View {
+        Button(action: {
+            switch type {
+            case .reportToday:
+                router.push(.emotionToday)
+            case .reportWeek:
+                router.push(.emotionWeek)
+            case .conversation:
+                router.push(.conversation)
+            case .setting:
+                router.push(.setting)
+            }
+        }) {
+            Text(type.title)
+                .font(.NanumBold20)
+                .foregroundStyle(.black1)
+                .padding(.vertical, 20)
+                .frame(maxWidth: .infinity)
+                .background(
+                    RoundedRectangle(cornerRadius: 25)
+                        .fill(.white.shadow(.inner(color: .shadowWhite, radius: 7)))
+                )
+                .padding(.horizontal, 55)
+        }
+        .buttonStyle(.plain)
     }
 }
 
 #Preview {
     MyPageView()
+        .environment(NavigationRouter<MypageRoute>())
 }
