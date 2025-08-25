@@ -16,4 +16,5 @@ enum MypageRoute: Hashable {
     case conversation
     
     case setting
+    case edit
 }

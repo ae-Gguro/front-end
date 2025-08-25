@@ -80,8 +80,16 @@ extension Font {
         return .nanum(type: .extraBold, size: 24)
     }
     
+    static var NanumExtraBold20: Font {
+        return .nanum(type: .extraBold, size: 20)
+    }
+    
     static var NanumExtraBold19: Font {
         return .nanum(type: .extraBold, size: 19)
+    }
+    
+    static var NanumExtraBold16: Font {
+        return .nanum(type: .extraBold, size: 16)
     }
     
     // Bold
@@ -112,6 +120,10 @@ extension Font {
     
     static var NanumBold15: Font {
         return .nanum(type: .bold, size: 15)
+    }
+    
+    static var NanumBold12: Font {
+        return .nanum(type: .bold, size: 12)
     }
     
     // MARK: - Pretendard
@@ -152,6 +164,11 @@ extension Font {
     
     static func pretend(type: Pretend, size: CGFloat) -> Font {
         return .custom(type.value, size: size)
+    }
+    
+    // bold
+    static var PretenardBold36: Font {
+        return .pretend(type: .bold, size: 36)
     }
     
     // SemiBold
