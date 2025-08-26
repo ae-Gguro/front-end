@@ -14,10 +14,24 @@ struct CalendarCell: View {
     
     var body: some View {
         ZStack {
-            if isSelected {
-                // TODO: 선택 날짜 표시
+            let status = viewModel.status(for: calendarDay.date)
+            if status == "positive" {
+                Circle()
+                    .fill(Color.blue1)
+                    .frame(width: 35, height: 35)
+                    .transition(.scale.combined(with: .opacity))
+            } else if status == "negative" {
+                Circle()
+                    .fill(Color.red1)
+                    .frame(width: 35, height: 35)
+                    .transition(.scale.combined(with: .opacity))
+            } else if status == "neutral" {
+                Circle()
+                    .fill(Color.gray1)
+                    .frame(width: 35, height: 35)
+                    .transition(.scale.combined(with: .opacity))
             }
-            
+                
             Text("\(calendarDay.day)")
                 .font(.NanumExtraBold20)
                 .foregroundStyle(textColor)
@@ -32,11 +46,15 @@ struct CalendarCell: View {
     }
     
     private var textColor: Color {
-       if calendarDay.isCurrentMonth {
+        let status = viewModel.status(for: calendarDay.date)
+        
+       if !calendarDay.isCurrentMonth {
+           return .gray1
+       } else if status != "none"  {
+           return .white
+       } else {
            return .black1
-        } else {
-            return .gray1
-        }
+       }
     }
 }
 
