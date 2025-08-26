@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EmotionVariationView: View {
     @Environment(NavigationRouter<ParentsRoute>.self) private var router
-    @State private var viewModel = EmotionVariationViewModel()
+    @StateObject private var viewModel = EmotionVariationViewModel()
     @EnvironmentObject private var cViewModel: ConversationDataViewModel
 
     var body: some View {
@@ -38,8 +38,8 @@ struct EmotionVariationView: View {
                     // 대화 스크롤
                     ScrollView {
                         LazyVStack(spacing: 40) {
-                            ForEach(viewModel.emotionSample) { item in
-                                Text(formattedDate(item.date))
+                            ForEach(viewModel.groups) { group in
+                                Text(formattedDate(group.dateString))
                                     .font(.NanumExtraBold19)
                                     .foregroundStyle(.white)
                                     .frame(width: 350, height: 40)
@@ -48,23 +48,27 @@ struct EmotionVariationView: View {
                                             .fill(.gray2)
                                     }
                                 
-                                ForEach(item.list, id: \.talk_id) { list in
-                                    if list.positive {
-                                        EmotionChatBoxBlue(text: list.text)
+                                ForEach(group.items) { item in
+                                    if item.positive {
+                                        EmotionChatBoxBlue(text: item.text)
                                     } else {
-                                        EmotionChatBoxRed(text: list.text)
+                                        EmotionChatBoxRed(text: item.text)
                                     }
                                 }
                             }
                         }
                         .padding(.vertical, 40)
                     }
+                    .scrollIndicators(.hidden)
                 }
                 .padding(.horizontal, 93)
                 .padding(.bottom, 60)
             }
         }
         .navigationBarBackButtonHidden()
+        .task {
+            viewModel.fetchSentimentSummary()
+        }
     }
     
     // 날짜 포맷

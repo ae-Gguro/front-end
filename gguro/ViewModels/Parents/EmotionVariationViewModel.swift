@@ -7,28 +7,44 @@
 
 import Foundation
 
-@Observable
-class EmotionVariationViewModel {
-    // 샘플 데이터
-    let emotionSample: [EmotionVariationDate] = [
-        EmotionVariationDate(date: "2024-07-01", list: [
-            EmotionVariationList(talk_id: 139, text: "아이는 '바보'에 대해 부정적인 반응을 보였어요.", positive: false),
-            EmotionVariationList(talk_id: 140, text: "아이는 '친구랑 놀았어'라는 말에 긍정적인 반응을 보였어요.", positive: true)
-        ]),
-        EmotionVariationDate(date: "2024-07-02", list: [
-            EmotionVariationList(talk_id: 141, text: "아이는 '혼났어'라는 말에 부정적인 반응을 보였어요.", positive: false),
-            EmotionVariationList(talk_id: 142, text: "아이는 '간식 먹었어'라는 말에 긍정적인 반응을 보였어요.", positive: true)
-        ]),
-        EmotionVariationDate(date: "2024-07-03", list: [
-            EmotionVariationList(talk_id: 143, text: "아이는 '새똥'에 대해 부정적인 반응을 보였어요.", positive: false)
-        ]),
-        EmotionVariationDate(date: "2024-07-04", list: [
-            EmotionVariationList(talk_id: 144, text: "아이는 '선물 받았어'라는 말에 긍정적인 반응을 보였어요.", positive: true),
-            EmotionVariationList(talk_id: 145, text: "아이는 '혼자 있었어'라는 말에 부정적인 반응을 보였어요.", positive: false)
-        ]),
-        EmotionVariationDate(date: "2024-07-05", list: [
-            EmotionVariationList(talk_id: 149, text: "아이는 '새똥'에 대해 부정적인 반응을 보였어요.", positive: false),
-            EmotionVariationList(talk_id: 150, text: "아이는 '예쁜 그림 그렸어'라는 말에 긍정적인 반응을 보였어요.", positive: true)
-        ])
-    ]
+class EmotionVariationViewModel: ObservableObject {
+    let provider = APIManager.shared.createProvider(for: ParentsRouter.self)
+    
+    @Published var variationList: [String: [SentimentItem]] = [:]
+    
+    struct DayGroup: Identifiable {
+        let id: String
+        let dateString: String
+        let items: [SentimentItem]
+    }
+    
+    var groups: [DayGroup] {
+        variationList
+            .map { DayGroup(id: $0.key, dateString: $0.key, items: $0.value) }
+            .sorted { $0.dateString > $1.dateString }
+    }
+    
+    func fetchSentimentSummary() {
+        let savedProfileId = UserDefaults.standard.object(forKey: "profileId") as? Int
+        guard let profileId = savedProfileId else {
+            print("선택된 프로필이 없습니다.")
+            return
+        }
+        provider.request(.getSummary(profileId: profileId)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    let byDate = try decoder.decode(SentimentSummaryResponse.self, from: response.data)
+                    
+                    self.variationList = byDate
+                } catch {
+                    print("GetSummary 디코더 오류: \(error)")
+                }
+            case .failure(let error):
+                print("GetSummary API 오류: \(error)")
+            }
+        }
+    }
 }
