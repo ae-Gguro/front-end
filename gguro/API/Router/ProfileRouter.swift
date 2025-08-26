@@ -15,11 +15,18 @@ enum ProfileRouter {
     case deleteProfile(profileId: Int)
     case patchProfile(profileId: Int, profileData: ProfilePatchData)
     case getProfiles
+    
+    case getFirstname(profileId: Int)
 }
 
 extension ProfileRouter: APITargetType {
-    private static let profilePath = "/api/profile"
+    // url
+    var baseURL: URL {
+        return URL(string: Config.baseURL)!
+    }
     
+    // path
+    private static let profilePath = "/api/profile"
     var path: String {
         switch self {
         case .postProfileCreate:
@@ -32,6 +39,9 @@ extension ProfileRouter: APITargetType {
             return "\(Self.profilePath)/\(profileId)"
         case .getProfiles:
             return "\(Self.profilePath)s"
+            
+        case .getFirstname(let profileId):
+            return "\(Self.profilePath)/first-name/\(profileId)"
         }
     }
     
@@ -39,7 +49,7 @@ extension ProfileRouter: APITargetType {
         switch self {
         case .postProfileCreate:
             return .post
-        case .getProfileDetail, .getProfiles:
+        case .getProfileDetail, .getProfiles, .getFirstname:
             return .get
         case .deleteProfile:
             return .delete
@@ -77,6 +87,9 @@ extension ProfileRouter: APITargetType {
         case .patchProfile(_, let profileData):
             return .requestJSONEncodable(profileData)
         case .getProfiles:
+            return .requestPlain
+            
+        case .getFirstname:
             return .requestPlain
         }
     }
