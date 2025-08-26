@@ -8,7 +8,7 @@
 import Foundation
 
 class MypageViewModel: ObservableObject {
-    let provider = APIManager.shared.createProvider(for: ProfileRouter.self)
+    let profileProvider = APIManager.shared.createProvider(for: ProfileRouter.self)
     
     @Published var name: String = "아이"
     @Published var birth: String = "0000.00.00"
@@ -20,7 +20,7 @@ class MypageViewModel: ObservableObject {
             print("선택된 프로필이 없습니다.")
             return
         }
-        provider.request(.getProfileDetail(profileId: profileId)) { result in
+        profileProvider.request(.getProfileDetail(profileId: profileId)) { result in
             switch result {
             case .success(let response):
                 do {
