@@ -227,6 +227,20 @@ class LoginViewModel: NSObject, ObservableObject {
             case .success(let response):
                 do {
                     let decodedData = try JSONDecoder().decode(LoginResponse.self, from: response.data)
+                    
+                    let userInfo = UserInfo(
+                        accessToken: decodedData.result.accessToken,
+                        refreshToken: decodedData.result.refreshToken
+                    )
+                    
+                    // 토큰 KeyChain에 저장
+                    let saved = KeychainManager.standard.saveSession(userInfo, for: "appNameUser")
+                    if saved {
+                        print("Token 저장 성공: \(String(describing: userInfo.accessToken))")
+                        self.isLogin = true // 화면 전환
+                    } else {
+                        print("Token 저장 실패")
+                    }
                 } catch {
                     print("PostApple 디코더 오류: \(error)")
                 }
