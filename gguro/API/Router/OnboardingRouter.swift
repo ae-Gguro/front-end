@@ -17,9 +17,13 @@ enum OnboardingRouter {
 }
 
 extension OnboardingRouter: APITargetType {
-    private static let authPath = "/api/auth"
+    // url
+    var baseURL: URL {
+        return URL(string: Config.baseURL)!
+    }
     
     // path
+    private static let authPath = "/api/auth"
     var path: String {
         switch self {
         case .postSignup:

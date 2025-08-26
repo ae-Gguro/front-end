@@ -7,10 +7,16 @@
 
 import Foundation
 
-struct ConversationList: Hashable {
+struct ConversationList: Hashable, Decodable {
     let id: Int
     let topic: String
-    let date: String
+    let createdAt: String
+    
+    // 응답용
+    enum CodingKeys: String, CodingKey {
+        case id, topic
+        case createdAt = "created_at"
+    }
 }
 
 struct PaginationConversationData {

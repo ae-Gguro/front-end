@@ -11,11 +11,7 @@ import Moya
 // baseURL 공통 처리
 protocol APITargetType: TargetType {}
 
-extension APITargetType {
-    var baseURL: URL {
-        return URL(string: Config.baseURL)!
-    }
-    
+extension APITargetType {    
     var headers: [String: String]? {
         switch task {
         case .requestJSONEncodable, .requestParameters:

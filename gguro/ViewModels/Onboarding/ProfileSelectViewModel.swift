@@ -38,6 +38,7 @@ class ProfileSelectViewModel: ObservableObject {
     
     func selectProfile(_ profile: ProfileListProfile) {
         selectedProfileId = profile.profileId
+        UserDefaults.standard.set(profile.profileId, forKey: "profileId")
         isSelected = true
     }
 }

@@ -15,6 +15,11 @@ enum NotificationRouter {
 }
 
 extension NotificationRouter: APITargetType {
+    // url
+    var baseURL: URL {
+        return URL(string: Config.baseURL)!
+    }
+    
     var path: String {
         switch self {
         case .postDeviceToken:

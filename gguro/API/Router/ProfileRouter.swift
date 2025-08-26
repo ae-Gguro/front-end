@@ -18,8 +18,13 @@ enum ProfileRouter {
 }
 
 extension ProfileRouter: APITargetType {
-    private static let profilePath = "/api/profile"
+    // url
+    var baseURL: URL {
+        return URL(string: Config.baseURL)!
+    }
     
+    // path
+    private static let profilePath = "/api/profile"
     var path: String {
         switch self {
         case .postProfileCreate:

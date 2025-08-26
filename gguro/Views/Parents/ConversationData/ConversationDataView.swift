@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct ConversationDataView: View {
-    @State private var viewModel = ConversationDataViewModel()
+    @Environment(NavigationRouter<ParentsRoute>.self) private var router
+    @EnvironmentObject var profileViewModel: ProfileSelectViewModel
+    
+    @StateObject private var viewModel = ConversationDataViewModel()
     
     var body: some View {
         ZStack {
@@ -36,7 +39,7 @@ struct ConversationDataView: View {
                     VStack {
                         VStack(spacing: 0) {
                             ForEach(Array(viewModel.currentPageItems.enumerated()), id: \.element.id) { index, item in
-                                ConversationListItem(date: formattedDate(item.date), title: item.topic)
+                                ConversationListItem(date: formattedDate(item.createdAt), title: item.topic)
                                     .padding(.vertical, 25)
 
                                 // 마지막 항목이 아니라면 Divider 추가
@@ -60,13 +63,15 @@ struct ConversationDataView: View {
                                 Image(.iconPrev)
                             }
                             
-                            ForEach(1...viewModel.totalPage, id: \.self) { page in
-                                Button(action: {
-                                    viewModel.goToPage(page)
-                                }) {
-                                    Text("\(page)")
-                                        .font(viewModel.currentPage == page ? .NanumExtraBold30 : .NanumBold30)
-                                        .foregroundStyle(viewModel.currentPage == page ? .black1 : .gray1)
+                            if viewModel.totalPage > 0 {
+                                ForEach(1...viewModel.totalPage, id: \.self) { page in
+                                    Button(action: {
+                                        viewModel.goToPage(page)
+                                    }) {
+                                        Text("\(page)")
+                                            .font(viewModel.currentPage == page ? .NanumExtraBold30 : .NanumBold30)
+                                            .foregroundStyle(viewModel.currentPage == page ? .black1 : .gray1)
+                                    }
                                 }
                             }
                             
@@ -84,6 +89,9 @@ struct ConversationDataView: View {
             }
         }
         .navigationBarBackButtonHidden()
+        .task {
+            viewModel.fetchGetChatrooms()
+        }
     }
     
     // 날짜 포맷
