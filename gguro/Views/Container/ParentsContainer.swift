@@ -11,6 +11,7 @@ struct ParentsContainer: View {
     @State private var router = NavigationRouter<ParentsRoute>()
     
     @StateObject private var conversationDataViewModel = ConversationDataViewModel()
+    @StateObject private var parentsViewModel = ParentsViewModel()
     
     var body: some View {
         NavigationStack(path: $router.path) {
@@ -29,11 +30,12 @@ struct ParentsContainer: View {
                     }
                 }
                 .task {
-                    conversationDataViewModel.fetchChildName()
+                    parentsViewModel.fetchChildName()
                 }
         }
         .environment(router)
         .environmentObject(conversationDataViewModel)
+        .environmentObject(parentsViewModel)
     }
 }
 

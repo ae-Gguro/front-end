@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ConversationDetailView: View {
     @StateObject private var viewModel = ConversationDetailViewModel()
-    @EnvironmentObject private var cViewModel: ConversationDataViewModel
+    @EnvironmentObject private var pViewModel: ParentsViewModel
     
     var body: some View {
         ZStack {
@@ -26,7 +26,7 @@ struct ConversationDetailView: View {
                     }
                     .padding(.horizontal, 45)
                     
-                    MessageBox(content: Text("AI와 \(cViewModel.name)의 대화 내용"))
+                    MessageBox(content: Text("AI와 \(pViewModel.name)의 대화 내용"))
                 }
                 
                 // 하단 박스

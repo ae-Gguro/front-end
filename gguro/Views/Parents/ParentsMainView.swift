@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ParentsMainView: View {
-    @EnvironmentObject private var viewModel: ConversationDataViewModel
+    @EnvironmentObject private var viewModel: ParentsViewModel
     
     var body: some View {
         ZStack {
