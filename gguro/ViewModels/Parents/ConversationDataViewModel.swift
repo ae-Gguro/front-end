@@ -11,6 +11,7 @@ class ConversationDataViewModel: ObservableObject {
     let provider = APIManager.shared.createProvider(for: ParentsRouter.self)
     
     @Published var chatroomList: [ConversationList] = []
+    @Published var selectedChatroomId: Int?
     
     // 페이지 당 리스트 수
     private let itemsPerPage = 6
@@ -35,6 +36,11 @@ class ConversationDataViewModel: ObservableObject {
     func goToPage(_ page: Int) {
         guard page >= 1 && page <= totalPage else { return }
         currentPage = page
+    }
+    
+    func selectChatroom(_ chatroom: ConversationList) {
+        selectedChatroomId = chatroom.id
+        UserDefaults.standard.set(chatroom.id, forKey: "chatroomId")
     }
     
     // MARK: - Function

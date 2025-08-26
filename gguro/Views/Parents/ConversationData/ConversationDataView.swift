@@ -11,7 +11,7 @@ struct ConversationDataView: View {
     @Environment(NavigationRouter<ParentsRoute>.self) private var router
     @EnvironmentObject var profileViewModel: ProfileSelectViewModel
     
-    @StateObject private var viewModel = ConversationDataViewModel()
+    @EnvironmentObject private var viewModel: ConversationDataViewModel
     
     var body: some View {
         ZStack {
@@ -39,7 +39,7 @@ struct ConversationDataView: View {
                     VStack {
                         VStack(spacing: 0) {
                             ForEach(Array(viewModel.currentPageItems.enumerated()), id: \.element.id) { index, item in
-                                ConversationListItem(date: formattedDate(item.createdAt), title: item.topic)
+                                ConversationListItem(item: item)
                                     .padding(.vertical, 25)
 
                                 // 마지막 항목이 아니라면 Divider 추가
@@ -93,6 +93,37 @@ struct ConversationDataView: View {
             viewModel.fetchGetChatrooms()
         }
     }
+}
+
+struct ConversationListItem: View {
+    @Environment(NavigationRouter<ParentsRoute>.self) private var router
+    
+    @EnvironmentObject private var viewModel: ConversationDataViewModel
+    
+    var item: ConversationList
+    
+    var body: some View {
+        Button(action: {
+            viewModel.selectChatroom(item)
+            router.push(.conversationDetail)
+        }) {
+            HStack {
+                Text(formattedDate(item.createdAt))
+                    .font(.PretendardSemiBold32)
+                    .foregroundStyle(.blue1)
+                
+                Spacer().frame(width: 54)
+                
+                Text(item.topic)
+                    .font(.PretendardRegular32)
+                    .foregroundStyle(.black1)
+                    .lineLimit(1)
+                
+                Spacer()
+            }
+            .padding(.horizontal, 94)
+        }
+    }
     
     // 날짜 포맷
     private func formattedDate(_ dateString: String) -> String {
@@ -107,35 +138,6 @@ struct ConversationDataView: View {
             return displayFormatter.string(from: date)
         }
         return ""
-    }
-}
-
-struct ConversationListItem: View {
-    @Environment(NavigationRouter<ParentsRoute>.self) private var router
-    
-    var date: String
-    var title: String
-    
-    var body: some View {
-        Button(action: {
-            router.push(.conversationDetail)
-        }) {
-            HStack {
-                Text(date)
-                    .font(.PretendardSemiBold32)
-                    .foregroundStyle(.blue1)
-                
-                Spacer().frame(width: 54)
-                
-                Text(title)
-                    .font(.PretendardRegular32)
-                    .foregroundStyle(.black1)
-                    .lineLimit(1)
-                
-                Spacer()
-            }
-            .padding(.horizontal, 94)
-        }
     }
 }
 

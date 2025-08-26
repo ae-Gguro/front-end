@@ -10,6 +10,8 @@ import SwiftUI
 struct ParentsContainer: View {
     @State private var router = NavigationRouter<ParentsRoute>()
     
+    @StateObject private var conversationDataViewModel = ConversationDataViewModel()
+    
     var body: some View {
         NavigationStack(path: $router.path) {
             ParentsMainView()
@@ -28,6 +30,7 @@ struct ParentsContainer: View {
                 }
         }
         .environment(router)
+        .environmentObject(conversationDataViewModel)
     }
 }
 
