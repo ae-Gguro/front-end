@@ -28,7 +28,7 @@ struct ConversationDataView: View {
                     }
                     .padding(.horizontal, 45)
                     
-                    MessageBox(content: Text("은서와 AI의 대화 내용"))
+                    MessageBox(content: Text("AI와 \(viewModel.name)의 대화 내용"))
                 }
                 
                 // 리스트

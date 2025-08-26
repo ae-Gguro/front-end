@@ -28,6 +28,9 @@ struct ParentsContainer: View {
                         EmotionVariationView()
                     }
                 }
+                .task {
+                    conversationDataViewModel.fetchChildName()
+                }
         }
         .environment(router)
         .environmentObject(conversationDataViewModel)

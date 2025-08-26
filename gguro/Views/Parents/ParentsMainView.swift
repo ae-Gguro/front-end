@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ParentsMainView: View {
+    @EnvironmentObject private var viewModel: ConversationDataViewModel
+    
     var body: some View {
         ZStack {
             BackgroundImage()
@@ -18,8 +20,8 @@ struct ParentsMainView: View {
                 Spacer().frame(height: 125)
                 
                 HStack(spacing: 116) {
-                    ParentsMenu(type: .conversation(name: "은서"))
-                    ParentsMenu(type: .emotion(name: "은서"))
+                    ParentsMenu(type: .conversation(name: viewModel.name))
+                    ParentsMenu(type: .emotion(name: viewModel.name))
                 }
                 
                 Spacer()
