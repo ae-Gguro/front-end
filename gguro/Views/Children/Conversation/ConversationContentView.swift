@@ -30,6 +30,7 @@ struct AIChatScreen: View {
         BlackBoardLayout(type: .aiChat(name: "은서")) {
             ConversationContentView(state: .listening, name: "은서")
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

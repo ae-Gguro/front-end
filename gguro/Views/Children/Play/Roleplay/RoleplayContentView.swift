@@ -29,8 +29,15 @@ struct RoleplayContentView: View {
     }
 }
 
-#Preview{
-    BlackBoardLayout(type: .rolePlay(name: "은서")) {
-        RoleplayContentView(state: .ended)
+struct RolePlayScreen: View {
+    var body: some View {
+        BlackBoardLayout(type: .wordQuiz(name: "은서")) {
+            RoleplayContentView(state: .intro(name: "은서"))
+        }
+        .navigationBarBackButtonHidden(true)
     }
+}
+
+#Preview{
+    RolePlayScreen()
 }

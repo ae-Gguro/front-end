@@ -9,10 +9,11 @@ import SwiftUI
 
 struct ChildrenMenu: View {
     let type: ChildrenMenuType
+    let action: () -> Void
     
     var body: some View {
         Button(action: {
-            //TODO: action 내용 추가
+            action()
         }) {
             VStack(spacing: 40) {
                 ZStack {
@@ -58,6 +59,6 @@ struct ChildrenMenu: View {
     }
 }
 
-#Preview {
-    ChildrenMenu(type: .conversation)
-}
+//#Preview {
+//    ChildrenMenu(type: .conversation)
+//}

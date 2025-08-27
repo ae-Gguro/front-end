@@ -35,6 +35,7 @@ struct WordQuizScreen: View {
         BlackBoardLayout(type: .wordQuiz(name: "은서")) {
             QuizContentView(state: .ended)
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

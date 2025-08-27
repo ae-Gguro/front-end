@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ChildrenMainView: View {
+    @Environment(NavigationRouter<ChildrenRoute>.self) private var router
+    
     var body: some View {
         ZStack {
             BackgroundImage()
@@ -29,9 +31,9 @@ struct ChildrenMainView: View {
     
     private var ChildrenMenuButtonGroup: some View {
         HStack(spacing: 75) {
-            ChildrenMenu(type: .conversation)
-            ChildrenMenu(type: .playing)
-            ChildrenMenu(type: .studying)
+            ChildrenMenu(type: .conversation, action: { router.push(.talk) })
+            ChildrenMenu(type: .playing, action: { router.push(.play) })
+            ChildrenMenu(type: .studying, action: { router.push(.study) })
         }
     }
 }
