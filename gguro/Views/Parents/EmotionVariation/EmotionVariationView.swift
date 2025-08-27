@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct EmotionVariationView: View {
+    @Environment(\.childName) private var childName
     @Environment(NavigationRouter<ParentsRoute>.self) private var router
     @StateObject private var viewModel = EmotionVariationViewModel()
-    @EnvironmentObject private var pViewModel: ParentsViewModel
 
     var body: some View {
         ZStack {
@@ -27,7 +27,7 @@ struct EmotionVariationView: View {
                     }
                     .padding(.horizontal, 45)
                     
-                    MessageBox(content: Text("\(pViewModel.name)의 감정 변화"))
+                    MessageBox(content: Text("\(childName)의 감정 변화"))
                 }
                 
                 // 하단 박스

@@ -35,7 +35,7 @@ struct ParentsContainer: View {
         }
         .environment(router)
         .environmentObject(conversationDataViewModel)
-        .environmentObject(parentsViewModel)
+        .environment(\.childName, parentsViewModel.name)
     }
 }
 

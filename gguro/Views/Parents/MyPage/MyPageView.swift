@@ -9,6 +9,7 @@ import SwiftUI
 import Kingfisher
 
 struct MyPageView: View {
+    @Environment(\.childName) private var childName
     @Environment(NavigationRouter<MypageRoute>.self) private var router
     @StateObject private var viewModel = MypageViewModel()
     
@@ -135,7 +136,7 @@ struct MyPageView: View {
             VStack(spacing: 40) {
                 // 감정 분석
                 VStack(spacing: 15) {
-                    Text("📊 OO의 감정 분석")
+                    Text("📊 \(childName)의 감정 분석")
                         .font(.NanumExtraBold28)
                         .foregroundStyle(.black1)
                     
@@ -148,7 +149,7 @@ struct MyPageView: View {
                 
                 // 대화 기록
                 VStack(spacing: 15) {
-                    Text("📚 OO의 대화 기록")
+                    Text("📚 \(childName)의 대화 기록")
                         .font(.NanumExtraBold28)
                         .foregroundStyle(.black1)
                     
