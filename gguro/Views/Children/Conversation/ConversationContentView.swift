@@ -28,7 +28,7 @@ struct ConversationContentView: View {
 struct AIChatScreen: View {
     var body: some View {
         BlackBoardLayout(type: .aiChat(name: "은서")) {
-            ConversationContentView(state: .listening, name: "은서")
+            ConversationContentView(state: .ended, name: "은서")
         }
         .navigationBarBackButtonHidden(true)
     }

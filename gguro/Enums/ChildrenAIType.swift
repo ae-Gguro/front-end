@@ -57,3 +57,21 @@ enum RoleplayState {
     case started
     case ended
 }
+
+enum LifeStudyState {
+    case intro(name: String)
+    case question(name: String)
+    case correctAnswer(name: String)
+    case wrongAnswer(name: String)
+    case listening
+    case thinking
+}
+
+enum AnimalStudyState {
+    case intro(name: String)
+    case question(name: String)
+    case correctAnswer(name: String)
+    case wrongAnswer(name: String)
+    case listening
+    case thinking
+}
