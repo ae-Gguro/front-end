@@ -12,7 +12,7 @@ struct AnimalStudyIntroView: View {
     @State private var viewModel = AnimalViewModel()
     
     var body: some View {
-        let img = Image(viewModel.animalSamples[0].imageName)
+        let img = Image(viewModel.animalMenuList[0].imageName)
         ZStack(alignment: .bottomTrailing) {
             HStack(spacing: 65) {
                 

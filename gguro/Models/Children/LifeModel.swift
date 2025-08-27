@@ -10,5 +10,6 @@ import Foundation
 struct LifeModel: Identifiable{
     let id = UUID()
     let title: String
+    let subTitle: String
     let imageName: String
 }

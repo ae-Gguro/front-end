@@ -32,10 +32,14 @@ struct ChildrenContainer: View {
                         
                     case .study:
                         ChildrenStudyingMenu()
-                    case .life:
+                    case .lifeMenu:
                         LifeStudyListView(name: name)
-                    case .animal:
+                    case .life:
+                        LifeStudyScreen()
+                    case .animalMenu:
                         AnimalStudyListView(name: name)
+                    case .animal:
+                        AnimalStudyScreen()
                     }
                 }
         }

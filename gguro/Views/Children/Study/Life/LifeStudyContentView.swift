@@ -30,7 +30,14 @@ struct LifeStudyContentView: View {
     }
 }
 
-
+struct LifeStudyScreen: View {
+    var body: some View {
+        BlackBoardLayout(type: .lifeStudy(name: "은서")) {
+            LifeStudyContentView(state: .intro(name: "은서"))
+        }
+        .navigationBarBackButtonHidden(true)
+    }
+}
 
 #Preview{
     BlackBoardLayout(type: .lifeStudy(name: "은서")) {

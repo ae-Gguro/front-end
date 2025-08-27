@@ -30,7 +30,14 @@ struct AnimalStudyContentView: View {
     }
 }
 
-
+struct AnimalStudyScreen: View {
+    var body: some View {
+        BlackBoardLayout(type: .animalStudy(name: "은서")) {
+            AnimalStudyContentView(state: .intro(name: "은서"))
+        }
+        .navigationBarBackButtonHidden(true)
+    }
+}
 
 #Preview{
     BlackBoardLayout(type: .animalStudy(name: "은서")) {

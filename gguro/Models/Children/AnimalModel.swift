@@ -10,5 +10,6 @@ import Foundation
 struct AnimalModel: Identifiable {
     let id = UUID()
     let title: String
+    let subTitle: String
     let imageName: String
 }

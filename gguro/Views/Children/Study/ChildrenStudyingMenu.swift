@@ -35,8 +35,8 @@ struct ChildrenStudyingMenu: View {
                 Spacer().frame(height: 31)
                 
                 HStack(spacing: 130) {
-                    ChildrenMenu(type: .lifeStudy, action: { router.push(.life) })
-                    ChildrenMenu(type: .animalStudy, action: { router.push(.animal) })
+                    ChildrenMenu(type: .lifeStudy, action: { router.push(.lifeMenu) })
+                    ChildrenMenu(type: .animalStudy, action: { router.push(.animalMenu) })
                 }
                 
                 Spacer()

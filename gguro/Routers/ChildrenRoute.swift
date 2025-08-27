@@ -17,6 +17,8 @@ enum ChildrenRoute: Hashable {
     case role
     
     case study
+    case lifeMenu
     case life
+    case animalMenu
     case animal
 }

@@ -10,13 +10,14 @@ import SwiftUI
 struct CategoryButton: View {
     var text: String
     var img: Image
+    var action: () -> Void
     
-    @State private var isSelected = false
+    @Binding var isSelected: Bool
     
     var body: some View {
             Button(action: {
-                //TODO: action 추가 예정
-                isSelected.toggle()
+                action()
+                isSelected = true
             }) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 25)
@@ -37,7 +38,7 @@ struct CategoryButton: View {
                                 .frame(width: 90, height: 90)
                         }
                         Text(text)
-                            .foregroundStyle(.black)
+                            .foregroundStyle(.black1)
                             .font(.NanumExtraBold48)
                             .frame(width: 261)
                             
@@ -48,6 +49,6 @@ struct CategoryButton: View {
     }
 }
 
-#Preview {
-    CategoryButton(text: "옷 입기", img: Image(.iconCloth))
-}
+//#Preview {
+//    CategoryButton(text: "옷 입기", img: Image(.iconCloth))
+//}

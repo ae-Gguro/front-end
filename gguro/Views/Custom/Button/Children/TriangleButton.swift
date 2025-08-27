@@ -19,8 +19,6 @@ struct TriangleButton: View {
     var body: some View {
         Button(action: action) {
             Image(direction == .left ? "icon_polygon_left" : "icon_polygon_right")
-                .resizable()
-                .frame(width: 65, height: 65)
         }
     }
 }
