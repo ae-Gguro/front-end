@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ParentsMainView: View {
+    @Environment(\.childName) private var childName
+    
     var body: some View {
         ZStack {
             BackgroundImage()
@@ -18,8 +20,8 @@ struct ParentsMainView: View {
                 Spacer().frame(height: 125)
                 
                 HStack(spacing: 116) {
-                    ParentsMenu(type: .conversation(name: "은서"))
-                    ParentsMenu(type: .emotion(name: "은서"))
+                    ParentsMenu(type: .conversation(name: childName))
+                    ParentsMenu(type: .emotion(name: childName))
                 }
                 
                 Spacer()

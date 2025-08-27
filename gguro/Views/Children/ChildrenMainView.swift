@@ -24,6 +24,7 @@ struct ChildrenMainView: View {
                 Spacer()
             }
         }
+        .navigationBarBackButtonHidden()
     }
     
     private var ChildrenMenuButtonGroup: some View {

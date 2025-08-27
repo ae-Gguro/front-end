@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct EmotionChatBoxBlue: View {
+    @Environment(NavigationRouter<ParentsRoute>.self) private var router
+    
     var text: String
     
     var body: some View {
@@ -17,7 +19,9 @@ struct EmotionChatBoxBlue: View {
             VStack(alignment: .leading, spacing: 15) {
                 ChatBubble
                 
-                Button(action: {}) { // TODO: action
+                Button(action: {
+                    router.push(.conversationDetail)
+                }) { // TODO: action
                     Text("대화 내용 보러가기")
                         .font(.NanumExtraBold19)
                         .foregroundStyle(.black1)

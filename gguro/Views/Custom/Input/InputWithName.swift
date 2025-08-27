@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct InputWithName: View {
-    @State var lastName: String = ""
-    @State var firstName: String = ""
+    @Binding var lastName: String
+    @Binding var firstName: String
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -44,8 +44,4 @@ struct NameTextField: View {
                 .padding(.horizontal, 30)
         }
     }
-}
-
-#Preview {
-    InputWithName()
 }

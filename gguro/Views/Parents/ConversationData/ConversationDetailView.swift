@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ConversationDetailView: View {
-    @State private var viewModel = ConversationDetailViewModel()
+    @Environment(\.childName) private var childName
+    @StateObject private var viewModel = ConversationDetailViewModel()
     
     var body: some View {
         ZStack {
@@ -25,7 +26,7 @@ struct ConversationDetailView: View {
                     }
                     .padding(.horizontal, 45)
                     
-                    MessageBox(content: Text("은서와 AI의 대화 내용"))
+                    MessageBox(content: Text("AI와 \(childName)의 대화 내용"))
                 }
                 
                 // 하단 박스
@@ -36,7 +37,7 @@ struct ConversationDetailView: View {
                     // 대화 스크롤
                     ScrollView {
                         LazyVStack(spacing: 40) {
-                            ForEach(viewModel.conversationSample, id: \.id) { item in
+                            ForEach(viewModel.conversationList, id: \.id) { item in
                                 if item.role == "bot" {
                                     ChatBoxGray(text: item.content)
                                 }
@@ -48,10 +49,15 @@ struct ConversationDetailView: View {
                         }
                         .padding(.vertical, 40)
                     }
+                    .scrollIndicators(.hidden)
                 }
                 .padding(.horizontal, 93)
                 .padding(.bottom, 60)
             }
+        }
+        .navigationBarBackButtonHidden()
+        .task {
+            viewModel.fetchGetTalks()
         }
     }
 }
