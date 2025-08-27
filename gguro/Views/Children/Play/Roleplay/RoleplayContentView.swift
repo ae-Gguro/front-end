@@ -13,10 +13,10 @@ struct RoleplayContentView: View {
     
     var body: some View {
         switch state {
-        case .intro(let name):
-            RoleplayIntroView(name: name)
-        case .confirm(let name):
-            RoleplayConfirmView(name: name)
+        case .intro:
+            RoleplayIntroView()
+        case .confirm:
+            RoleplayConfirmView()
         case .started:
             RoleplayStartView()
         case .listening:
@@ -29,8 +29,17 @@ struct RoleplayContentView: View {
     }
 }
 
-#Preview{
-    BlackBoardLayout(type: .rolePlay(name: "은서")) {
-        RoleplayContentView(state: .ended)
+struct RolePlayScreen: View {
+    @Environment(\.childNameAYA) private var childName
+    
+    var body: some View {
+        BlackBoardLayout(type: .wordQuiz(name: childName)) {
+            RoleplayContentView(state: .intro(name: childName))
+        }
+        .navigationBarBackButtonHidden(true)
     }
+}
+
+#Preview{
+    RolePlayScreen()
 }

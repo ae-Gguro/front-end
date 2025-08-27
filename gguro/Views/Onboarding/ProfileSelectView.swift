@@ -42,7 +42,7 @@ struct ProfileSelectView: View {
         .fullScreenCover(isPresented: $viewModel.isSelected) {
             switch type {
             case .onboarding:
-                ChildrenMainView()
+                ChildrenContainer()
             case .parents:
                 MypageContainer()
             }

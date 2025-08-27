@@ -10,7 +10,8 @@ import Foundation
 enum ModalType {
     case delete
     case withdraw
-    case life(LifeType)
+    case life(LifeModel)
+    case animal(AnimalModel)
     
     var title: String {
         switch self {
@@ -19,6 +20,8 @@ enum ModalType {
         case .withdraw:
             return "계정 탈퇴"
         case .life(let type):
+            return type.title
+        case .animal(let type):
             return type.title
         }
     }
@@ -30,7 +33,9 @@ enum ModalType {
         case .withdraw:
             return "정말 탈퇴하시겠습니까?\n탈퇴한 계정은 복구할 수 없습니다."
         case .life(let type):
-            return ""
+            return type.subTitle
+        case .animal(let type):
+            return type.subTitle
         }
     }
     
@@ -38,7 +43,7 @@ enum ModalType {
         switch self {
         case .delete, .withdraw:
             return "예"
-        case .life:
+        case .life, .animal:
             return "학습하기"
         }
     }
@@ -47,24 +52,8 @@ enum ModalType {
         switch self {
         case .delete, .withdraw:
             return "아니오"
-        case .life:
+        case .life, .animal:
             return "다시 고르기"
-        }
-    }
-}
-
-enum LifeType {
-    case crosswalk
-    case seatBelt
-    // TODO: 추가
-    
-    var title: String {
-        switch self {
-        case .crosswalk:
-            return "횡단보도"
-        case .seatBelt:
-            return "안전벨트"
-        // TODO: 추가
         }
     }
 }

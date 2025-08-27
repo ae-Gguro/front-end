@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct LifeStudyIntroView: View {
-    let name: String
+    @Environment(\.childNameAYA) private var childName
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             VStack(spacing: 46) {
-                (Text("안녕 ") + Text("\(name)").foregroundStyle(.yellow1) + Text("야!"))
+                (Text("안녕 ") + Text("\(childName)").foregroundStyle(.yellow1) + Text("!"))
                     .foregroundStyle(.white)
                     .multilineTextAlignment(.center)
                     .font(.NanumBold48)

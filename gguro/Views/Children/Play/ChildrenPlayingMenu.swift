@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ChildrenPlayingMenu: View {
-    var name: String = "은서"
+    @Environment(NavigationRouter<ChildrenRoute>.self) private var router
+    @Environment(\.childNameIGA) private var childName
     
     var body: some View {
         ZStack {
@@ -20,18 +21,28 @@ struct ChildrenPlayingMenu: View {
                 
                 Spacer().frame(height: 24)
                 
-                MessageBox(content: Text("\(name)(이)가 하고 싶은 걸 선택해봐! 🎶"))
+                // 상단 메뉴
+                ZStack {
+                    HStack {
+                        BackButton(color: "red")
+                        Spacer()
+                    }
+                    .padding(.horizontal, 45)
+                    
+                    MessageBox(content: Text("\(childName) 하고 싶은 걸 선택해봐! 🎶"))
+                }
                 
                 Spacer().frame(height: 31)
                 
                 HStack(spacing: 130) {
-                    ChildrenMenu(type: .quiz)
-                    ChildrenMenu(type: .roleplay)
+                    ChildrenMenu(type: .quiz, action: { router.push(.quiz) })
+                    ChildrenMenu(type: .roleplay, action: { router.push(.role)} )
                 }
                 
                 Spacer()
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

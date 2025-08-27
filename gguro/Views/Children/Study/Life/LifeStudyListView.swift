@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct LifeStudyListView: View {
-    let name: String
+    @Environment(\.childNameAYA) private var childName
+    @Environment(NavigationRouter<ChildrenRoute>.self) private var router
+    
     @State private var viewModel = LifeViewModel()
     @State private var currentPage = 0
+    
+    @State private var selectedModel: LifeModel? = nil
 
     private let columns = [
         GridItem(.fixed(489), spacing: 70),
@@ -18,7 +22,7 @@ struct LifeStudyListView: View {
     ]
 
     var body: some View {
-        let pages = viewModel.lifeSamples.chunked(into: 6) // 6개씩 한 페이지
+        let pages = viewModel.lifeMenuList.chunked(into: 6) // 6개씩 한 페이지
 
         ZStack {
             BackgroundImage()
@@ -28,16 +32,33 @@ struct LifeStudyListView: View {
                     .padding(.top, 30)
 
                 Spacer().frame(height: 24)
-
-                MessageBox(content: Text("\(name)야! 어떤 바른 생활을 살아볼까?🎒"))
+                
+                // 상단 메뉴
+                ZStack {
+                    HStack {
+                        BackButton(color: "red")
+                        Spacer()
+                    }
+                    .padding(.horizontal, 45)
+                    
+                    MessageBox(content: Text("\(childName)! 어떤 바른 생활을 살아볼까?🎒"))
+                }
 
                 Spacer().frame(height: 65)
 
                 TabView(selection: $currentPage) {
                     ForEach(0..<pages.count, id: \.self) { index in
                         LazyVGrid(columns: columns, spacing: 60) {
-                            ForEach(pages[index]) { sample in
-                                CategoryButton(text: sample.title, img: Image(sample.imageName))
+                            ForEach(pages[index]) { item in
+                                CategoryButton(
+                                    text: item.title,
+                                    img: Image(item.imageName),
+                                    action: { selectedModel = item },
+                                    isSelected: Binding(
+                                        get: { selectedModel?.id == item.id },
+                                        set: { _ in selectedModel = item }
+                                    )
+                                )
                             }
                         }
                         .tag(index)
@@ -71,8 +92,22 @@ struct LifeStudyListView: View {
                 .padding(.trailing, 24)
             }
             .padding(.top, 220)
+            
+            // 모달
+            if let selectedModel {
+                ModalView(
+                    type: .life(selectedModel),
+                    onLeftButtonTap: {
+                        router.push(.life)
+                    },
+                    onRightButtonTap: {
+                        self.selectedModel = nil
+                    }
+                )
+            }
 
         }
+        .navigationBarBackButtonHidden()
         
     }
 }
@@ -86,5 +121,6 @@ extension Array {
 }
 
 #Preview {
-    LifeStudyListView(name: "은서")
+    LifeStudyListView()
+        .environment(NavigationRouter<ChildrenRoute>())
 }

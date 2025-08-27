@@ -17,6 +17,8 @@ enum ProfileRouter {
     case getProfiles
     
     case getFirstname(profileId: Int)
+    case getFirstnamePossessive(profileId: Int) // ~아/야
+    case getFirstnameNominative(profileId: Int) // ~가/이가
 }
 
 extension ProfileRouter: APITargetType {
@@ -42,6 +44,10 @@ extension ProfileRouter: APITargetType {
             
         case .getFirstname(let profileId):
             return "\(Self.profilePath)/first-name/\(profileId)"
+        case .getFirstnamePossessive(let profileId):
+            return "\(Self.profilePath)/first-name/possessive/\(profileId)"
+        case .getFirstnameNominative(let profileId):
+            return "\(Self.profilePath)/first-name/nominative/\(profileId)"
         }
     }
     
@@ -49,7 +55,7 @@ extension ProfileRouter: APITargetType {
         switch self {
         case .postProfileCreate:
             return .post
-        case .getProfileDetail, .getProfiles, .getFirstname:
+        case .getProfileDetail, .getProfiles, .getFirstname, .getFirstnamePossessive, .getFirstnameNominative:
             return .get
         case .deleteProfile:
             return .delete
@@ -89,7 +95,7 @@ extension ProfileRouter: APITargetType {
         case .getProfiles:
             return .requestPlain
             
-        case .getFirstname:
+        case .getFirstname, .getFirstnamePossessive, .getFirstnameNominative:
             return .requestPlain
         }
     }

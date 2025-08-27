@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct RoleplayIntroView: View {
-    let name: String
+    @Environment(\.childNameAYA) private var childNameAYA
+    @Environment(\.childName) private var childName
     
     var body: some View {
         VStack(spacing: 46){
-            (Text("안녕 ") + Text("\(name)").foregroundStyle(.yellow1) + Text("(아)야!\n")
-            + Text("\(name)와 꾸로의 ") + Text("역할").foregroundStyle(.yellow1) + Text("을 정해줘."))
+            (Text("안녕 ") + Text("\(childNameAYA)").foregroundStyle(.yellow1) + Text("!\n")
+            + Text("\(childName)와 꾸로의 ") + Text("역할").foregroundStyle(.yellow1) + Text("을 정해줘."))
             .foregroundStyle(.white)
             .multilineTextAlignment(.center)
             .font(.NanumBold48)
@@ -28,5 +29,5 @@ struct RoleplayIntroView: View {
 }
 
 #Preview {
-    RoleplayIntroView(name: "은서")
+    RoleplayIntroView()
 }
