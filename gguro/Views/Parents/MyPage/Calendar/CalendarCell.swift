@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CalendarCell: View {
+    @Environment(NavigationRouter<MypageRoute>.self) private var router
+    
     var calendarDay: CalendarDay
     var isSelected: Bool
     @Bindable var viewModel: ReportCalendarViewModel
@@ -41,6 +43,7 @@ struct CalendarCell: View {
         .onTapGesture {
             withAnimation(.spring(response: 0.4, dampingFraction: 0.5, blendDuration: 0)) {
                 viewModel.changeSelectedDate(calendarDay.date)
+                router.push(.emotionToday(date: viewModel.selectedDate))
             }
         }
     }

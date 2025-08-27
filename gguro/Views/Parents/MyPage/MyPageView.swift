@@ -171,7 +171,7 @@ struct MyPageView: View {
         Button(action: {
             switch type {
             case .reportToday:
-                router.push(.emotionToday)
+                router.push(.emotionToday(date: Date()))
             case .reportWeek:
                 router.push(.emotionWeek)
             case .conversation:

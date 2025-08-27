@@ -17,6 +17,8 @@ struct ChartData: Identifiable {
 struct EmotionTodayView: View {
     @Environment(NavigationRouter<ParentsRoute>.self) private var router
     @StateObject private var viewModel = EmotionTodayViewModel()
+    
+    let selectedDate: Date
 
     var body: some View {
         ZStack {
@@ -107,7 +109,12 @@ struct EmotionTodayView: View {
         }
         .navigationBarBackButtonHidden()
         .task {
-            viewModel.fetchDailyReport()
+            let formatter = DateFormatter()
+            formatter.locale = Locale(identifier: "ko_KR")
+            formatter.dateFormat = "yyyy-MM-dd"
+            let dateString = formatter.string(from: selectedDate)
+            
+            viewModel.fetchDailyReport(date: dateString)
         }
     }
     
@@ -169,7 +176,7 @@ struct EmotionTodayView: View {
     }()
 }
 
-#Preview {
-    EmotionTodayView()
-        .environment(NavigationRouter<ParentsRoute>())
-}
+//#Preview {
+//    EmotionTodayView()
+//        .environment(NavigationRouter<ParentsRoute>())
+//}

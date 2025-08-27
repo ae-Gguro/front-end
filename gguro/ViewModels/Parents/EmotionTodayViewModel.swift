@@ -12,13 +12,13 @@ class EmotionTodayViewModel: ObservableObject {
     
     @Published var dailyReport: DailyReportResponse?
     
-    func fetchDailyReport() {
+    func fetchDailyReport(date: String) {
         let savedProfileId = UserDefaults.standard.object(forKey: "profileId") as? Int
         guard let profileId = savedProfileId else {
             print("선택된 프로필이 없습니다.")
             return
         }
-        provider.request(.getSummaryDaily(profileId: profileId)) { result in
+        provider.request(.getSummaryDaily(profileId: profileId, targetDate: date)) { result in
             switch result {
             case .success(let response):
                 do {

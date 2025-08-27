@@ -15,7 +15,7 @@ enum ParentsRouter {
     case patchFeedback(talkId: Int) // 대화 피드백(좋아요/싫어요) 남기기
     
     // analysis
-    case getSummaryDaily(profileId: Int) // 오늘 하루 긍정/부정 단어 요약
+    case getSummaryDaily(profileId: Int, targetDate: String) // 오늘 하루 긍정/부정 단어 요약
     case getSummaryWeekly(profileId: Int) // 지난주 긍정/부정 종합 리포트
     case getSummaryMonthly(profileId: Int, year: Int, month: Int) // 월간 긍정/부정 상태 리포트
     case getSummary(profileId: Int) // 전체 기간 날짜별 분석 목록 조회
@@ -37,7 +37,7 @@ extension ParentsRouter: APITargetType {
         case .patchFeedback(let talkId):
             return "/api/history/talks/\(talkId)/feedback"
             
-        case .getSummaryDaily(let profileId):
+        case .getSummaryDaily(let profileId, _):
             return "/api/analysis/summary/daily/\(profileId)"
         case .getSummaryWeekly(let profileId):
             return "/api/analysis/summary/weekly/\(profileId)"
@@ -64,7 +64,9 @@ extension ParentsRouter: APITargetType {
         case .getChatrooms, .getTalks, .patchFeedback:
             return .requestPlain
             
-        case .getSummaryDaily, .getSummaryWeekly, .getSummary:
+        case .getSummaryDaily(_, let targetDate):
+            return .requestParameters(parameters: ["target_date": targetDate], encoding: URLEncoding.queryString)
+        case .getSummaryWeekly, .getSummary:
             return .requestPlain
         case .getSummaryMonthly(_, let year, let month):
             return .requestParameters(parameters: ["year": year, "month": month], encoding: URLEncoding.queryString)

@@ -19,8 +19,8 @@ struct MypageContainer: View {
                     case .mypage:
                         MyPageView()
                         
-                    case .emotionToday:
-                        EmotionTodayView()
+                    case .emotionToday(let date):
+                        EmotionTodayView(selectedDate: date)
                     case .emotionWeek:
                         EmotionWeekView()
                         
