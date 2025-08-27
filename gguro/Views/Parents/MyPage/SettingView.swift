@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SettingView: View {
+    @Environment(\.childName) private var childName
     @Environment(NavigationRouter<MypageRoute>.self) private var router
     
     @State var isAllOn: Bool = false
@@ -43,6 +44,7 @@ struct SettingView: View {
                 .padding(.bottom, 80)
             }
         }
+        .navigationBarBackButtonHidden()
     }
     
     // 왼쪽 페이지
@@ -128,13 +130,13 @@ struct SettingView: View {
                     .font(.NanumExtraBold28)
                     .padding(.bottom, 10)
                 
-                AccountList(title: "00 프로필 수정하기", color: .black1, action: {
+                AccountList(title: "\(childName) 프로필 수정하기", color: .black1, action: {
                     router.push(.edit)
                 })
                 AccountList(title: "로그아웃", color: .black, action: {
                     // TODO: 로그아웃 모달
                 })
-                AccountList(title: "00 프로필 삭제하기", color: .red1, action: {
+                AccountList(title: "\(childName) 프로필 삭제하기", color: .red1, action: {
                     // TODO: 삭제 모달
                 })
                 AccountList(title: "계정 탈퇴하기", color: .red1, action: {
