@@ -26,7 +26,7 @@ struct ParentsHeaderView: View {
         .padding(.leading, 40)
         .padding(.trailing, 30)
         .fullScreenCover(isPresented: $showChildrenView) {
-            ChildrenMainView() // TODO: Container로 수정
+            ChildrenContainer()
         }
         .fullScreenCover(isPresented: $showMypageView) {
             MypageContainer()

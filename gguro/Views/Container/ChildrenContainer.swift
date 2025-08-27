@@ -10,6 +10,8 @@ import SwiftUI
 struct ChildrenContainer: View {
     @State private var router = NavigationRouter<ChildrenRoute>()
     
+    let name = "은서"
+    
     var body: some View {
         NavigationStack(path: $router.path) {
             ChildrenMainView()
@@ -29,11 +31,11 @@ struct ChildrenContainer: View {
                         RolePlayScreen()
                         
                     case .study:
-                        EmptyView()
+                        ChildrenStudyingMenu()
                     case .life:
-                        EmptyView()
+                        LifeStudyListView(name: name)
                     case .animal:
-                        EmptyView()
+                        AnimalStudyListView(name: name)
                     }
                 }
         }

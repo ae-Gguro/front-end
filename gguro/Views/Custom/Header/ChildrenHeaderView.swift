@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ChildrenHeaderView: View {
     @EnvironmentObject var viewModel: ProfileSelectViewModel
+    @Environment(NavigationRouter<ChildrenRoute>.self) private var router
     
     @State private var showParentsView: Bool = false
     
@@ -51,7 +52,7 @@ struct ChildrenHeaderView: View {
                 }
             HeaderMenu(type: .home)
                 .onTapGesture {
-                    // TODO: ChildRoute reset
+                    router.reset()
                 }
         }
     }

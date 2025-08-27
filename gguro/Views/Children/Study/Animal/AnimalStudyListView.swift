@@ -28,8 +28,17 @@ struct AnimalStudyListView: View {
                     .padding(.top, 30)
 
                 Spacer().frame(height: 24)
-
-                MessageBox(content: Text("\(name)야! 어떤 동물이 궁금해? 🐾"))
+                
+                // 상단 메뉴
+                ZStack {
+                    HStack {
+                        BackButton(color: "red")
+                        Spacer()
+                    }
+                    .padding(.horizontal, 45)
+                    
+                    MessageBox(content: Text("\(name)야! 어떤 동물이 궁금해? 🐾"))
+                }
 
                 Spacer().frame(height: 65)
 
@@ -73,7 +82,7 @@ struct AnimalStudyListView: View {
             .padding(.top, 220)
 
         }
-        
+        .navigationBarBackButtonHidden()
     }
 }
 

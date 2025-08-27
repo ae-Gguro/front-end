@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ChildrenStudyingMenu: View {
+    @Environment(NavigationRouter<ChildrenRoute>.self) private var router
     var name: String = "은서"
     
     var body: some View {
@@ -20,18 +21,28 @@ struct ChildrenStudyingMenu: View {
                 
                 Spacer().frame(height: 24)
                 
-                MessageBox(content: Text("\(name)야! 어떤 주제를 공부해볼까?✏️"))
+                // 상단 메뉴
+                ZStack {
+                    HStack {
+                        BackButton(color: "red")
+                        Spacer()
+                    }
+                    .padding(.horizontal, 45)
+                    
+                    MessageBox(content: Text("\(name)야! 어떤 주제를 공부해볼까?✏️"))
+                }
                 
                 Spacer().frame(height: 31)
                 
                 HStack(spacing: 130) {
-                    ChildrenMenu(type: .lifeStudy)
-                    ChildrenMenu(type: .animalStudy)
+                    ChildrenMenu(type: .lifeStudy, action: { router.push(.life) })
+                    ChildrenMenu(type: .animalStudy, action: { router.push(.animal) })
                 }
                 
                 Spacer()
             }
         }
+        .navigationBarBackButtonHidden()
     }
 }
 import SwiftUI
