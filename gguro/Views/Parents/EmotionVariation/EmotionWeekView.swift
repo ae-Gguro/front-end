@@ -12,11 +12,12 @@ import MarkdownUI
 struct WeekChartData: Identifiable {
     let id = UUID()
     let emotion: String
-    let value: Double
+    let value: Int
     let day: String
 }
 
 struct EmotionWeekView: View {
+    @Environment(\.childName) private var childName
     @Environment(NavigationRouter<ParentsRoute>.self) private var router
     @StateObject private var viewModel = EmotionWeekViewModel()
 
@@ -61,33 +62,24 @@ struct EmotionWeekView: View {
         .navigationBarBackButtonHidden()
         .task {
             viewModel.fetchAdvice()
+            viewModel.fetchWeekReport()
         }
     }
     
     // 차트
     private var chartGroup: some View {
-        let data: [WeekChartData] = [
-            WeekChartData(emotion: "긍정", value: 80, day: "월"),
-            WeekChartData(emotion: "부정", value: 20, day: "월"),
-            WeekChartData(emotion: "긍정", value: 60, day: "화"),
-            WeekChartData(emotion: "부정", value: 40, day: "화"),
-            WeekChartData(emotion: "긍정", value: 70, day: "수"),
-            WeekChartData(emotion: "부정", value: 30, day: "수"),
-            WeekChartData(emotion: "긍정", value: 45, day: "목"),
-            WeekChartData(emotion: "부정", value: 55, day: "목"),
-            WeekChartData(emotion: "긍정", value: 20, day: "금"),
-            WeekChartData(emotion: "부정", value: 80, day: "금"),
-            WeekChartData(emotion: "긍정", value: 60, day: "토"),
-            WeekChartData(emotion: "부정", value: 40, day: "토"),
-            WeekChartData(emotion: "긍정", value: 50, day: "일"),
-            WeekChartData(emotion: "부정", value: 50, day: "일")
-        ]
+        let chartData: [WeekChartData] = viewModel.weekReport.flatMap { summary in
+            [
+                WeekChartData(emotion: "긍정", value: summary.positive_percentage, day: summary.day),
+                WeekChartData(emotion: "부정", value: summary.negative_percentage, day: summary.day)
+            ]
+        }
         
-        let positiveData = data.filter { $0.emotion == "긍정" }
-        let negativeData = data.filter { $0.emotion == "부정" }
+        let positiveData = chartData.filter { $0.emotion == "긍정" }
+        let negativeData = chartData.filter { $0.emotion == "부정" }
         
         return VStack(alignment: .leading, spacing: 25) {
-            Text("1. 지난 일주일간 00의 긍·부정 반응 비율") // TODO: name
+            Text("1. 지난 일주일간 \(childName)의 긍·부정 반응 비율")
                 .font(.PretenardBold36)
                 .foregroundStyle(.black1)
                 .padding(.bottom, 25)
@@ -107,6 +99,7 @@ struct EmotionWeekView: View {
                     .foregroundStyle(.red1)
                     .chartXAxis(.hidden)
                     .chartYAxis(.hidden)
+                    .chartXScale(domain: -100...0)
                     
                     // 긍정 그래프
                     Chart {
@@ -121,6 +114,7 @@ struct EmotionWeekView: View {
                     .foregroundStyle(.blue1)
                     .chartXAxis(.hidden)
                     .chartYAxis(.hidden)
+                    .chartXScale(domain: 0...100)
                 }
                 .padding(.horizontal, 80)
                 .frame(height: 383)
@@ -173,9 +167,6 @@ struct EmotionWeekView: View {
     
     // 긍부정 Top5
     private var top5Group: some View {
-        let positiveTop5 = ["삼겹살", "이슬이 누나", "친구", "액션가면", "초코비"]
-        let negativeTop5 = ["피망", "나미리 선생님", "병원", "게임", "책"]
-        
         let columns = Array(repeating: GridItem(.flexible(), spacing: 18), count: 5)
         
         return VStack(alignment: .leading, spacing: 25) {
@@ -184,20 +175,20 @@ struct EmotionWeekView: View {
                 .foregroundStyle(.black1)
             
             LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(positiveTop5.indices, id: \.self) { index in
-                    makeTop5(emotion: "p", title: positiveTop5[index])
+                ForEach(viewModel.topPositiveKeywords.indices, id: \.self) { index in
+                    makeTop5(emotion: "p", title: viewModel.topPositiveKeywords[index].keyword)
                 }
             }
             
             Spacer().frame(height: 25)
             
-            Text("2. 긍정 키워드 Top5")
+            Text("3. 부정 키워드 Top5")
                 .font(.PretenardBold36)
                 .foregroundStyle(.black1)
             
             LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(negativeTop5.indices, id: \.self) { index in
-                    makeTop5(emotion: "n", title: negativeTop5[index])
+                ForEach(viewModel.topNegativeKeywords.indices, id: \.self) { index in
+                    makeTop5(emotion: "n", title: viewModel.topNegativeKeywords[index].keyword)
                 }
             }
         }
