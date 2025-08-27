@@ -8,16 +8,32 @@
 import SwiftUI
 
 struct CalendarCell: View {
+    @Environment(NavigationRouter<MypageRoute>.self) private var router
+    
     var calendarDay: CalendarDay
     var isSelected: Bool
     @Bindable var viewModel: ReportCalendarViewModel
     
     var body: some View {
         ZStack {
-            if isSelected {
-                // TODO: 선택 날짜 표시
+            let status = viewModel.status(for: calendarDay.date)
+            if status == "positive" {
+                Circle()
+                    .fill(Color.blue1)
+                    .frame(width: 35, height: 35)
+                    .transition(.scale.combined(with: .opacity))
+            } else if status == "negative" {
+                Circle()
+                    .fill(Color.red1)
+                    .frame(width: 35, height: 35)
+                    .transition(.scale.combined(with: .opacity))
+            } else if status == "neutral" {
+                Circle()
+                    .fill(Color.gray1)
+                    .frame(width: 35, height: 35)
+                    .transition(.scale.combined(with: .opacity))
             }
-            
+                
             Text("\(calendarDay.day)")
                 .font(.NanumExtraBold20)
                 .foregroundStyle(textColor)
@@ -27,16 +43,21 @@ struct CalendarCell: View {
         .onTapGesture {
             withAnimation(.spring(response: 0.4, dampingFraction: 0.5, blendDuration: 0)) {
                 viewModel.changeSelectedDate(calendarDay.date)
+                router.push(.emotionToday(date: viewModel.selectedDate))
             }
         }
     }
     
     private var textColor: Color {
-       if calendarDay.isCurrentMonth {
+        let status = viewModel.status(for: calendarDay.date)
+        
+       if !calendarDay.isCurrentMonth {
+           return .gray1
+       } else if status != "none"  {
+           return .white
+       } else {
            return .black1
-        } else {
-            return .gray1
-        }
+       }
     }
 }
 

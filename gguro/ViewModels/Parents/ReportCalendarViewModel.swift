@@ -15,6 +15,13 @@ class ReportCalendarViewModel {
     var selectedDate: Date
     var calendar: Calendar
     
+    var statusByDay: [Int: String] = [:]
+    var calendarDataList: [DailyStatus] = [] {
+        didSet {
+            statusByDay = Dictionary(uniqueKeysWithValues: calendarDataList.map { ($0.day, $0.status) })
+        }
+    }
+    
     var currentMonthYear: Int {
         Calendar.current.component(.year, from: currentMonth)
     }
@@ -24,6 +31,10 @@ class ReportCalendarViewModel {
         self.selectedDate = selectedDate
         self.calendar = calendar
     }
+    
+    // 편의 프로퍼티
+    var currentYear: Int { calendar.component(.year, from: currentMonth) }
+    var currentMonthNumber: Int { calendar.component(.month, from: currentMonth) }
     
     // 월 변경
     func changeMonth(by value: Int) {
@@ -111,5 +122,36 @@ class ReportCalendarViewModel {
         } else {
             selectedDate = date
         }
+    }
+    
+    // 날짜 상태 조회
+    func status(for date: Date) -> String {
+        let day = calendar.component(.day, from: date)
+        return statusByDay[day] ?? "none"
+    }
+    
+    // MARK: - API
+    let provider = APIManager.shared.createProvider(for: ParentsRouter.self)
+    
+    func fetchSummaryMonth(year: Int, month: Int) {
+        let savedProfileId = UserDefaults.standard.object(forKey: "profileId") as? Int
+        guard let profileId = savedProfileId else {
+            print("선택된 프로필이 없습니다.")
+            return
+        }
+        provider.request(.getSummaryMonthly(profileId: profileId, year: year, month: month)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let decodedData = try JSONDecoder().decode(MonthReportResponse.self, from: response.data)
+                    self.calendarDataList = decodedData.daily_statuses
+                } catch {
+                    print("GetSummaryMonthly 디코더 오류: \(error)")
+                }
+            case .failure(let error):
+                print("GetSummaryMonthly API 오류: \(error)")
+            }
+        }
+        
     }
 }

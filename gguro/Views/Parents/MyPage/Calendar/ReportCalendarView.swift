@@ -16,6 +16,12 @@ struct ReportCalendarView: View {
             calendarView
         }
         .padding(.horizontal, 30)
+        .task {
+            viewModel.fetchSummaryMonth(year: viewModel.currentYear, month: viewModel.currentMonthNumber)
+        }
+        .onChange(of: viewModel.currentMonth) {
+            viewModel.fetchSummaryMonth(year: viewModel.currentYear, month: viewModel.currentMonthNumber)
+        }
     }
     
     // 월 변경

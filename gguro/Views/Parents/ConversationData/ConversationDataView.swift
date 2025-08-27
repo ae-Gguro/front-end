@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ConversationDataView: View {
     @Environment(NavigationRouter<ParentsRoute>.self) private var router
+    @Environment(\.childName) private var childName
     @EnvironmentObject var profileViewModel: ProfileSelectViewModel
-    
     @EnvironmentObject private var viewModel: ConversationDataViewModel
     
     var body: some View {
@@ -28,7 +28,7 @@ struct ConversationDataView: View {
                     }
                     .padding(.horizontal, 45)
                     
-                    MessageBox(content: Text("AI와 \(viewModel.name)의 대화 내용"))
+                    MessageBox(content: Text("AI와 \(childName)의 대화 내용"))
                 }
                 
                 // 리스트

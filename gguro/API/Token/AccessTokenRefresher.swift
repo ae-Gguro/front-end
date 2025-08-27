@@ -28,6 +28,15 @@ class AccessTokenRefresher: @unchecked Sendable, RequestInterceptor {
     }
     
     func retry(_ request: Request, for session: Session, dueTo error: any Error, completion: @escaping (RetryResult) -> Void) {
+        
+        let url = request.request?.url?.absoluteString ?? ""
+
+        // 애플 로그인은 1회용 code -> 재시도 금지
+        if url.contains("/api/auth/apple") {
+            completion(.doNotRetry)
+            return
+        }
+        
         print("🍎 리트라이 진입했어요!!!!!! 🍎")
         guard request.retryCount < 1,
               let response = request.task?.response as? HTTPURLResponse,

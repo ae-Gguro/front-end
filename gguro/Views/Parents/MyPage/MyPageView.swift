@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct MyPageView: View {
+    @Environment(\.childName) private var childName
     @Environment(NavigationRouter<MypageRoute>.self) private var router
+    @StateObject private var viewModel = MypageViewModel()
     
     @State var showDeleteModal: Bool = false
     @State var showWithdrawModal: Bool = false
@@ -67,6 +70,9 @@ struct MyPageView: View {
                 )
             }
         }
+        .task {
+            viewModel.fetchProfile()
+        }
     }
     
     // 왼쪽 페이지
@@ -96,15 +102,24 @@ struct MyPageView: View {
     // 아이 프로필
     private var ProfileGroup: some View {
         HStack(spacing: 35) {
-            Circle() // TODO: 아이 이미지
-                .frame(width: 120, height: 120)
+            if let url = URL(string: viewModel.image) {
+                KFImage(url)
+                    .placeholder {
+                        ProgressView()
+                            .controlSize(.mini)
+                    }
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 120, height: 120)
+                    .clipShape( Circle() )
+            }
             
             VStack(alignment: .leading, spacing: 15) {
-                Text("OO")
+                Text(viewModel.name)
                     .font(.NanumExtraBold28)
                     .foregroundStyle(.black1)
                 
-                Text("0000.00.00")
+                Text(viewModel.birth)
                     .font(.NanumExtraBold19)
                     .foregroundStyle(.gray1)
             }
@@ -121,7 +136,7 @@ struct MyPageView: View {
             VStack(spacing: 40) {
                 // 감정 분석
                 VStack(spacing: 15) {
-                    Text("📊 OO의 감정 분석")
+                    Text("📊 \(childName)의 감정 분석")
                         .font(.NanumExtraBold28)
                         .foregroundStyle(.black1)
                     
@@ -134,7 +149,7 @@ struct MyPageView: View {
                 
                 // 대화 기록
                 VStack(spacing: 15) {
-                    Text("📚 OO의 대화 기록")
+                    Text("📚 \(childName)의 대화 기록")
                         .font(.NanumExtraBold28)
                         .foregroundStyle(.black1)
                     
@@ -157,7 +172,7 @@ struct MyPageView: View {
         Button(action: {
             switch type {
             case .reportToday:
-                router.push(.emotionToday)
+                router.push(.emotionToday(date: Date()))
             case .reportWeek:
                 router.push(.emotionWeek)
             case .conversation:

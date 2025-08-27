@@ -13,7 +13,6 @@ enum OnboardingRouter {
     case postLogin(loginData: LoginData)
     case postNaver(accessToken: String)
     case postKakao(accessToken: String)
-//    case postApple
 }
 
 extension OnboardingRouter: APITargetType {

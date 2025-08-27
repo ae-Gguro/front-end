@@ -11,12 +11,14 @@ import Charts
 struct ChartData: Identifiable {
     let id = UUID()
     let emotion: String
-    let value: Double
+    let value: Int
 }
 
 struct EmotionTodayView: View {
     @Environment(NavigationRouter<ParentsRoute>.self) private var router
-    @State private var viewModel = EmotionVariationViewModel()
+    @StateObject private var viewModel = EmotionTodayViewModel()
+    
+    let selectedDate: Date
 
     var body: some View {
         ZStack {
@@ -65,7 +67,7 @@ struct EmotionTodayView: View {
                                         .fill(.gray3)
                                     
                                     ScrollView {
-                                        Text("테스트")
+                                        Text((viewModel.dailyReport?.positive_keywords ?? []).joined(separator: ", "))
                                             .padding(.horizontal, 30)
                                             .padding(.vertical, 20)
                                     }
@@ -84,7 +86,7 @@ struct EmotionTodayView: View {
                                         .fill(.gray3)
                                     
                                     ScrollView {
-                                        Text("테스트")
+                                        Text((viewModel.dailyReport?.negative_keywords ?? []).joined(separator: ", "))
                                             .padding(.horizontal, 30)
                                             .padding(.vertical, 20)
                                     }
@@ -106,12 +108,23 @@ struct EmotionTodayView: View {
             }
         }
         .navigationBarBackButtonHidden()
+        .task {
+            let formatter = DateFormatter()
+            formatter.locale = Locale(identifier: "ko_KR")
+            formatter.dateFormat = "yyyy-MM-dd"
+            let dateString = formatter.string(from: selectedDate)
+            
+            viewModel.fetchDailyReport(date: dateString)
+        }
     }
     
     private var chartGroup: some View {
+        let positive = viewModel.dailyReport?.positive_percentage ?? 0
+        let negative = viewModel.dailyReport?.negative_percentage ?? 0
+        
         let data: [ChartData] = [
-            ChartData(emotion: "긍정", value: 80),
-            ChartData(emotion: "부정", value: 20)
+            ChartData(emotion: "긍정", value: positive),
+            ChartData(emotion: "부정", value: negative)
         ]
         
         return VStack(spacing: 30) {
@@ -163,7 +176,7 @@ struct EmotionTodayView: View {
     }()
 }
 
-#Preview {
-    EmotionTodayView()
-        .environment(NavigationRouter<ParentsRoute>())
-}
+//#Preview {
+//    EmotionTodayView()
+//        .environment(NavigationRouter<ParentsRoute>())
+//}

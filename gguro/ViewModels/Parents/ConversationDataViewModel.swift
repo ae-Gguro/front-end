@@ -9,9 +9,6 @@ import Foundation
 
 class ConversationDataViewModel: ObservableObject {
     let provider = APIManager.shared.createProvider(for: ParentsRouter.self)
-    let profileProvider = APIManager.shared.createProvider(for: ProfileRouter.self)
-    
-    @Published var name: String = "아이"
     
     @Published var chatroomList: [ConversationList] = []
     @Published var selectedChatroomId: Int?
@@ -47,27 +44,6 @@ class ConversationDataViewModel: ObservableObject {
     }
     
     // MARK: - Function
-    func fetchChildName() {
-        let savedProfileId = UserDefaults.standard.object(forKey: "profileId") as? Int
-        guard let profileId = savedProfileId else {
-            print("선택된 프로필이 없습니다.")
-            return
-        }
-        profileProvider.request(.getFirstname(profileId: profileId)) { result in
-            switch result {
-            case .success(let response):
-                do {
-                    let decodedData = try JSONDecoder().decode(BasicResponse.self, from: response.data)
-                    
-                    self.name = decodedData.result
-                } catch {
-                    print("GetFirstname 디코더 오류: \(error)")
-                }
-            case .failure(let error):
-                print("GetFirstname API 오류: \(error)")
-            }
-        }
-    }
     
     func fetchGetChatrooms() {
         let savedProfileId = UserDefaults.standard.object(forKey: "profileId") as? Int

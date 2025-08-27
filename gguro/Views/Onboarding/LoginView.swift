@@ -81,7 +81,13 @@ struct LoginView: View {
                     
                     // 애플 로그인
                     Button(action: {
-                        viewModel.appleLogin()
+                        guard
+                            let windowScene = UIApplication.shared.connectedScenes
+                                .compactMap({ $0 as? UIWindowScene }).first,
+                            let window = windowScene.keyWindow
+                        else { return }
+
+                        Task { await viewModel.loginWithApple(presentationAnchor: window) }
                     }) {
                         Image(.iconLoginApple)
                             .resizable()

@@ -10,7 +10,7 @@ import Foundation
 enum MypageRoute: Hashable {
     case mypage
     
-    case emotionToday
+    case emotionToday(date: Date)
     case emotionWeek
     
     case conversation
