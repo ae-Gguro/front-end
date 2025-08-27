@@ -9,12 +9,11 @@ import SwiftUI
 
 struct ConversationContentView: View {
     let state: AIChatState
-    let name: String
     
     var body: some View {
         switch state {
         case .intro:
-            ConversationIntroView(name: name)
+            ConversationIntroView()
         case .listening:
             ListeningView()
         case .thinking:
@@ -26,9 +25,11 @@ struct ConversationContentView: View {
 }
 
 struct AIChatScreen: View {
+    @Environment(\.childNameAYA) private var childName
+
     var body: some View {
-        BlackBoardLayout(type: .aiChat(name: "은서")) {
-            ConversationContentView(state: .ended, name: "은서")
+        BlackBoardLayout(type: .aiChat(name: childName)) {
+            ConversationContentView(state: .ended)
         }
         .navigationBarBackButtonHidden(true)
     }

@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct ConversationIntroView: View {
-    let name: String
+    @Environment(\.childNameAYA) private var childName
     
     var body: some View {
         VStack(spacing: 55) {
             Group {
                 Text("안녕 ")
                     .foregroundStyle(.white)
-                + Text("\(name)")
+                + Text("\(childName)!")
                     .foregroundStyle(.yellow1)
-                + Text("야(아)!\n꾸로 눈을 바라봐줄래?")
+                + Text("\n꾸로 눈을 바라봐줄래?")
                     .foregroundStyle(.white)
                 
                     
@@ -36,5 +36,5 @@ struct ConversationIntroView: View {
 }
 
 #Preview {
-    ConversationIntroView(name: "은서")
+    ConversationIntroView()
 }

@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct AnimalStudyListView: View {
+    @Environment(\.childNameAYA) private var childName
     @Environment(NavigationRouter<ChildrenRoute>.self) private var router
     
-    let name: String
     @State private var viewModel = AnimalViewModel()
     @State private var currentPage = 0
     
@@ -41,7 +41,7 @@ struct AnimalStudyListView: View {
                     }
                     .padding(.horizontal, 45)
                     
-                    MessageBox(content: Text("\(name)야! 어떤 동물이 궁금해? 🐾"))
+                    MessageBox(content: Text("\(childName)! 어떤 동물이 궁금해? 🐾"))
                 }
 
                 Spacer().frame(height: 65)

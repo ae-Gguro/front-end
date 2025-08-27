@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct LifeStudyListView: View {
+    @Environment(\.childNameAYA) private var childName
     @Environment(NavigationRouter<ChildrenRoute>.self) private var router
     
-    let name: String
     @State private var viewModel = LifeViewModel()
     @State private var currentPage = 0
     
@@ -41,7 +41,7 @@ struct LifeStudyListView: View {
                     }
                     .padding(.horizontal, 45)
                     
-                    MessageBox(content: Text("\(name)야! 어떤 바른 생활을 살아볼까?🎒"))
+                    MessageBox(content: Text("\(childName)! 어떤 바른 생활을 살아볼까?🎒"))
                 }
 
                 Spacer().frame(height: 65)
@@ -121,6 +121,6 @@ extension Array {
 }
 
 #Preview {
-    LifeStudyListView(name: "은서")
+    LifeStudyListView()
         .environment(NavigationRouter<ChildrenRoute>())
 }

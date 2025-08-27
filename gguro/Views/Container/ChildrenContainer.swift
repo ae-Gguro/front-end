@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ChildrenContainer: View {
     @State private var router = NavigationRouter<ChildrenRoute>()
-    
-    let name = "은서"
+    @StateObject private var childrenViewModel = ChildrenViewModel()
+    @StateObject private var parentsViewModel = ParentsViewModel()
     
     var body: some View {
         NavigationStack(path: $router.path) {
@@ -33,17 +33,25 @@ struct ChildrenContainer: View {
                     case .study:
                         ChildrenStudyingMenu()
                     case .lifeMenu:
-                        LifeStudyListView(name: name)
+                        LifeStudyListView()
                     case .life:
                         LifeStudyScreen()
                     case .animalMenu:
-                        AnimalStudyListView(name: name)
+                        AnimalStudyListView()
                     case .animal:
                         AnimalStudyScreen()
                     }
                 }
+                .task {
+                    parentsViewModel.fetchChildName()
+                    childrenViewModel.fetchChildNamePossessive()
+                    childrenViewModel.fetchChildNameNominative()
+                }
         }
         .environment(router)
+        .environment(\.childName, parentsViewModel.name)
+        .environment(\.childNameAYA, childrenViewModel.ayaName)
+        .environment(\.childNameIGA, childrenViewModel.igaName)
     }
 }
 

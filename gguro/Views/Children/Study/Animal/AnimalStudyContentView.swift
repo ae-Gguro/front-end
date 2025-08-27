@@ -13,14 +13,14 @@ struct AnimalStudyContentView: View {
     var body: some View {
         
         switch state {
-        case .intro(let name):
-            AnimalStudyIntroView(name: name)
-        case .question(let name):
-            AnimalStudyIntroView(name: name)
-        case .wrongAnswer(let name):
-            AnimalStudyIntroView(name: name)
-        case .correctAnswer(let name):
-            AnimalStudyIntroView(name: name)
+        case .intro:
+            AnimalStudyIntroView()
+        case .question:
+            AnimalStudyIntroView()
+        case .wrongAnswer:
+            AnimalStudyIntroView()
+        case .correctAnswer:
+            AnimalStudyIntroView()
         case .listening:
             ListeningView()
         case .thinking:
@@ -31,16 +31,16 @@ struct AnimalStudyContentView: View {
 }
 
 struct AnimalStudyScreen: View {
+    @Environment(\.childNameAYA) private var childName
+    
     var body: some View {
-        BlackBoardLayout(type: .animalStudy(name: "은서")) {
-            AnimalStudyContentView(state: .intro(name: "은서"))
+        BlackBoardLayout(type: .animalStudy(name: childName)) {
+            AnimalStudyContentView(state: .intro(name: childName))
         }
         .navigationBarBackButtonHidden(true)
     }
 }
 
 #Preview{
-    BlackBoardLayout(type: .animalStudy(name: "은서")) {
-        AnimalStudyContentView(state: .intro(name: "은서"))
-    }
+    AnimalStudyScreen()
 }

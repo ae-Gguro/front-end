@@ -8,19 +8,21 @@
 import SwiftUI
 
 struct LifeStudyContentView: View {
+    @Environment(\.childNameAYA) private var childName
+    
     let state: LifeStudyState
     
     var body: some View {
         
         switch state {
-        case .intro(let name):
-            LifeStudyIntroView(name: name)
-        case .question(let name):
-            LifeStudyIntroView(name: name)
-        case .wrongAnswer(let name):
-            LifeStudyIntroView(name: name)
-        case .correctAnswer(let name):
-            LifeStudyIntroView(name: name)
+        case .intro:
+            LifeStudyIntroView()
+        case .question:
+            LifeStudyIntroView()
+        case .wrongAnswer:
+            LifeStudyIntroView()
+        case .correctAnswer:
+            LifeStudyIntroView()
         case .listening:
             ListeningView()
         case .thinking:
@@ -31,16 +33,16 @@ struct LifeStudyContentView: View {
 }
 
 struct LifeStudyScreen: View {
+    @Environment(\.childNameAYA) private var childName
+    
     var body: some View {
-        BlackBoardLayout(type: .lifeStudy(name: "은서")) {
-            LifeStudyContentView(state: .intro(name: "은서"))
+        BlackBoardLayout(type: .lifeStudy(name: childName)) {
+            LifeStudyContentView(state: .intro(name: childName))
         }
         .navigationBarBackButtonHidden(true)
     }
 }
 
 #Preview{
-    BlackBoardLayout(type: .lifeStudy(name: "은서")) {
-        LifeStudyContentView(state: .intro(name: "은서"))
-    }
+    LifeStudyScreen()
 }

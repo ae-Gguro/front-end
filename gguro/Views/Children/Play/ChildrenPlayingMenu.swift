@@ -9,8 +9,7 @@ import SwiftUI
 
 struct ChildrenPlayingMenu: View {
     @Environment(NavigationRouter<ChildrenRoute>.self) private var router
-
-    var name: String = "은서"
+    @Environment(\.childNameIGA) private var childName
     
     var body: some View {
         ZStack {
@@ -30,7 +29,7 @@ struct ChildrenPlayingMenu: View {
                     }
                     .padding(.horizontal, 45)
                     
-                    MessageBox(content: Text("\(name)(이)가 하고 싶은 걸 선택해봐! 🎶"))
+                    MessageBox(content: Text("\(childName) 하고 싶은 걸 선택해봐! 🎶"))
                 }
                 
                 Spacer().frame(height: 31)

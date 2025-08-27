@@ -31,8 +31,10 @@ struct QuizContentView: View {
 }
 
 struct WordQuizScreen: View {
+    @Environment(\.childNameAYA) private var childName
+    
     var body: some View {
-        BlackBoardLayout(type: .wordQuiz(name: "은서")) {
+        BlackBoardLayout(type: .wordQuiz(name: childName)) {
             QuizContentView(state: .ended)
         }
         .navigationBarBackButtonHidden(true)

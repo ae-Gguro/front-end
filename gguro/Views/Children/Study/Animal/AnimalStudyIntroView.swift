@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AnimalStudyIntroView: View {
-    let name: String
+    @Environment(\.childNameAYA) private var childName
     @State private var viewModel = AnimalViewModel()
     
     var body: some View {
@@ -26,7 +26,7 @@ struct AnimalStudyIntroView: View {
                         .frame(width: 260, height: 260)
                 }
                 
-                Text("안녕! \(name)야\n나는 용맹하고 멋진 호랑이야")
+                Text("안녕! \(childName)\n나는 용맹하고 멋진 호랑이야")
                     .foregroundStyle(.white)
                     .font(.NanumBold48)
             }
