@@ -9,6 +9,9 @@ import Foundation
 import Moya
 
 enum ParentsRouter {
+    // utility
+    case postAdvice(profileId: Int) // 관계 조언 생성 또는 조회
+    
     // history
     case getChatrooms(profileId: Int) // 프로필별 채팅방 목록 조회
     case getTalks(chatroomId: Int) // 채팅방별 대화 내용 조회
@@ -30,6 +33,8 @@ extension ParentsRouter: APITargetType {
     // path
     var path: String {
         switch self {
+        case .postAdvice:
+            return "/api/relationship-advice"
         case .getChatrooms(let profileId):
             return "/api/history/chatrooms/\(profileId)"
         case .getTalks(let chatroomId):
@@ -51,6 +56,8 @@ extension ParentsRouter: APITargetType {
     // method
     var method: Moya.Method {
         switch self {
+        case .postAdvice:
+            return .post
         case .getChatrooms, .getTalks, .getSummaryDaily, .getSummaryWeekly, .getSummaryMonthly, .getSummary:
             return .get
         case .patchFeedback:
@@ -61,6 +68,9 @@ extension ParentsRouter: APITargetType {
     // task
     var task: Task {
         switch self {
+        case .postAdvice(let profileId):
+            return .requestParameters(parameters: ["profile_id": profileId], encoding: JSONEncoding.default)
+            
         case .getChatrooms, .getTalks, .patchFeedback:
             return .requestPlain
             
