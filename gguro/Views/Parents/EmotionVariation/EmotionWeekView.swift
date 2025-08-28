@@ -54,6 +54,7 @@ struct EmotionWeekView: View {
                         .padding(.vertical, 55)
                         .padding(.horizontal, 60)
                     }
+                    .scrollIndicators(.hidden)
                 }
                 .padding(.horizontal, 97)
                 .padding(.bottom, 41)
