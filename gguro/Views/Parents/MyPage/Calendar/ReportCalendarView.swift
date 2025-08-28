@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ReportCalendarView: View {
-    @Bindable var viewModel: ReportCalendarViewModel = .init()
+    @State private var viewModel = ReportCalendarViewModel()
     
     var body: some View {
         VStack(spacing: 30) {
@@ -17,9 +17,6 @@ struct ReportCalendarView: View {
         }
         .padding(.horizontal, 30)
         .task {
-            viewModel.fetchSummaryMonth(year: viewModel.currentYear, month: viewModel.currentMonthNumber)
-        }
-        .onChange(of: viewModel.currentMonth) {
             viewModel.fetchSummaryMonth(year: viewModel.currentYear, month: viewModel.currentMonthNumber)
         }
     }
