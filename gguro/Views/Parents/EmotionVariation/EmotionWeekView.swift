@@ -129,12 +129,14 @@ struct EmotionWeekView: View {
                             Text("\(Int(neg))%")
                                 .foregroundStyle(.white)
                                 .font(.NanumExtraBold16)
+                                .frame(width: 55, alignment: .trailing)
                             Text(day)
                                 .foregroundStyle(.black)
                                 .font(.NanumExtraBold20)
                             Text("\(Int(pos))%")
                                 .foregroundStyle(.white)
                                 .font(.NanumExtraBold16)
+                                .frame(width: 55, alignment: .leading)
                         }
                     }
                 }
