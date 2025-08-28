@@ -12,12 +12,11 @@ class ConversationDataViewModel: ObservableObject {
     
     @Published var chatroomList: [ConversationList] = []
     @Published var selectedChatroomId: Int?
+    // 현재 페이지
+    @Published var currentPage: Int = 1
     
     // 페이지 당 리스트 수
     private let itemsPerPage = 6
-    
-    // 현재 페이지
-    var currentPage: Int = 1
     
     // 총 페이지 수 계산
     var totalPage: Int {
