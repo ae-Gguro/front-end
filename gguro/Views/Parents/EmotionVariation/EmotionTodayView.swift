@@ -133,6 +133,13 @@ struct EmotionTodayView: View {
                     angle: .value("Emotion", item.value),
                     innerRadius: .ratio(0.618)
                 )
+                .annotation(position: .overlay) {
+                    if item.value > 0 {
+                        Text("\(item.value)%")
+                            .font(.NanumExtraBold20)
+                            .foregroundStyle(.white)
+                    }
+                }
                 .foregroundStyle(by: .value("Color", item.emotion))
             }
             .frame(width: 370, height: 370)
