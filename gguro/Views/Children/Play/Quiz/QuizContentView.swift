@@ -35,7 +35,7 @@ struct WordQuizScreen: View {
     
     var body: some View {
         BlackBoardLayout(type: .wordQuiz(name: childName)) {
-            QuizContentView(state: .ended)
+            QuizContentView(state: .intro)
         }
         .navigationBarBackButtonHidden(true)
     }

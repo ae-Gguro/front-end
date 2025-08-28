@@ -23,8 +23,8 @@ struct ParentsContainer: View {
                         
                     case .conversationData:
                         ConversationDataView()
-                    case .conversationDetail:
-                        ConversationDetailView()
+                    case .conversationDetail(let chatroomId, let focusTalkId):
+                        ConversationDetailView(chatroomId: chatroomId, focusTalkId: focusTalkId)
                     case .emotionVariation:
                         EmotionVariationView()
                     }

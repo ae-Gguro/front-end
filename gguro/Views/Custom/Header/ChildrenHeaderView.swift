@@ -28,7 +28,7 @@ struct ChildrenHeaderView: View {
             viewModel.fetchProfileList()
         }
         .fullScreenCover(isPresented: $showParentsView) {
-            ParentsContainer()
+            ProfileContainer(type: .parents)
         }
     }
     

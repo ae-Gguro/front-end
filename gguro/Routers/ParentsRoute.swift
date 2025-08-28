@@ -11,7 +11,7 @@ enum ParentsRoute: Hashable {
     case main
     
     case conversationData
-    case conversationDetail
+    case conversationDetail(chatroomId: Int, focusTalkId: Int?)
     case emotionVariation
 }
 

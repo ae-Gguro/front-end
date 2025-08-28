@@ -29,7 +29,7 @@ struct AIChatScreen: View {
 
     var body: some View {
         BlackBoardLayout(type: .aiChat(name: childName)) {
-            ConversationContentView(state: .ended)
+            ConversationContentView(state: .intro)
         }
         .navigationBarBackButtonHidden(true)
     }

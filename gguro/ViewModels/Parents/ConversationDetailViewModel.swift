@@ -12,12 +12,7 @@ class ConversationDetailViewModel: ObservableObject {
     
     @Published var conversationList: [ConversationDetailModel] = []
     
-    func fetchGetTalks() {
-        let savedChatroomId = UserDefaults.standard.object(forKey: "chatroomId") as? Int
-        guard let chatroomId = savedChatroomId else {
-            print("선택된 대화방이 없습니다.")
-            return
-        }
+    func fetchGetTalks(chatroomId: Int) {
         provider.request(.getTalks(chatroomId: chatroomId)) { result in
             switch result {
             case .success(let response):

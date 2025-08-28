@@ -105,7 +105,7 @@ struct ConversationListItem: View {
     var body: some View {
         Button(action: {
             viewModel.selectChatroom(item)
-            router.push(.conversationDetail)
+            router.push(.conversationDetail(chatroomId: item.id, focusTalkId: nil))
         }) {
             HStack {
                 Text(formattedDate(item.createdAt))

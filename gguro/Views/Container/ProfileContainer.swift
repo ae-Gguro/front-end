@@ -9,26 +9,30 @@ import SwiftUI
 
 struct ProfileContainer: View {
     @State private var router = NavigationRouter<ProfileRoute>()
+    @State private var pRouter = NavigationRouter<ParentsRoute>()
     
     @StateObject private var profileViewModel = ProfileSelectViewModel()
     
+    let type: ProfileCreateType
+    
     var body: some View {
         NavigationStack(path: $router.path) {
-            ProfileSelectView(type: .onboarding)
+            ProfileSelectView(type: type)
                 .navigationDestination(for: ProfileRoute.self) { route in
                     switch route {
                     case .profileSelect:
-                        ProfileSelectView(type: .onboarding)
+                        ProfileSelectView(type: type)
                     case .profileCreate:
-                        ProfileCreateView(type: .onboarding)
+                        ProfileCreateView(type: type)
                     }
                 }
         }
         .environment(router)
+        .environment(pRouter)
         .environmentObject(profileViewModel)
     }
 }
 
 #Preview {
-    ProfileContainer()
+    ProfileContainer(type: .onboarding)
 }

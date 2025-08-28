@@ -44,7 +44,7 @@ struct ProfileSelectView: View {
             case .onboarding:
                 ChildrenContainer()
             case .parents:
-                MypageContainer()
+                ParentsContainer()
             }
         }
         .navigationBarBackButtonHidden()

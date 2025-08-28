@@ -26,7 +26,7 @@ struct AnimalStudyIntroView: View {
                         .frame(width: 260, height: 260)
                 }
                 
-                Text("안녕! \(childName)\n나는 용맹하고 멋진 호랑이야")
+                Text("안녕! \(childName)\n나는 용맹하고 멋진 곰이야")
                     .foregroundStyle(.white)
                     .font(.NanumBold48)
             }

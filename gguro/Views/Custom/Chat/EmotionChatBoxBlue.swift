@@ -11,6 +11,8 @@ struct EmotionChatBoxBlue: View {
     @Environment(NavigationRouter<ParentsRoute>.self) private var router
     
     var text: String
+    var chatroomId: Int
+    var talkId: Int
     
     var body: some View {
         HStack(alignment: .top, spacing: 30) {
@@ -20,8 +22,8 @@ struct EmotionChatBoxBlue: View {
                 ChatBubble
                 
                 Button(action: {
-                    router.push(.conversationDetail)
-                }) { // TODO: action
+                    router.push(.conversationDetail(chatroomId: chatroomId, focusTalkId: talkId))
+                }) {
                     Text("대화 내용 보러가기")
                         .font(.NanumExtraBold19)
                         .foregroundStyle(.black1)
@@ -58,6 +60,6 @@ struct EmotionChatBoxBlue: View {
     }
 }
 
-#Preview {
-    EmotionChatBoxBlue(text: "은서는 “삼겹살”이라는 단어에 긍정적으로 반응했어요.")
-}
+//#Preview {
+//    EmotionChatBoxBlue(text: "은서는 “삼겹살”이라는 단어에 긍정적으로 반응했어요.")
+//}

@@ -48,11 +48,15 @@ struct EmotionVariationView: View {
                                             .fill(.gray2)
                                     }
                                 
-                                ForEach(group.items) { item in
+                                ForEach(group.items, id: \.talkId) { item in
                                     if item.positive {
-                                        EmotionChatBoxBlue(text: item.text)
+                                        EmotionChatBoxBlue(text: item.text,
+                                                           chatroomId: item.chatroomId,
+                                                           talkId: item.talkId)
                                     } else {
-                                        EmotionChatBoxRed(text: item.text)
+                                        EmotionChatBoxRed(text: item.text,
+                                                          chatroomId: item.chatroomId,
+                                                          talkId: item.talkId)
                                     }
                                 }
                             }
