@@ -41,6 +41,10 @@ class ReportCalendarViewModel {
         let calendar = Calendar.current
         if let newMonth = calendar.date(byAdding: .month, value: value, to: currentMonth) {
             currentMonth = newMonth
+            
+            calendarDataList = []
+            
+            fetchSummaryMonth(year: currentYear, month: currentMonthNumber)
         }
     }
     
@@ -144,7 +148,9 @@ class ReportCalendarViewModel {
             case .success(let response):
                 do {
                     let decodedData = try JSONDecoder().decode(MonthReportResponse.self, from: response.data)
-                    self.calendarDataList = decodedData.daily_statuses
+                    DispatchQueue.main.async {
+                        self.calendarDataList = decodedData.daily_statuses
+                    }
                 } catch {
                     print("GetSummaryMonthly 디코더 오류: \(error)")
                 }

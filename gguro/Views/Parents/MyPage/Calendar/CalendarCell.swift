@@ -17,21 +17,24 @@ struct CalendarCell: View {
     var body: some View {
         ZStack {
             let status = viewModel.status(for: calendarDay.date)
-            if status == "positive" {
-                Circle()
-                    .fill(Color.blue1)
-                    .frame(width: 35, height: 35)
-                    .transition(.scale.combined(with: .opacity))
-            } else if status == "negative" {
-                Circle()
-                    .fill(Color.red1)
-                    .frame(width: 35, height: 35)
-                    .transition(.scale.combined(with: .opacity))
-            } else if status == "neutral" {
-                Circle()
-                    .fill(Color.gray1)
-                    .frame(width: 35, height: 35)
-                    .transition(.scale.combined(with: .opacity))
+            
+            if calendarDay.isCurrentMonth {
+                if status == "positive" {
+                    Circle()
+                        .fill(Color.blue1)
+                        .frame(width: 35, height: 35)
+                        .transition(.scale.combined(with: .opacity))
+                } else if status == "negative" {
+                    Circle()
+                        .fill(Color.red1)
+                        .frame(width: 35, height: 35)
+                        .transition(.scale.combined(with: .opacity))
+                } else if status == "neutral" {
+                    Circle()
+                        .fill(Color.gray1)
+                        .frame(width: 35, height: 35)
+                        .transition(.scale.combined(with: .opacity))
+                }
             }
                 
             Text("\(calendarDay.day)")
@@ -52,7 +55,7 @@ struct CalendarCell: View {
         let status = viewModel.status(for: calendarDay.date)
         
        if !calendarDay.isCurrentMonth {
-           return .gray1
+           return .clear
        } else if status != "none"  {
            return .white
        } else {

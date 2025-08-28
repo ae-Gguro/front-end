@@ -54,6 +54,7 @@ struct EmotionWeekView: View {
                         .padding(.vertical, 55)
                         .padding(.horizontal, 60)
                     }
+                    .scrollIndicators(.hidden)
                 }
                 .padding(.horizontal, 97)
                 .padding(.bottom, 41)
@@ -129,12 +130,14 @@ struct EmotionWeekView: View {
                             Text("\(Int(neg))%")
                                 .foregroundStyle(.white)
                                 .font(.NanumExtraBold16)
+                                .frame(width: 55, alignment: .trailing)
                             Text(day)
                                 .foregroundStyle(.black)
                                 .font(.NanumExtraBold20)
                             Text("\(Int(pos))%")
                                 .foregroundStyle(.white)
                                 .font(.NanumExtraBold16)
+                                .frame(width: 55, alignment: .leading)
                         }
                     }
                 }
