@@ -13,6 +13,7 @@ struct ChildrenMenu: View {
     
     var body: some View {
         Button(action: {
+            print("[DEBUG] ChildrenMenu tapped: \(type)")
             action()
         }) {
             VStack(spacing: 40) {

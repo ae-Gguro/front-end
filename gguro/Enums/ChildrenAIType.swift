@@ -49,14 +49,15 @@ enum WordQuizState {
     case ended
 }
 
-enum RoleplayState {
+enum RoleplayState: Equatable {
     case intro(name: String)
+    case confirm(user: String, bot: String)
+    case started(reply: String)
     case listening
     case thinking
-    case confirm(name: String)
-    case started
     case ended
 }
+ 
 
 enum LifeStudyState {
     case intro(name: String)

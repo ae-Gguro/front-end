@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		201390622E5FB04300F3A98E /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 201390612E5FB04300F3A98E /* SocketIO */; };
 		238564302E110EC2008F25B1 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2385642F2E110EC2008F25B1 /* KakaoSDKAuth */; };
 		238564322E110EC2008F25B1 /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 238564312E110EC2008F25B1 /* KakaoSDKCommon */; };
 		238564342E110EC2008F25B1 /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 238564332E110EC2008F25B1 /* KakaoSDKUser */; };
@@ -54,6 +55,7 @@
 				23BAD1092E5A1BFE0000E27A /* FirebaseMessaging in Frameworks */,
 				23BAD1132E5B45450000E27A /* MarkdownUI in Frameworks */,
 				23BAD0E82E59CE8F0000E27A /* Moya in Frameworks */,
+				201390622E5FB04300F3A98E /* SocketIO in Frameworks */,
 				23BAD5952E5C3A120000E27A /* NidThirdPartyLogin in Frameworks */,
 				238564342E110EC2008F25B1 /* KakaoSDKUser in Frameworks */,
 				23BAD1072E5A1BFE0000E27A /* FirebaseCore in Frameworks */,
@@ -111,6 +113,7 @@
 				23BAD1122E5B45450000E27A /* MarkdownUI */,
 				23BAD5942E5C3A120000E27A /* NidThirdPartyLogin */,
 				23BAD5BA2E5C482A0000E27A /* NaverThirdPartyLogin */,
+				201390612E5FB04300F3A98E /* SocketIO */,
 			);
 			productName = gguro;
 			productReference = 23855B182DDE163F008F25B1 /* gguro.app */;
@@ -149,6 +152,7 @@
 				23BAD1112E5B45450000E27A /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				23BAD5932E5C3A120000E27A /* XCRemoteSwiftPackageReference "naveridlogin-sdk-ios-swift" */,
 				23BAD5B92E5C482A0000E27A /* XCRemoteSwiftPackageReference "naveridlogin-sdk-ios" */,
+				201390602E5FB04300F3A98E /* XCRemoteSwiftPackageReference "socket" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 23855B192DDE163F008F25B1 /* Products */;
@@ -320,6 +324,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = gguro/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "라즈베리파이와 연결하기 위해 로컬 네트워크 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진 앨범 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -360,6 +366,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = gguro/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "라즈베리파이와 연결하기 위해 로컬 네트워크 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진 앨범 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -408,6 +416,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		201390602E5FB04300F3A98E /* XCRemoteSwiftPackageReference "socket" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		2385642E2E110EC2008F25B1 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
@@ -467,6 +483,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		201390612E5FB04300F3A98E /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 201390602E5FB04300F3A98E /* XCRemoteSwiftPackageReference "socket" */;
+			productName = SocketIO;
+		};
 		2385642F2E110EC2008F25B1 /* KakaoSDKAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2385642E2E110EC2008F25B1 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;

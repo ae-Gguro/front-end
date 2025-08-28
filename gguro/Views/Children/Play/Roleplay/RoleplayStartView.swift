@@ -8,22 +8,29 @@
 import SwiftUI
 
 struct RoleplayStartView: View {
+    /// 서버에서 넘어온 꾸로의 대답
+    let reply: String
+    
     var body: some View {
         VStack(spacing: 46){
-            (Text("이제 ") + Text("역할 놀이").foregroundStyle(.yellow1) + Text("를 시작하자\n 꾸로 눈을 바라봐줄래?"))
-            .foregroundStyle(.white)
-            .multilineTextAlignment(.center)
-            .font(.NanumBold48)
-            
-            (Text("대화를 마치고 싶다면\n") + Text("그만하고 싶어").foregroundStyle(.yellow1) + Text("라고 말해줘!"))
+            // 서버 응답 표시
+            Text(reply)
                 .foregroundStyle(.white)
                 .multilineTextAlignment(.center)
                 .font(.NanumBold48)
+                .padding()
             
+            // 안내 문구
+            (Text("대화를 마치고 싶다면\n") +
+             Text("그만하고 싶어").foregroundStyle(.yellow1) +
+             Text("라고 말해줘!"))
+                .foregroundStyle(.white)
+                .multilineTextAlignment(.center)
+                .font(.NanumBold48)
         }
     }
 }
 
 #Preview {
-    RoleplayStartView()
+    RoleplayStartView(reply: "좋아! 지금부터 너는 '공주님', 나는 '왕자님'이야.")
 }

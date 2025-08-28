@@ -31,11 +31,15 @@ struct ChildrenMainView: View {
     
     private var ChildrenMenuButtonGroup: some View {
         HStack(spacing: 75) {
-            ChildrenMenu(type: .conversation, action: { router.push(.talk) })
+            ChildrenMenu(type: .conversation, action: {
+                print("[DEBUG] 대화 버튼 눌림")   // ✅ 여기가 찍히는지 확인
+                router.push(.talk)
+            })
             ChildrenMenu(type: .playing, action: { router.push(.play) })
             ChildrenMenu(type: .studying, action: { router.push(.study) })
         }
     }
+
 }
 
 #Preview {

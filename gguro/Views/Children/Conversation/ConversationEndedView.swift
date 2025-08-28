@@ -7,6 +7,8 @@
 import SwiftUI
 
 struct ConversationEndedView: View {
+    @EnvironmentObject var ws: AIChatWebSocketManager
+    
     var body: some View {
         VStack {
             HStack(spacing: -24) {
