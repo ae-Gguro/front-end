@@ -9,9 +9,8 @@ import SwiftUI
 import PhotosUI
 
 struct ProfileImageUploadButton: View {
+    @Binding var selectedImage: UIImage?
     @State var selectedItem: PhotosPickerItem? = nil
-    @State var selectedImage: UIImage? = nil
-    
     
     var body: some View {
         PhotosPicker(
@@ -21,8 +20,7 @@ struct ProfileImageUploadButton: View {
             VStack(spacing: 15) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 30)
-                        .fill(.gray3)
-                        .insetShadow(cornerRadius: 30)
+                        .fill(.gray3.shadow(.inner(color: .shadowWhite, radius: 7)))
                         .frame(width: 160, height: 160)
                     if let selectedImage {
                         Image(uiImage: selectedImage)
@@ -54,8 +52,4 @@ struct ProfileImageUploadButton: View {
         }
         .buttonStyle(.plain)
     }
-}
-
-#Preview {
-    ProfileImageUploadButton()
 }

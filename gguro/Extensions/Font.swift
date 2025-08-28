@@ -40,6 +40,10 @@ extension Font {
         return .nanum(type: .extraBold, size: 64)
     }
     
+    static var NanumExtraBold55: Font {
+        return .nanum(type: .extraBold, size: 55)
+    }
+    
     static var NanumExtraBold48: Font {
         return .nanum(type: .extraBold, size: 48)
     }
@@ -60,21 +64,37 @@ extension Font {
         return .nanum(type: .extraBold, size: 32)
     }
     
+    static var NanumExtraBold30: Font {
+        return .nanum(type: .extraBold, size: 30)
+    }
+    
     static var NanumExtraBold28: Font {
         return .nanum(type: .extraBold, size: 28)
+    }
+    
+    static var NanumExtraBold26: Font {
+        return .nanum(type: .extraBold, size: 26)
     }
     
     static var NanumExtraBold24: Font {
         return .nanum(type: .extraBold, size: 24)
     }
     
+    static var NanumExtraBold20: Font {
+        return .nanum(type: .extraBold, size: 20)
+    }
+    
     static var NanumExtraBold19: Font {
         return .nanum(type: .extraBold, size: 19)
     }
     
+    static var NanumExtraBold16: Font {
+        return .nanum(type: .extraBold, size: 16)
+    }
+    
     // Bold
     
-    static var NunumBold64: Font {
+    static var NanumBold64: Font {
         return .nanum(type: .bold, size: 64)
     }
     
@@ -86,12 +106,24 @@ extension Font {
         return .nanum(type: .bold, size: 36)
     }
     
+    static var NanumBold30: Font {
+        return .nanum(type: .bold, size: 30)
+    }
+    
     static var NanumBold20: Font {
         return .nanum(type: .bold, size: 20)
     }
 
     static var NanumBold18: Font {
         return .nanum(type: .bold, size: 18)
+    }
+    
+    static var NanumBold15: Font {
+        return .nanum(type: .bold, size: 15)
+    }
+    
+    static var NanumBold12: Font {
+        return .nanum(type: .bold, size: 12)
     }
     
     // MARK: - Pretendard
@@ -134,19 +166,37 @@ extension Font {
         return .custom(type.value, size: size)
     }
     
+    // bold
+    static var PretenardBold36: Font {
+        return .pretend(type: .bold, size: 36)
+    }
+    
     // SemiBold
     
     static var PretendardSemiBold128: Font {
         return .pretend(type: .semiBold, size: 128)
     }
     
+    static var PretendardSemiBold24: Font {
+        return .pretend(type: .semiBold, size: 24)
+    }
+    
     static var PretendardSemiBold32: Font {
         return .pretend(type: .semiBold, size: 32)
+    }
+    
+    // Medium
+    static var PretendardMedium10: Font {
+        return .pretend(type: .medium, size: 10)
     }
     
     // Regular
     
     static var PretendardRegular32: Font {
         return .pretend(type: .regular, size: 32)
+    }
+    
+    static var PretendardRegular24: Font {
+        return .pretend(type: .regular, size: 24)
     }
 }

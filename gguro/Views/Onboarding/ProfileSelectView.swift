@@ -8,25 +8,49 @@
 import SwiftUI
 
 struct ProfileSelectView: View {
+    @EnvironmentObject var viewModel: ProfileSelectViewModel
+    
+    let type: ProfileCreateType
+    
     var body: some View {
-        NavigationStack {
-            ZStack {
-                BackgroundImage()
+        ZStack {
+            BackgroundImage()
+            
+            VStack(spacing: 103) {
+                MessageBox(content:
+                            Text("아이의 ") +
+                           Text("프로필").foregroundStyle(.red1) +
+                           Text("을 선택해 주세요!")
+                )
                 
-                VStack(spacing: 103) {
-                    MessageBox(content:
-                                Text("아이의 ") +
-                               Text("프로필").foregroundStyle(.red1) +
-                               Text("을 선택해 주세요!")
-                    )
-                    ProfileCreateButton()
+                HStack(spacing: 130) {
+                    ForEach(viewModel.profileList, id: \.profileId) { item in
+                        ProfileSelectButton(viewModel: viewModel, profileImg: item.profileImageUrl, name: item.profileName)
+                            .onTapGesture {
+                                viewModel.selectProfile(item)
+                            }
+                    }
+                    if viewModel.profileList.count < 3 {
+                        ProfileCreateButton(type: type)
+                    }
                 }
             }
-            .toolbar(.hidden)
         }
+        .task {
+            viewModel.fetchProfileList()
+        }
+        .fullScreenCover(isPresented: $viewModel.isSelected) {
+            switch type {
+            case .onboarding:
+                ChildrenContainer()
+            case .parents:
+                MypageContainer()
+            }
+        }
+        .navigationBarBackButtonHidden()
     }
 }
 
 #Preview {
-    ProfileSelectView()
+    ProfileSelectView(type: .onboarding)
 }

@@ -10,36 +10,47 @@ import SwiftUI
 struct ProfileButton: View {
     var color: String
     var title: String
+    var isEnabled: Bool = true
+    var action: () -> Void = {}
     
     var foreground: Color {
-        if color == "red" {
-            return .red1
+        if isEnabled {
+            if color == "red" {
+                return .red1
+            } else {
+                return .blue1
+            }
         } else {
-            return .blue1
+            return .gray1
         }
     }
     
     var shadow: Color {
-        if color == "red" {
-            return .shadowRed
+        if isEnabled {
+            if color == "red" {
+                return .shadowRed
+            } else {
+                return .shadowBlue
+            }
         } else {
-            return .shadowBlue
+            return .black1.opacity(0.3)
         }
     }
     
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 40)
-                .frame(width: 400, height: 70)
-                .foregroundStyle(foreground)
-                .insetShadow(color: shadow, cornerRadius: 40)
-            Text(title)
-                .font(.NanumExtraBold32)
-                .foregroundStyle(.white)
+        Button(action: action) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 40)
+                    .fill(foreground.shadow(.inner(color: shadow, radius: 7)))
+                    .frame(width: 400, height: 70)
+                Text(title)
+                    .font(.NanumExtraBold32)
+                    .foregroundStyle(.white)
+            }
         }
     }
 }
 
 #Preview {
-    ProfileButton(color: "red", title: "테스트")
+    ProfileButton(color: "blue", title: "테스트")
 }

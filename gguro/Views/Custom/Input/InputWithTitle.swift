@@ -12,7 +12,7 @@ struct InputWithTitle: View {
     var placeholder: String
     var isPassword: Bool = false
     
-    @State var text: String = ""
+    @Binding var text: String
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -23,17 +23,20 @@ struct InputWithTitle: View {
             
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: 20)
+                    .fill(.white.shadow(.inner(color: .shadowWhite, radius: 7)))
                     .frame(width: 600, height: 60)
-                    .foregroundColor(.white)
-                    .insetShadow(cornerRadius: 20)
                 
                 if !isPassword {
                     TextField(placeholder, text: $text)
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.never)
                         .font(.NanumExtraBold24)
                         .foregroundStyle(.black2)
                         .padding(.horizontal, 30)
                 } else {
                     SecureField(placeholder, text: $text)
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.never)
                         .font(.NanumExtraBold24)
                         .foregroundStyle(.black2)
                         .padding(.horizontal, 30)
@@ -45,5 +48,5 @@ struct InputWithTitle: View {
 }
 
 #Preview {
-    InputWithTitle(title: "테스트", placeholder: "테스트입니다.")
+    InputWithTitle(title: "테스트", placeholder: "테스트입니다.", text: .constant(""))
 }
