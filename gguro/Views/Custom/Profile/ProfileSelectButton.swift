@@ -9,7 +9,7 @@ import SwiftUI
 import Kingfisher
 
 struct ProfileSelectButton: View {
-    @Environment(NavigationRouter<ProfileRoute>.self) private var router
+    @Environment(NavigationRouter<MypageRoute>.self) private var router
     @ObservedObject var viewModel: ProfileSelectViewModel
 
     let profileImg: String?

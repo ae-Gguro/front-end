@@ -24,7 +24,7 @@ class ParentsViewModel: ObservableObject {
                 do {
                     let decodedData = try JSONDecoder().decode(BasicResponse.self, from: response.data)
                     
-                    self.name = decodedData.result
+                    self.name = decodedData.result ?? ""
                 } catch {
                     print("GetFirstname 디코더 오류: \(error)")
                 }

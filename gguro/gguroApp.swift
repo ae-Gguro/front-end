@@ -16,6 +16,7 @@ struct gguroApp: App {
     
     init() {
         KakaoSDK.initSDK(appKey: "eebb1242e2da80fe103994d0366c0671")
+        UserDefaults.standard.removeObject(forKey: "profileId")
     }
     
     var body: some Scene {

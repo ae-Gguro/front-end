@@ -14,12 +14,14 @@ class MypageViewModel: ObservableObject {
     @Published var birth: String = "0000.00.00"
     @Published var image: String = ""
     
+    let savedProfileId = UserDefaults.standard.object(forKey: "profileId") as? Int
+    
     func fetchProfile() {
-        let savedProfileId = UserDefaults.standard.object(forKey: "profileId") as? Int
         guard let profileId = savedProfileId else {
             print("선택된 프로필이 없습니다.")
             return
         }
+        
         profileProvider.request(.getProfileDetail(profileId: profileId)) { result in
             switch result {
             case .success(let response):
@@ -35,6 +37,30 @@ class MypageViewModel: ObservableObject {
                 }
             case .failure(let error):
                 print("GetProfileDetail API 오류: \(error)")
+            }
+        }
+    }
+    
+    func deleteProfile(completion: @escaping () -> Void) {
+        guard let profileId = savedProfileId else {
+            print("선택된 프로필이 없습니다.")
+            return
+        }
+        
+        profileProvider.request(.deleteProfile(profileId: profileId)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    _ = try JSONDecoder().decode(BasicResponse.self, from: response.data)
+                    
+                    DispatchQueue.main.async {
+                        completion()
+                    }
+                } catch {
+                    print("DeleteProfile 디코더 오류: \(error)")
+                }
+            case .failure(let error):
+                print("DeleteProfile API 오류: \(error)")
             }
         }
     }

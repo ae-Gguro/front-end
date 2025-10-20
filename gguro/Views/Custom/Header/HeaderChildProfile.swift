@@ -33,7 +33,7 @@ struct HeaderChildProfile: View {
                     .fill(color.sub)
                     .frame(width: 88, height: 88)
                 
-                if let url = URL(string: profile.profileImageUrl) {
+                if let url = URL(string: profile.profileImageUrl ?? "") {
                     KFImage(url)
                         .placeholder {
                             ProgressView()

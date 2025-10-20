@@ -101,7 +101,7 @@ struct LoginView: View {
             viewModel.fetchFcmToken()
         })
         .fullScreenCover(isPresented: $viewModel.isLogin) {
-            ProfileContainer()
+            MypageContainer()
         }
         .navigationBarBackButtonHidden(true)
     }

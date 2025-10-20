@@ -10,6 +10,10 @@ import SwiftUI
 struct SettingView: View {
     @Environment(\.childName) private var childName
     @Environment(NavigationRouter<MypageRoute>.self) private var router
+    @StateObject private var viewModel = MypageViewModel()
+    
+    @State var showDeleteModal: Bool = false
+    @State var showWithdrawModal: Bool = false
     
     @State var isAllOn: Bool = false
     @State var isServiceOn: Bool = false
@@ -42,6 +46,37 @@ struct SettingView: View {
                 .padding(.horizontal, 130)
                 .padding(.top, 26)
                 .padding(.bottom, 80)
+            }
+            
+            // 삭제 모달
+            if showDeleteModal {
+                ModalView(
+                    type: .delete,
+                    onLeftButtonTap: {
+                        viewModel.deleteProfile {
+                            DispatchQueue.main.async {
+                                withAnimation { showDeleteModal = false }
+                                router.push(.profileSelect)
+                            }
+                        }
+                    },
+                    onRightButtonTap: {
+                        showDeleteModal = false
+                    }
+                )
+            }
+            
+            // 탈퇴 모달
+            if showWithdrawModal {
+                ModalView(
+                    type: .withdraw,
+                    onLeftButtonTap: {
+                        // TODO: withdraw action
+                    },
+                    onRightButtonTap: {
+                        showWithdrawModal = false
+                    }
+                )
             }
         }
         .navigationBarBackButtonHidden()
@@ -137,7 +172,7 @@ struct SettingView: View {
                     // TODO: 로그아웃 모달
                 })
                 AccountList(title: "\(childName) 프로필 삭제하기", color: .red1, action: {
-                    // TODO: 삭제 모달
+                    showDeleteModal.toggle()
                 })
                 AccountList(title: "계정 탈퇴하기", color: .red1, action: {
                     // TODO: 탈퇴 모달
@@ -147,10 +182,8 @@ struct SettingView: View {
         }
     }
     
-    private func AccountList(title: String, color: Color, action: (() -> Void)?) -> some View {
-        Button(action: {
-            action
-        }) {
+    private func AccountList(title: String, color: Color, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
             ZStack {
                 RoundedRectangle(cornerRadius: 25)
                     .fill(.white.shadow(.inner(color: .shadowWhite, radius: 7)))
