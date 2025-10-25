@@ -13,6 +13,7 @@ enum OnboardingRouter {
     case postLogin(loginData: LoginData)
     case postNaver(accessToken: String)
     case postKakao(accessToken: String)
+    case postLogout(deviceToken: String)
 }
 
 extension OnboardingRouter: APITargetType {
@@ -33,6 +34,8 @@ extension OnboardingRouter: APITargetType {
             return "\(Self.authPath)/naver"
         case .postKakao:
             return "\(Self.authPath)/kakao"
+        case .postLogout:
+            return "\(Self.authPath)/logout"
         }
     }
     
@@ -50,6 +53,8 @@ extension OnboardingRouter: APITargetType {
             return .requestJSONEncodable(loginData)
         case .postNaver(let accessToken), .postKakao(let accessToken):
             return .requestParameters(parameters: ["accessToken": accessToken], encoding: JSONEncoding.default)
+        case .postLogout(let deviceToken):
+            return .requestParameters(parameters: ["deviceToken": deviceToken], encoding: JSONEncoding.default)
         }
     }
 }

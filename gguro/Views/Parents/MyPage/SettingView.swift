@@ -14,11 +14,14 @@ struct SettingView: View {
     
     @State var showDeleteModal: Bool = false
     @State var showWithdrawModal: Bool = false
+    @State var showLogoutModal: Bool = false
     
     @State var isAllOn: Bool = false
     @State var isServiceOn: Bool = false
     @State var isTodayOn: Bool = false
     @State var isWeekOn: Bool = false
+    
+    @State var isLogout: Bool = false
     
     var body: some View {
         ZStack {
@@ -54,10 +57,8 @@ struct SettingView: View {
                     type: .delete,
                     onLeftButtonTap: {
                         viewModel.deleteProfile {
-                            DispatchQueue.main.async {
-                                withAnimation { showDeleteModal = false }
-                                router.push(.profileSelect)
-                            }
+                            withAnimation { showDeleteModal = false }
+                            router.push(.profileSelect)
                         }
                     },
                     onRightButtonTap: {
@@ -78,8 +79,27 @@ struct SettingView: View {
                     }
                 )
             }
+            
+            // 로그아웃 모달
+            if showLogoutModal {
+                ModalView(
+                    type: .logout,
+                    onLeftButtonTap: {
+                        viewModel.logout {
+                            withAnimation { showLogoutModal = false }
+                            isLogout.toggle()
+                        }
+                    },
+                    onRightButtonTap: {
+                        showLogoutModal = false
+                    }
+                )
+            }
         }
         .navigationBarBackButtonHidden()
+        .fullScreenCover(isPresented: $isLogout) {
+//            OnboardingContainer()
+        }
     }
     
     // 왼쪽 페이지
@@ -169,7 +189,7 @@ struct SettingView: View {
                     router.push(.edit)
                 })
                 AccountList(title: "로그아웃", color: .black, action: {
-                    // TODO: 로그아웃 모달
+                    showLogoutModal.toggle()
                 })
                 AccountList(title: "\(childName) 프로필 삭제하기", color: .red1, action: {
                     showDeleteModal.toggle()
