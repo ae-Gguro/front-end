@@ -80,6 +80,7 @@ class MypageViewModel: ObservableObject {
             case .success(let response):
                 do {
                     _ = try JSONDecoder().decode(BasicResponse.self, from: response.data)
+                    KeychainManager.standard.deleteSession(for: "appNameUser")
                     
                     DispatchQueue.main.async {
                         completion()

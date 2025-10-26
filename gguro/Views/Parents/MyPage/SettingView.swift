@@ -98,7 +98,7 @@ struct SettingView: View {
         }
         .navigationBarBackButtonHidden()
         .fullScreenCover(isPresented: $isLogout) {
-//            OnboardingContainer()
+            OnboardingContainer()
         }
     }
     

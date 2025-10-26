@@ -13,6 +13,7 @@ struct LoginView: View {
     
     @State var username: String = ""
     @State var password: String = ""
+    @State var showMain: Bool = false
     
     var body: some View {
         ZStack {
@@ -97,10 +98,17 @@ struct LoginView: View {
                 }
             }
         }
-        .onChange(of: viewModel.isLogin, {
-            viewModel.fetchFcmToken()
-        })
-        .fullScreenCover(isPresented: $viewModel.isLogin) {
+        .onChange(of: viewModel.isLogin) {
+            if viewModel.isLogin == true {
+                viewModel.fetchFcmToken()
+                showMain = true
+                
+                DispatchQueue.main.async {
+                    viewModel.isLogin = false
+                }
+            }
+        }
+        .fullScreenCover(isPresented: $showMain) {
             MypageContainer()
         }
         .navigationBarBackButtonHidden(true)
