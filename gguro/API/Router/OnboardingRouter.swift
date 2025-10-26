@@ -14,6 +14,7 @@ enum OnboardingRouter {
     case postNaver(accessToken: String)
     case postKakao(accessToken: String)
     case postLogout(deviceToken: String)
+    case deleteUser
 }
 
 extension OnboardingRouter: APITargetType {
@@ -36,12 +37,19 @@ extension OnboardingRouter: APITargetType {
             return "\(Self.authPath)/kakao"
         case .postLogout:
             return "\(Self.authPath)/logout"
+        case .deleteUser:
+            return "\(Self.authPath)/delete"
         }
     }
     
     // method
     var method: Moya.Method {
-        return .post
+        switch self {
+        case .deleteUser:
+            return .delete
+        default:
+            return .post
+        }
     }
     
     // task
@@ -55,6 +63,8 @@ extension OnboardingRouter: APITargetType {
             return .requestParameters(parameters: ["accessToken": accessToken], encoding: JSONEncoding.default)
         case .postLogout(let deviceToken):
             return .requestParameters(parameters: ["deviceToken": deviceToken], encoding: JSONEncoding.default)
+        case .deleteUser:
+            return .requestPlain
         }
     }
 }

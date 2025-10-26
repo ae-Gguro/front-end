@@ -72,7 +72,10 @@ struct SettingView: View {
                 ModalView(
                     type: .withdraw,
                     onLeftButtonTap: {
-                        // TODO: withdraw action
+                        viewModel.deleteUser {
+                            withAnimation { showLogoutModal = false }
+                            isLogout.toggle()
+                        }
                     },
                     onRightButtonTap: {
                         showWithdrawModal = false
@@ -195,7 +198,7 @@ struct SettingView: View {
                     showDeleteModal.toggle()
                 })
                 AccountList(title: "계정 탈퇴하기", color: .red1, action: {
-                    // TODO: 탈퇴 모달
+                    showWithdrawModal.toggle()
                 })
             }
             .padding(.top, 50)

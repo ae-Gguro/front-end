@@ -93,4 +93,24 @@ class MypageViewModel: ObservableObject {
             }
         }
     }
+    
+    // 유저 탈퇴
+    func deleteUser(completion: @escaping () -> Void) {
+        onboardingProvider.request(.deleteUser) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    _ = try JSONDecoder().decode(BasicResponse.self, from: response.data)
+                    
+                    DispatchQueue.main.async {
+                        completion()
+                    }
+                } catch {
+                    print("DeleteUser 디코더 오류: \(error)")
+                }
+            case .failure(let error):
+                print("DeleteUser API 오류: \(error)")
+            }
+        }
+    }
 }
