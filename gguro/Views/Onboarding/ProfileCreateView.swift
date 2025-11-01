@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileCreateView: View {
-    @Environment(NavigationRouter<ProfileRoute>.self) private var router
+    @Environment(NavigationRouter<MypageRoute>.self) private var router
     
     @StateObject var viewModel = ProfileCreateViewModel()
     var type: ProfileCreateType

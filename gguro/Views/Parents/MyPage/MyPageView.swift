@@ -13,9 +13,6 @@ struct MyPageView: View {
     @Environment(NavigationRouter<MypageRoute>.self) private var router
     @StateObject private var viewModel = MypageViewModel()
     
-    @State var showDeleteModal: Bool = false
-    @State var showWithdrawModal: Bool = false
-    
     var body: some View {
         ZStack {
             BackgroundImage()
@@ -42,32 +39,6 @@ struct MyPageView: View {
                 .padding(.horizontal, 130)
                 .padding(.top, 26)
                 .padding(.bottom, 80)
-            }
-            
-            // 삭제 모달
-            if showDeleteModal {
-                ModalView(
-                    type: .delete,
-                    onLeftButtonTap: {
-                        // TODO: delete action
-                    },
-                    onRightButtonTap: {
-                        showDeleteModal = false
-                    }
-                )
-            }
-            
-            // 탈퇴 모달
-            if showWithdrawModal {
-                ModalView(
-                    type: .withdraw,
-                    onLeftButtonTap: {
-                        // TODO: withdraw action
-                    },
-                    onRightButtonTap: {
-                        showWithdrawModal = false
-                    }
-                )
             }
         }
         .task {

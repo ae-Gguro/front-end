@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileCreateButton: View {
-    @Environment(NavigationRouter<ProfileRoute>.self) private var router
+    @Environment(NavigationRouter<MypageRoute>.self) private var router
     
     var type: ProfileCreateType
     

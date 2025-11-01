@@ -22,5 +22,5 @@ struct ProfileListProfile: Decodable {
     let profileId: Int
     let profileName: String
     let profileBirthDate: String
-    let profileImageUrl: String
+    let profileImageUrl: String?
 }

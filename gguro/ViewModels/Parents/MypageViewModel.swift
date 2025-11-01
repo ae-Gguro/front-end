@@ -9,17 +9,20 @@ import Foundation
 
 class MypageViewModel: ObservableObject {
     let profileProvider = APIManager.shared.createProvider(for: ProfileRouter.self)
+    let onboardingProvider = APIManager.shared.createProvider(for: OnboardingRouter.self)
     
     @Published var name: String = "아이"
     @Published var birth: String = "0000.00.00"
     @Published var image: String = ""
     
+    let savedProfileId = UserDefaults.standard.object(forKey: "profileId") as? Int
+    
     func fetchProfile() {
-        let savedProfileId = UserDefaults.standard.object(forKey: "profileId") as? Int
         guard let profileId = savedProfileId else {
             print("선택된 프로필이 없습니다.")
             return
         }
+        
         profileProvider.request(.getProfileDetail(profileId: profileId)) { result in
             switch result {
             case .success(let response):
@@ -35,6 +38,78 @@ class MypageViewModel: ObservableObject {
                 }
             case .failure(let error):
                 print("GetProfileDetail API 오류: \(error)")
+            }
+        }
+    }
+    
+    // 프로필 삭제
+    func deleteProfile(completion: @escaping () -> Void) {
+        guard let profileId = savedProfileId else {
+            print("선택된 프로필이 없습니다.")
+            return
+        }
+        
+        profileProvider.request(.deleteProfile(profileId: profileId)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    _ = try JSONDecoder().decode(BasicResponse.self, from: response.data)
+                    
+                    DispatchQueue.main.async {
+                        completion()
+                    }
+                } catch {
+                    print("DeleteProfile 디코더 오류: \(error)")
+                }
+            case .failure(let error):
+                print("DeleteProfile API 오류: \(error)")
+            }
+        }
+    }
+    
+    // 로그아웃
+    func logout(completion: @escaping () -> Void) {
+        UserDefaults.standard.removeObject(forKey: "profileId")
+        guard let token = KeychainManager.standard.loadString(for: "FCMToken") else {
+            print("토큰이 없습니다.")
+            return
+        }
+        
+        onboardingProvider.request(.postLogout(deviceToken: token)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    _ = try JSONDecoder().decode(BasicResponse.self, from: response.data)
+                    KeychainManager.standard.deleteSession(for: "appNameUser")
+                    
+                    DispatchQueue.main.async {
+                        completion()
+                    }
+                } catch {
+                    print("Logout 디코더 오류: \(error)")
+                }
+            case .failure(let error):
+                print("Logout API 오류: \(error)")
+            }
+        }
+    }
+    
+    // 유저 탈퇴
+    func deleteUser(completion: @escaping () -> Void) {
+        onboardingProvider.request(.deleteUser) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    _ = try JSONDecoder().decode(BasicResponse.self, from: response.data)
+                    
+                    DispatchQueue.main.async {
+                        completion()
+                    }
+                } catch {
+                    print("DeleteUser 디코더 오류: \(error)")
+                }
+            case .failure(let error):
+                print("DeleteUser API 오류: \(error)")
             }
         }
     }

@@ -17,4 +17,7 @@ enum MypageRoute: Hashable {
     
     case setting
     case edit
+    
+    case profileSelect
+    case profileCreate(type: ProfileCreateType)
 }

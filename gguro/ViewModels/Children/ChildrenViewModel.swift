@@ -25,7 +25,7 @@ class ChildrenViewModel: ObservableObject {
                 do {
                     let decodedData = try JSONDecoder().decode(BasicResponse.self, from: response.data)
                     
-                    self.ayaName = decodedData.result
+                    self.ayaName = decodedData.result ?? ""
                 } catch {
                     print("GetFirstnamePossessive 디코더 오류: \(error)")
                 }
@@ -47,7 +47,7 @@ class ChildrenViewModel: ObservableObject {
                 do {
                     let decodedData = try JSONDecoder().decode(BasicResponse.self, from: response.data)
                     
-                    self.igaName = decodedData.result
+                    self.igaName = decodedData.result ?? ""
                 } catch {
                     print("GetFirstnameNominative 디코더 오류: \(error)")
                 }

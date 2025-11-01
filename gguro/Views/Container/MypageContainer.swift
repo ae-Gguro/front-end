@@ -9,7 +9,8 @@ import SwiftUI
 
 struct MypageContainer: View {
     @State private var router = NavigationRouter<MypageRoute>()
-    @State private var pRouter = NavigationRouter<ParentsRoute>()
+    @State private var paRouter = NavigationRouter<ParentsRoute>()
+    @StateObject private var profileViewModel = ProfileSelectViewModel()
     
     var body: some View {
         NavigationStack(path: $router.path) {
@@ -26,16 +27,30 @@ struct MypageContainer: View {
                         
                     case .conversation:
                         ConversationDataView()
-                            .environment(pRouter)
                         
                     case .setting:
                         SettingView()
                     case .edit:
                         ProfileEditView()
+                        
+                    case .profileSelect:
+                        ProfileSelectView(type: .onboarding)
+                    case .profileCreate:
+                        ProfileCreateView(type: .onboarding)
                     }
                 }
         }
         .environment(router)
+        .environment(paRouter)
+        .environmentObject(profileViewModel)
+        .task {
+            let hasProfile = UserDefaults.standard.string(forKey: "profileId") != nil
+            if !hasProfile {
+                DispatchQueue.main.async {
+                    router.push(.profileSelect)
+                }
+            }
+        }
     }
 }
 
